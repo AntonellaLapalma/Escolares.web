@@ -1,0 +1,88 @@
+/* Estilos login */
+.login{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.tarjeta-login{
+    width: 500px;
+    border-radius: 5px;
+    background-color: var(--efecto_translucido);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+}
+#form-login{
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.campo-login{
+    margin: 30px 0px 0px;
+    width: 100%;
+}
+.campo-login input{
+    margin: 0px;
+    padding: 10px 10px;
+    width: 94.5%;
+    font-size: 14px;
+    color: var(--color_blanco);
+    background-color: #00000000;
+    border-radius: 5px;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.campo-login input:hover{
+    border: 1px solid var(--color_blanco);
+}
+.campo-login input:focus{
+    border: 1px solid var(--color_principal);
+}
+.campo-login input:hover + .lablel-registro{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.campo-login input:focus + .lablel-registro{
+    color: var(--color_principal);
+    transition: 0.3s ease;
+}
+.campo-login input:not(:focus){
+    color: var(--color_borde_id_tarjeta);
+    transition: 0.3s ease;
+}
+.campo-login input:not(:placeholder-shown) + .lablel-registro,
+.campo-login input:focus + .lablel-registro{
+    top: -10px;
+    left: 5px;
+    font-size: 14px;
+    opacity: 1;
+}
+.boton-login{
+    width: 100%;
+    margin: 30px 20px 0px;
+    background-color: #00000000;
+    padding: 10px 20px;
+}
+.link-login{
+    margin: 15px 0px 0px 0px;
+    color: var(--color_blanco);
+    font-weight: 300;
+    font-size: 14px;
+}
+.link-login:hover{
+    color: var(--color_letra_renglon_3);
+    transition: 0.3s ease;
+}
+.link-login:active{
+    color: var(--color_opcion);
+    transition: 0.3s ease;
+}
+.error{
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color_borde_id_tarjeta);
+}

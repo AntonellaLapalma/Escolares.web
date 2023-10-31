@@ -1,0 +1,21 @@
+.btn-agregar{
+    padding: 5px 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: #36363645;
+    color: var(--color_borde_id_tarjeta);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.btn-agregar:hover{
+    background-color: #ff770020;
+    color: var(--color_principal);
+    transition: 0.3s ease;
+}
+.advertencia{
+    margin: 10px 20px;
+    color: var(--color_borde_id_tarjeta);
+    font-style: italic;
+}

@@ -1,0 +1,111 @@
+{% extends 'ingresos.html' %}
+{% block ingresos_content %}    
+<div class=" contabilidad fila">
+    <div class="tarjeta">
+        <section class="id-tarjeta dia fila">
+            <p class="id-dia">MES{{ dia | upper }}</p>
+        </section>
+        <div class="tarjeta-contabilidad">
+        <div class="tabla-mes">
+                <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                    <li>ID</li>
+                    <li>ID Familiar</li>
+                    <li>Fecha</li>
+                    <li>Descuento</li>
+                    <li>Total</li>
+                    <!-- <li class="edicion"></li> -->
+                </ul>
+                <ul class="contenido-tabla-mes renglon-mes fila">
+                    <li>20</li>
+                    <li>35</li>
+                    <li>10/23</li>
+                    <li>% 20</li>
+                    <li>$ 35000</li>
+                    <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                </ul>
+                <ul class="contenido-tabla-mes renglon-mes fila">
+                    <li>20</li>
+                    <li>35</li>
+                    <li>10/23</li>
+                    <li>% 20</li>
+                    <li>$ 35000</li>
+                </ul>
+                <ul class="contenido-tabla-mes renglon-mes fila">
+                    <li>20</li>
+                    <li>35</li>
+                    <li>10/23</li>
+                    <li>% 20</li>
+                    <li>$ 35000</li>
+                </ul>
+            </div> 
+        </div>
+    </div>  
+    <div class="seccion-contabilidad columna">    
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">PRECIOS{{ dia | upper }}</p>
+                <i class="fa-solid fa-pencil i-tarjeta-id"></i>
+            </section>
+            <div class="tarjeta-contabilidad">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li>Tipo de viaje</li>
+                        <li>Precio</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Ida o vuelta</li>
+                        <li>$ 30000</li>
+                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Ida y vuelta</li>
+                        <li>$ 55000</li>
+                    </ul>
+                </div> 
+            </div>
+        </div>
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">FACTURACIÓN ANUAL{{ dia | upper }}</p>
+            </section>        
+            <div class="tarjeta-contabilidad">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li>Mes</li>
+                        <li>Total</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Enero</li>
+                        <li>$ 30000</li>
+                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Febrero</li>
+                        <li>$ 55000</li>
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Enero</li>
+                        <li>$ 30000</li>
+                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Febrero</li>
+                        <li>$ 55000</li>
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Enero</li>
+                        <li>$ 30000</li>
+                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                    </ul>
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>Febrero</li>
+                        <li>$ 55000</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock ingresos_content %}

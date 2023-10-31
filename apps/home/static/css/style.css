@@ -1,0 +1,373 @@
+/* En este documento se encontraran los estilos comunes a todos los html */
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Roboto Mono', monospace;
+    font-family: 'Nunito Sans', sans-serif;
+    line-height: 1.5;
+    text-decoration: none;
+    outline: none;
+    list-style-type: none;
+}
+/* tema oscuro */
+:root{
+    --color_blanco: #fcfcfc;
+    --color_principal:#ff7700;
+    --color_principal_a:#d66400;
+    --color_letra_renglon_1:#ff7700;
+    --color_letra_renglon_2:#ffffff;
+    --color_letra_renglon_3:#d1d1d1;
+    --color_opcion:rgb(168, 168, 168);
+    --color_borde_id_tarjeta:rgba(255, 255, 255, 0.222);
+    --color_link:var(--color_detalles_a);
+    --efecto_translucido:rgba(255, 255, 255, 0.03);
+    --color_info:rgb(168, 168, 168);
+    --color_info_a:rgb(144, 144, 144);
+    --color_fondo:#111111;
+}
+::selection {
+    background-color: var(--color_gris_seleccion);
+    color: var(--color_letras);
+}
+/* Estilos cuerpo */
+html, body{
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+html{
+    background-color:#111111;
+}
+/* Estilos pagina */
+.pagina{
+    align-items: center;
+    justify-content: center;
+}
+/* Estilos resultados */
+.listado-db{ 
+    padding: 10px 12%;
+    padding-top: 90px;
+    width: 76%;
+    height: max-content;
+    scroll-behavior: smooth;
+}
+body::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+    background-color: #ffffff10;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: #ffffff13;
+    border-radius: 5px;
+}
+/* Tarjeta contenedora de informacion */
+.id-tarjeta{
+    padding: 0px 10px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color_borde_id_tarjeta);
+    border-radius: 5px 5px 0px 0px;
+}
+.id-tarjeta p{
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+.id-tarjeta section a{
+    padding: 5px 30px 5px 10px;
+    color: var(--color_borde_id_tarjeta);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.id-tarjeta section span{
+    color: var(--color_borde_id_tarjeta);
+    font-size: 14px;
+}
+.i-tarjeta-id{
+    padding-bottom: 2px;
+    color: var(--color_borde_id_tarjeta);
+    font-size: 11px;
+}
+.id-tarjeta section a:hover span, .id-tarjeta section a:hover .i-tarjeta-id{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.id-tarjeta section a:focus span, .id-tarjeta section a:focus .i-tarjeta-id{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.i-tarjetas{
+    padding: 5.3px 20px 3px 0px;
+    color: var(--color_letra_renglon_1);
+    font-size: 12px;
+    border-radius: 10px;
+}
+.tarjeta{
+    margin: 5px 0px 20px 0px;
+    width: 100%;
+    height: min-content;
+    border-radius: 5px;
+    animation: fadeIn 1s ease-in-out forwards;
+    background-color: var(--efecto_translucido);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+}
+.tarjeta:hover{
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: 0.3s ease;
+}
+/* .sombra-luz{
+     backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.5);
+} */
+/* Posicionamiento de elementos general */
+.fila{
+    display: flex;
+    flex-direction: row;
+}
+.columna{
+    display: flex;
+    flex-direction: column;
+}
+.grid-tarjeta{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0px 80px 100px 80px;
+}
+.tam-seccion{
+    width: 100%;
+}
+.seccion-1-mostrar{
+    width: 90%;
+    padding: 5px 15px;
+    grid-row: 2/ span 1;
+}
+.seccion-2-mostrar{
+    width: 90%;
+    padding: 5px 15px;
+    grid-row: 3/ span 1;
+}
+.seccion-3-mostrar{
+    width: 90%;
+    padding: 5px 15px;
+    grid-row: 4/ span 1;
+}
+.primer-fila{
+    grid-column: 1/span 4;
+    grid-row: 1/ span 1;
+}
+.segunda-fila{
+    grid-column: 1/span 4;
+    grid-row: 2/ span 1;
+}
+.tercer-fila{
+    grid-column: 1/span 4;
+    grid-row: 3/ span 1;
+}
+.cuarta-fila{
+    grid-column: 1/span 4;
+    grid-row: 4/ span 1;
+}
+/* Estilos */
+.renglon-1{
+    color: var(--color_letra_renglon_1);
+    font-size: 17px;
+    font-weight: 500;
+}
+.renglon-2{
+    color: var(--color_letra_renglon_2);
+    font-weight: 300;
+    font-size: 16px;
+}
+.renglon-3{
+    color: var(--color_letra_renglon_3);
+    font-weight: 300;
+    font-size: 14px;
+}
+.renglon-4{
+    color: var(--color_opcion);
+    font-weight: 300;
+    font-size: 14px;
+}
+.no-link{
+    cursor: default;
+}
+/* Estilos para los celulares y direcciones linkeables */
+.redirigir{
+    border-left: 1px solid rgba(255, 255, 255, 0);
+    border-top: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.redirigir:hover{
+    background-color: var(--efecto_translucido);
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 9px -1px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
+}
+.redirigir:active{
+    background-color: #ffffff00;
+    box-shadow: none;
+}
+.redirigir-i{
+    opacity: 0;
+    font-size: 30;
+    color: var(--color_principal);
+    transform: translateX(-5px);
+}
+.ir{
+    margin-right: 10px;
+    opacity: 0;
+    padding-right: 5px;
+    font-size: 12px;
+    color: var(--color_principal);
+    transform: translateX(-10px);
+}
+.redirigir:hover .redirigir-i{
+    opacity: 1;
+    transition: 0.3s ease;
+    transform: translateX(2px);
+}
+.redirigir:hover .ir{
+    opacity: 1;
+    transition: 0.3s ease;
+    transform: translateX(10px);
+}
+.wsp-maps{
+    align-items: center;
+}
+.lupa{
+    font-size: 14px;
+}
+.lista{
+    font-size: 15px;
+}
+/* actividad */
+.actividad{
+    height: 100%;
+    justify-content: end;
+    gap: 10px;
+}
+.activo{
+    padding: 5px 0px;
+    padding-right: 10px;
+    color: var(--color_principal);
+    animation: shadow-animacion 1s infinite alternate linear;
+}
+.inactivo{
+    padding: 5px 0px;
+    padding-right: 10px;
+    color: var(--color_borde_id_tarjeta);
+}
+/* Barra desplazadora para datos del grid */
+.desborde{
+    width: 100%;
+    overflow:auto;
+    white-space: nowrap;
+}
+.desborde::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+    background-color: var(--color_boton_c);
+}
+.desborde::-webkit-scrollbar-thumb{
+    background-color: var(--color_detalles);
+    border-radius: 5px;
+}
+/* botones */
+.btn-secundario{
+    color: var(--color_borde_id_tarjeta);
+    border: 1px solid var(--color_borde_id_tarjeta);
+    font-weight: 600 !important;
+    cursor: pointer;
+}
+.btn-secundario:hover{
+    color: var(--color_blanco);
+    border: 1px solid var(--color_blanco);
+    transition: 0.3s ease;
+}
+.btn-secundario:active{
+    background-color: var(--color_blanco);
+    color: #111111;
+    transition: 0.3s ease;
+}
+.btn-principal{
+    color: var(--color_principal_a);
+    border: 1px solid var(--color_principal_a);
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+.btn-principal:hover{
+    color: var(--color_principal);
+    border: 1px solid var(--color_principal);
+    transition: 0.3s ease;
+}
+.btn-principal:active{
+    color: #111111;
+    background-color: var(--color_principal);
+    border: 1px solid var(--color_principal);
+    transition: 0.3s ease;
+}
+/* SIN RESULTADOS */
+.sin-resultados-box{
+    margin: 5px 0px 15px 0px;
+    width: 100%;
+    border-radius: 5px;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+.sin-resultados{
+    padding: 100px;
+    justify-content: center;
+    align-items: center;
+}
+.sin-resultados i{
+    padding: 0px 20px;
+}
+.sin-resultados i{
+    font-size: 13px;
+}
+.vacio{
+    color: var(--color_blanco);
+}
+.seccion-info{
+    justify-content: start;
+    width: 100%;
+}
+.parpadeo {
+    animation: blink 1s infinite alternate;
+}
+/* ERRORES FORMULARIOS REGISTRO C E V */
+.error_forms_registro{
+    position: absolute;
+    color: var(--color_borde_id_tarjeta);
+    transform: translateX(5px);
+    font-size: 13px;
+    z-index: 999;
+}
+.error-in{
+    width: 100%;
+    justify-content: start;
+}
+/* Animaciones */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

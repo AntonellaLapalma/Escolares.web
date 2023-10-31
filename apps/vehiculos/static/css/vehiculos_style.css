@@ -1,0 +1,39 @@
+/* Aca iran los estilos que afecten unicamente a la seccion vehiculos */
+.grid-tarjeta-vehiculos{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0px 80px;
+}
+/* .renglon-3 span{
+    margin-right: 5px;
+    color: var(--color_negro);
+} */
+.ver-lista{
+    padding-right: 5px;
+    font-size: 10px;
+    color: var(--color_blanco);
+    animation: mover-i 1s linear infinite;
+}
+.link-info{
+    background-color: var(--color_detalles);
+    border: 1px solid var(--color_negro);
+    padding: 0px 8px;
+    border-radius: 5px;
+}
+.link-info:active{
+    background-color: var(--color_detalles_a);
+    transition: 0.3s ease;
+}
+
+@keyframes mover-i {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(+5px); /* Desplazar 10px a la izquierda */
+    }
+    100% {
+        transform: translateX(0);
+    }
+}

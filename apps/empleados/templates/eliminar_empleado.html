@@ -1,0 +1,57 @@
+{% extends 'empleados.html' %}
+{% block empleados_content %}
+<div class="tarjeta tarjeta-registro sombra-luz">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-trash-can"></i>
+        <h3>Eliminar empleado</h3>
+    </section>
+    <form id="registro-db" class="columna" action="{% url 'eliminar_empleado' empleado.id %}" method="post">
+        {% csrf_token %}
+        <div class="fila seccion-info">
+            <div id="registro-seccion-1" class="columna">
+                <section class="columna">
+                    <div class="titulo-seccion fila">
+                        <i class="fa-solid fa-user"></i>
+                        <h3>Datos Personales</h3>
+                    </div>
+                    <div class="campos columna">
+                        <section class="campo-registro">
+                            <input class="input-registro" name="nombre_empleado" placeholder="" value="{{ empleado.nombre }}" disabled>  
+                            <label class="lablel-registro">Nombre</label>
+                        </section>
+                        <section class="campo-registro">
+                            <input class="input-registro" name="apellido_empleado" placeholder="" value="{{ empleado.apellido }}" disabled>
+                            <label class="lablel-registro">Apellido</label>
+                        </section>
+                        <section class="campo-registro">
+                            <input class="input-registro cel" name="cel_empleado" placeholder="" value="{{ empleado.celular }}" disabled>
+                            <label class="lablel-registro ">Celular</label>
+                        </section>
+                    </div>
+                </section>  
+            </div>
+            <div id="registro-seccion-2" class="columna">
+                <section class="columna">
+                    <div class="titulo-seccion fila">
+                        <i class="fa-solid fa-address-card"></i>
+                        <h3>Tarea asignada</h3>
+                    </div>
+                    <div class="campos-tarea columna">
+                        <section class="campo-registro">
+                            <select name="opcion_tarea" class="select-registro" disabled>
+                                <option value="{{empleado.puesto.puesto}}"selected>{{empleado.puesto.puesto}}</option>
+                            </select>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div id="registro-seccion-3" class="columna"></div>
+            <div id="registro-seccion-4" class="columna"></div>
+        </div>
+        <div class="botones-registro fila">
+            <a href="{% url 'empleados' %}" class="btn-secundario">Cancelar</a>
+            <button type="submit" class="btn-principal">Eliminar</button>
+        </div>
+    </form>
+</div>  
+{% endblock empleados_content %}

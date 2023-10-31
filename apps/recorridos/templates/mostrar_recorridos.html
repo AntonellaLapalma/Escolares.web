@@ -1,0 +1,224 @@
+{% extends 'recorridos.html' %}
+{% load static %}
+{% block recorridos_content %}
+<script src="{% static 'js/recorridos_js.js' %}"></script>
+<div>
+    <div class="tarjeta sombra-luz">
+        <section class="id-tarjeta dia fila">
+            <p class="id-dia">{{ dia | upper }}</p>
+        </section>
+        <input type="hidden" id="celular-input" value="{{ celular }}">
+        <div class="grid-tarjeta-recorridos columna">
+            <div class="columna recorrido-1">
+                <section class="fila seccion-turno-recorrido">
+                    <section class="fila">
+                        <i class="fa-solid fa-clock i-recorrido"></i>
+                        <h3>Ingreso mañana</h3>  
+                    </section>
+                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
+                        <i class="fa-solid fa-chevron-right wsp-e"></i>
+                    </button>
+                </section>
+                <section class="lista-pasajeros" id="lista-ingreso-m">
+                    <ul id="">
+                        {% if resultados %}
+                        {% for resultado in resultados %}
+                        {% if resultado.viaje.turno == 'Mañana' and resultado.viaje.tipo == 'Ingreso' %}
+                        <li class="fila">
+                            <form action="{% url 'quitar-pasajero' resultado.vehiculo.id dia resultado.viaje.id  resultado.estudiante.id %}" method="post" class="fila">
+                                {% csrf_token %}
+                                <section>
+                                    <input type="hidden" name="turno" value="ingreso-m">
+                                    <p class="pasajeros-2">{{ resultado.estudiante.nvl_educativo|capfirst }} {{ resultado.estudiante.sala_grado_anio }} {{ resultado.estudiante.division.division }}</p>
+                                    <p class="pasajeros-1">{{ resultado.estudiante.nombre }} {{ resultado.estudiante.apellido }}</p>
+                                    <p class="pasajeros-3">{{ resultado.direccion.calle }}  {{ resultado.direccion.altura }}  {{ resultado.direccion.piso }} {{ resultado.direccion.dpto }}</p>
+                                </section>
+                                <section>
+                                    <button type="submit"><i class="fa-solid fa-xmark quitar-pasajero"></i></button>
+                                </section>
+                            </form>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </section>
+                <form class="form-recorridos fila" action="{% url 'recorridos' vehiculo.id dia %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="turno" value="ingreso-m">
+                    <select id="alumno1" name="agregar-alumno-m" class="select-registro select-recorrido" onchange="cargarDirecciones('alumno1', 'direccion1')"{% if mi_lugar_disponible == False %}disabled{%endif%}>
+                        <option value="" selected disabled>Seleccione un estudiante</option>
+                        {% if estudiantes1 %}
+                        {% for estudiante in estudiantes1 %}
+                        {% if estudiante.turno.turno == 'Mañana' or estudiante.turno.turno == 'Completo' %}
+                        <option value="{{estudiante.id}}">{{estudiante.id}} - {{estudiante.nombre}} {{estudiante.apellido}}</option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                    <select id="direccion1" name="agregar-direccion-m" class="select-registro select-recorrido" disabled>
+                    </select>
+                    <button type="submit" class="btn-header btn-recorrido"{% if mi_lugar_disponible == False %}disabled{%endif%}>Agregar</button>
+                </form>
+            </div>
+            <div class="columna recorrido-2">
+                <section class="fila seccion-turno-recorrido">
+                    <section class="fila">
+                        <i class="fa-solid fa-clock i-recorrido"></i>
+                        <h3>Salida medio dia</h3>
+                    </section>
+                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
+                        <i class="fa-solid fa-chevron-right wsp-e"></i>
+                    </button>
+                </section>
+                <section class="lista-pasajeros" id="lista-salida-md">
+                    <ul>
+                        {% if resultados %}
+                        {% for resultado in resultados %}
+                        {% if resultado.viaje.turno == 'Medio dia' and resultado.viaje.tipo == 'Salida' %}
+                        <li class="fila">
+                            <form action="{% url 'quitar-pasajero' resultado.vehiculo.id dia resultado.viaje.id  resultado.estudiante.id %}" method="post" class="fila">
+                                {% csrf_token %}
+                                <section>
+                                    <p class="pasajeros-2">{{ resultado.estudiante.nvl_educativo|capfirst }} {{ resultado.estudiante.sala_grado_anio }} {{ resultado.estudiante.division.division }}</p>
+                                    <p class="pasajeros-1">{{ resultado.estudiante.nombre }} {{ resultado.estudiante.apellido }}</p>
+                                    <p class="pasajeros-3">{{ resultado.direccion.calle }}  {{ resultado.direccion.altura }}   {{ resultado.direccion.piso }} {{ resultado.direccion.dpto }}</p>
+                                </section>
+                                <section>
+                                    <button type="submit"><i class="fa-solid fa-xmark quitar-pasajero"></i></button>
+                                </section>
+                            </form>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </section>
+                <form class="form-recorridos fila" action="{% url 'recorridos' vehiculo.id dia %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="turno" value="salida-md">
+                    <select id="alumno2" name="agregar-alumno-md" class="select-registro select-recorrido" onchange="cargarDirecciones('alumno2', 'direccion2')"{% if mds_lugar_disponible == False %}disabled{%endif%}>
+                        <option value="" selected disabled>Seleccione un estudiante</option>
+                        {% if estudiantes2 %}
+                        {% for estudiante in estudiantes2 %}
+                        {% if estudiante.turno.turno == 'Mañana' %}
+                                <option value="{{estudiante.id}}">{{estudiante.id}} - {{estudiante.nombre}} {{estudiante.apellido}}</option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                    <select id="direccion2" name="agregar-direccion-md" class="select-registro select-recorrido" disabled>
+                    </select>
+                    <button type="submit" class="btn-header btn-recorrido"{% if mds_lugar_disponible == False %}disabled{%endif%}>Agregar</button>
+                </form>
+            </div>
+            <div class="columna recorrido-3">
+                <section class="fila seccion-turno-recorrido">
+                    <section class="fila">
+                        <i class="fa-solid fa-clock i-recorrido"></i>
+                        <h3>Ingreso medio dia</h3>
+                    </section>
+                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
+                        <i class="fa-solid fa-chevron-right wsp-e"></i>
+                    </button>
+                </section>
+                <section class="lista-pasajeros" id="lista-ingreso-md">
+                    <ul>
+                        {% if resultados %}
+                        {% for resultado in resultados %}
+                        {% if resultado.viaje.turno == 'Medio dia' and resultado.viaje.tipo == 'Ingreso'  %}
+                        <li class="fila">
+                            <form action="{% url 'quitar-pasajero' resultado.vehiculo.id dia resultado.viaje.id  resultado.estudiante.id %}" method="post" class="fila">
+                                {% csrf_token %}
+                                <section>
+                                    <p class="pasajeros-2">{{ resultado.estudiante.nvl_educativo|capfirst }} {{ resultado.estudiante.sala_grado_anio }} {{ resultado.estudiante.division.division }}</p>
+                                    <p class="pasajeros-1">{{ resultado.estudiante.nombre }} {{ resultado.estudiante.apellido }}</p>
+                                    <p class="pasajeros-3">{{ resultado.direccion.calle }}  {{ resultado.direccion.altura }}   {{ resultado.direccion.piso }} {{ resultado.direccion.dpto }}</p>
+                                </section>
+                                <section>
+                                    <button type="submit"><i class="fa-solid fa-xmark quitar-pasajero"></i></button>
+                                </section>
+                            </form>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </section>
+                <form class="form-recorridos fila" action="{% url 'recorridos' vehiculo.id dia %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="turno" value="ingreso-md">
+                    <select id="alumno3" name="agregar-alumno-md-i" class="select-registro select-recorrido" onchange="cargarDirecciones('alumno3', 'direccion3')"{% if mdi_lugar_disponible == False %}disabled{%endif%}>
+                        <option value="" selected disabled>Seleccione un estudiante</option>
+                        {% if estudiantes3 %}
+                        {% for estudiante in estudiantes3 %}
+                        {% if estudiante.turno.turno == 'Tarde'%}
+                                <option value="{{estudiante.id}}">{{estudiante.id}} - {{estudiante.nombre}} {{estudiante.apellido}}</option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                    <select id="direccion3" name="agregar-direccion-md-i" class="select-registro select-recorrido" disabled>
+                    </select>
+                    <button type="submit" class="btn-header btn-recorrido"{% if mdi_lugar_disponible == False %}disabled{%endif%}>Agregar</button>
+                </form>
+            </div>
+            <div class="columna recorrido-4">
+                <section class="fila seccion-turno-recorrido">
+                    <section class="fila">
+                        <i class="fa-solid fa-clock i-recorrido"></i>
+                        <h3>Salida tarde</h3>
+                    </section>
+                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
+                        <i class="fa-solid fa-chevron-right wsp-e"></i>
+                    </button>
+                </section>
+                <section class="lista-pasajeros" id="lista-salida-t">
+                    <ul>
+                        {% if resultados %}
+                        {% for resultado in resultados %}
+                        {% if resultado.viaje.turno == 'Tarde' and resultado.viaje.tipo == 'Salida' %}
+                        <li class="fila">
+                            <form action="{% url 'quitar-pasajero' resultado.vehiculo.id dia resultado.viaje.id  resultado.estudiante.id %}" method="post" class="fila">
+                                {% csrf_token %}
+                                <section>
+                                    <p class="pasajeros-2">{{ resultado.estudiante.nvl_educativo|capfirst }} {{ resultado.estudiante.sala_grado_anio }} {{ resultado.estudiante.division.division }}</p>
+                                    <p class="pasajeros-1">{{ resultado.estudiante.nombre }} {{ resultado.estudiante.apellido }}</p>
+                                    <p class="pasajeros-3">{{ resultado.direccion.calle }}  {{ resultado.direccion.altura }}   {{ resultado.direccion.piso }} {{ resultado.direccion.dpto }}</p>
+                                </section>
+                                <section>
+                                    <button type="submit"><i class="fa-solid fa-xmark quitar-pasajero"></i></button>
+                                </section>
+                            </form>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </section>
+                <form class="form-recorridos fila" action="{% url 'recorridos' vehiculo.id dia %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="turno" value="salida-t">
+                    <select id="alumno4" name="agregar-alumno-t" class="select-registro select-recorrido" onchange="cargarDirecciones('alumno4', 'direccion4')"{% if ts_lugar_disponible == False %}disabled{%endif%}>
+                        <option value="" selected disabled>Seleccione un estudiante</option>
+                        {% if estudiantes4 %}
+                        {% for estudiante in estudiantes4 %}
+                        {% if estudiante.turno.turno == 'Tarde' or estudiante.turno.turno == 'Completo' %}
+                            <option value="{{estudiante.id}}">{{estudiante.id}} - {{estudiante.nombre}} {{estudiante.apellido}}</option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                    <select id="direccion4" name="agregar-direccion-t" class="select-registro select-recorrido" disabled>
+                    </select>
+                    <button type="submit" class="btn-header btn-recorrido"{% if ts_lugar_disponible == False %}disabled{%endif%}>Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/enviar_wsp.js' %}"></script>
+
+
+{% endblock recorridos_content %}

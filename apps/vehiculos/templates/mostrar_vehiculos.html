@@ -1,0 +1,114 @@
+{% extends 'vehiculos.html' %}
+{% block vehiculos_content %}
+{% if vehiculos %}
+        {% for vehiculo in vehiculos %}
+            <div class="tarjeta sombra-luz">
+                <section class="id-tarjeta fila">
+                    <section class="actividad fila">
+                        {% if vehiculo.chofer != None %}
+                        <p class="activo">#{{vehiculo.id}}</p>
+                        {% else %}
+                        <p class="inactivo">#{{vehiculo.id}}</p>
+                        {% endif%}
+                    </section>
+                    <section class="fila">
+                        <a href="{% url 'modificar_vehiculo' vehiculo.id %}" class="fila borde"><i class="fa-solid fa-pencil i-tarjeta-id"></i><span>Modificar</span></a>
+                        <a href="{% url 'eliminar_vehiculo' vehiculo.id %}" class="fila borde"><i class="fa-solid fa-trash-can i-tarjeta-id"></i><span>Eliminar</span></a>
+                    </section>
+                </section>
+                <div class="grid-tarjeta-vehiculos">
+                    <section class="seccion-1-mostrar tam-seccion fila">
+                        <i class="fa-solid fa-bus i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Vehículo</p>
+                            <p class="renglon-2 desborde">{{vehiculo.patente|upper}}</p>
+                            <p class="renglon-3 desborde">Capacidad max.:{{vehiculo.cant_asientos}}</p>
+                        </section>
+                    </section>
+                    {% if vehiculo.chofer %}
+                    <a href="https://wa.me/+540{{ vehiculo.chofer.celular }}" target="_blank" class="redirigir seccion-1-mostrar tam-seccion fila">
+                    {% else %}
+                    <section class="seccion-1-mostrar tam-seccion fila">
+                    {% endif %}
+                        <section class="fila">
+                            <i class="fa-solid fa-address-card i-tarjetas"></i>
+                            <section>
+                                <p class="renglon-1 desborde">Chofer</p>
+                                {% if vehiculo.chofer %}
+                                <p class="renglon-2 desborde">{{vehiculo.chofer.nombre}} {{vehiculo.chofer.apellido}}</p>
+                                <p class="renglon-3 desborde"></i>{{vehiculo.chofer.celular}}</p>
+                                {% else %}
+                                <p class="renglon-2 desborde">Sin asignar</p>
+                                {% endif %}
+                            </section>
+                        </section>
+                        <section class="fila wsp-maps">
+                            <i class="fa-brands fa-whatsapp redirigir-i"></i>
+                            <i class="fa-solid fa-chevron-right ir"></i>
+                        </section>
+                    {% if vehiculo.chofer %}
+                    </a>
+                    {% else %}
+                    </section>
+                    {% endif %}
+                    {% if vehiculo.celador %}
+                    <a href="https://wa.me/+540{{ vehiculo.celador.celular }}" target="_blank" class="redirigir seccion-1-mostrar tam-seccion fila">
+                    {% else %}
+                    <section class="seccion-1-mostrar tam-seccion fila">
+                    {% endif %} 
+                        <section class="fila">
+                            <i class="fa-solid fa-address-card i-tarjetas"></i>
+                            <section>
+                                <p class="renglon-1 desborde">Celador</p>
+                                {% if vehiculo.celador %}
+                                <p class="renglon-2 desborde">{{ vehiculo.celador.nombre }} {{ vehiculo.celador.apellido }}</p>
+                                <p class="renglon-3 desborde">{{ vehiculo.celador.celular }}</p>
+                                {% else %}
+                                <p class="renglon-2 desborde">Sin asignar</p>
+                                {% endif %}
+                            </section>
+                        </section>
+                        <section class="fila wsp-maps">
+                            <i class="fa-brands fa-whatsapp redirigir-i"></i>
+                            <i class="fa-solid fa-chevron-right ir"></i>
+                        </section>
+                    {% if vehiculo.celador %}
+                    </a>
+                    {% else %}
+                    </section>
+                    {% endif %}
+                    <a href="{% url 'recorridos' vehiculo.id 'lunes' %}" class="seccion-1-mostrar tam-seccion fila redirigir"> 
+                        <section>
+                            <div class="fila">
+                                <i class="fa-solid fa-map-location-dot i-tarjetas"></i>
+                                <section class="columna">
+                                    <p class="renglon-1 desborde">Recorridos asignados</p>
+                                    <section class="fila r2r">
+                                        <p class="renglon-2-r desborde">L</p>
+                                        <p class="renglon-2-r desborde">M</p>
+                                        <p class="renglon-2-r desborde">X</p>
+                                        <p class="renglon-2-r desborde">J</p>
+                                        <p class="renglon-2-r desborde">V</p>
+                                    </section>
+                                    <section class="fila r2r">
+                                        <p class="renglon-3-r desborde">{%if vehiculo.l%}{{vehiculo.l}}{%else%}0{%endif%}</p>
+                                        <p class="renglon-3-r desborde">{%if vehiculo.m%}{{vehiculo.m}}{%else%}0{%endif%}</p>
+                                        <p class="renglon-3-r desborde">{%if vehiculo.x%}{{vehiculo.x}}{%else%}0{%endif%}</p>
+                                        <p class="renglon-3-r desborde">{%if vehiculo.j%}{{vehiculo.j}}{%else%}0{%endif%}</p>
+                                        <p class="renglon-3-r desborde">{%if vehiculo.v%}{{vehiculo.v}}{%else%}0{%endif%}</p>
+                                    </section>
+                                </section>
+                            </div>
+                        </section>
+                        <section class="fila wsp-maps">
+                            <i class="fa-solid fa-gear redirigir-i lista"></i>
+                            <i class="fa-solid fa-chevron-right ir"></i>
+                        </section>
+                    </a>
+                </div>
+            </div>
+        {% endfor%}
+    {% else %}
+        {% include "sin_resultados.html" %}
+    {% endif %}
+{% endblock vehiculos_content %}

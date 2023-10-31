@@ -1,0 +1,91 @@
+{% extends 'clientes.html' %}
+{% block clientes_content %}
+    {% if familias %}
+    {% for familia in familias %}
+        <div class="tarjeta sombra-luz">
+            <section class="id-tarjeta fila">
+                <section class="actividad fila">
+                    {% if familia.estado == True  %}
+                        <p class="activo">#{{familia.id_familiar}}</p>
+                    {% else %}
+                        <p class="inactivo">#{{familia.id_familiar}}</p>
+                    {% endif%}
+                </section>
+                <section class="fila">
+                    <a href="{% url 'modificar_cliente' familia.id_familiar %}" class="fila borde"><i class="fa-solid fa-pencil i-tarjeta-id"></i><span>Modificar</span></a>
+                    <a href="{% url 'eliminar_cliente' familia.id_familiar %}" class="fila borde"><i class="fa-solid fa-trash-can i-tarjeta-id"></i><span>Eliminar</span></a>
+                </section>
+            </section>
+            <div class="grid-tarjeta">
+                {% for adulto in adultos %}
+                {% if adulto.id_familiar.id_familiar == familia.id_familiar %}
+                <a href="https://wa.me/+540{{ adulto.celular }}" target="_blank" class="redirigir seccion-1-mostrar tam-seccion fila">
+                    <section class="fila">
+                        <i class="fa-solid fa-user i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">{{ adulto.parentesco.parentesco }}</p>
+                            <p class="renglon-2 desborde">{{ adulto.nombre }} {{ adulto.apellido }}</p>
+                            <p class="renglon-3 desborde">{{ adulto.celular }}</p>
+                        </section>
+                    </section>
+                    <section class="fila wsp-maps">
+                        <i class="fa-brands fa-whatsapp redirigir-i"></i>
+                        <i class="fa-solid fa-chevron-right ir"></i>
+                    </section>
+                </a>
+                {% endif %}
+                {% endfor %}
+                <section class="fila seccion-1-mostrar tam-seccion">
+                    <i class="fa-solid fa-coins i-tarjetas"></i>
+                    <section>
+                        <p class="renglon-1 desborde">Cuota</p>
+                        <p class="renglon-2 desborde">$ {{ familia.cuota }}</p>
+                        <p class="renglon-3 desborde">{{ familia.descuento }} % de descuento</p>
+                    </section>
+                </section>
+                <section class="fila wsp-maps">
+                    <i class="fa-brands fa-whatsapp redirigir-i"></i>
+                    <i class="fa-solid fa-chevron-right ir"></i>
+                </section>
+                {% for estudiante in estudiantes %}
+                {% if estudiante.id_familiar.id_familiar == familia.id_familiar %}
+                <section class="seccion-2-mostrar tam-seccion fila">
+                    <i class="fa-solid fa-user-graduate i-tarjetas"></i>
+                    <section>
+                        <p class="renglon-1 desborde">Estudiante</p>
+                        <p class="renglon-2 desborde">{{ estudiante.nombre }} {{ estudiante.apellido }}</p>
+                        <p class="renglon-3 desborde">{{ estudiante.nvl_educativo|capfirst }} {{ estudiante.sala_grado_anio }} {{ estudiante.division.division }}</p>
+                        {% if estudiante.viaje.tipo %}
+                            <p class="renglon-4 desborde">Servicio contratado: {{ estudiante.viaje.tipo }}</p>
+                        {% else %}
+                        <p class="renglon-4 desborde">Servicio contratado: Ninguno</p>
+                        {% endif %}
+                    </section>
+                </section>
+                {% endif %}
+                {% endfor %}
+                {% for direccion in direcciones %}
+                {% if direccion.id_familiar.id_familiar == familia.id_familiar %}
+                <a href="https://www.google.com/maps?q={{ direccion.calle }}{{ direccion.altura }}" target="_blank" class="redirigir seccion-3-mostrar tam-seccion fila">
+                    <section class="fila">
+                        <i class="fa-solid fa-location-dot i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Direccion</p>
+                            <p class="renglon-2 desborde">{{ direccion.calle }} {{ direccion.altura }}</p>
+                            <p class="renglon-3 desborde">{{ direccion.piso }} {{ direccion.dpto }}</p>
+                        </section>
+                    </section>
+                    <section class="fila wsp-maps">
+                        <i class="fa-solid fa-magnifying-glass redirigir-i lupa"></i>
+                        <i class="fa-solid fa-chevron-right ir"></i>
+                    </section>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        {% include "sin_resultados.html" %}
+    {% endif %}
+{% endblock clientes_content %}

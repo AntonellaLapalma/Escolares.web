@@ -1,0 +1,25 @@
+{% extends 'clientes.html' %}
+{% load static %}
+{% block clientes_content %}
+<div class="tarjeta tarjeta-registro sombra-luz">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-user-plus"></i>
+        <h3>Modificar grupo familiar</h3>
+        <input type="hidden" name="id-familia" value="{{ familia.id_familiar }}">
+    </section>
+    <script src="{% static 'js/opciones-registro.js' %}"></script>
+    <form id="registro-db" class="columna" action="{% url 'modificar_cliente' familia.id_familiar %}" method="post">
+        {% csrf_token %}
+        {% include "campos_registro_modificar.html" %}
+        <div class="fila error-in">
+            {% if error_x %}
+            <p class="error_forms_registro">{{ error_x }}</p>
+            {% endif %}
+        </div>
+        <div class="botones-registro fila">
+            <a href="{% url 'clientes' %}" class="btn-secundario">Cancelar</a>
+            <button type="submit" class="btn-principal">Modificar</button>
+        </div>
+    </form>
+</div>
+{% endblock clientes_content %}

@@ -1,0 +1,537 @@
+{% load static %}
+{% block campos_content %}
+<div id="registro-seccion-1" class="fila">
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user"></i>
+            <h3>Responsable 1*</h3>
+            <input type="hidden" name="id-adulto-1" value="{{ adultos.0.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-adulto-1" placeholder="" value="{% if datos_adultos.1.nombre %}{{datos_adultos.1.nombre}}{% elif adultos.0.nombre %}{{ adultos.0.nombre }}{% else %}{% endif %}">  
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_adultos.1.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.1.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-adulto-1" placeholder="" value="{% if datos_adultos.1.apellido %}{{datos_adultos.1.apellido}}{% elif adultos.0.apellido %}{{ adultos.0.apellido }}{% else %}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_adultos.1.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.1.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-adulto-1-parentesco" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if parentescos %}
+                    {% for parentesco in parentescos %}                            
+                    <option value="{{ parentesco.id }}"{% if datos_adultos.1.parentesco.id == parentesco.id %}selected{% elif adultos.0.parentesco.id == parentesco.id %}selected{% endif %}>{{ parentesco.parentesco }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Parentesco</label>
+                {% if datos_adultos.1.parentesco_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.1.parentesco_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro cel" name="celular-adulto-1" placeholder="" value="{% if datos_adultos.1.celular %}{{datos_adultos.1.celular}}{% elif adultos.0.celular %}{{ adultos.0.celular }}{% endif %}">
+                <label class="lablel-registro ">Celular</label>
+                {% if datos_adultos.1.celular_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.1.celular_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user"></i>
+            <h3>Responsable 2</h3>
+            <input type="hidden" name="id-adulto-2" value="{{ adultos.1.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-adulto-2" placeholder="" value="{% if datos_adultos.2.nombre %}{{datos_adultos.2.nombre}}{% elif adultos.1.nombre %}{{ adultos.1.nombre }}{% else %}{% endif %}">  
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_adultos.2.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.2.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-adulto-2" placeholder="" value="{% if datos_adultos.2.apellido %}{{datos_adultos.2.apellido}}{% elif adultos.1.apellido %}{{ adultos.1.apellido }}{% else %}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_adultos.2.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.2.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-adulto-2-parentesco" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if parentescos %}
+                    {% for parentesco in parentescos %}                            
+                    <option value="{{ parentesco.id }}"{% if datos_adultos.2.parentesco.id == parentesco.id %}selected{% elif adultos.1.parentesco.id == parentesco.id %}selected{% endif %}>{{ parentesco.parentesco }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Parentesco</label>
+                {% if datos_adultos.2.parentesco_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.2.parentesco_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro cel" name="celular-adulto-2" placeholder="" value="{% if datos_adultos.2.celular %}{{datos_adultos.2.celular}}{% elif adultos.1.celular %}{{ adultos.1.celular }}{% endif %}">
+                <label class="lablel-registro ">Celular</label>
+                {% if datos_adultos.2.celular_error %}
+                    <p class="error_forms_registro">{{ datos_adultos.2.celular_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+</div>
+<div id="registro-seccion-2" class="fila">
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Estudiante 1*</h3>
+            <input type="hidden" name="id-estudiante-1" value="{{ estudiantes.0.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-estudiante-1" placeholder="" value="{% if datos_estudiantes.1.nombre %}{{datos_estudiantes.1.nombre}}{% elif estudiantes.0.nombre %}{{ estudiantes.0.nombre }}{% endif %}">
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_estudiantes.1.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-estudiante-1" placeholder="" value="{% if datos_estudiantes.1.apellido %}{{datos_estudiantes.1.apellido}}{% elif estudiantes.0.apellido %}{{ estudiantes.0.apellido }}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_estudiantes.1.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-1-nvl-educativo" class="select-registro" id="selectNivelEducativo1" onchange="cargarDivisiones('selectNivelEducativo1', 'selectDivision1')">
+                    <option value="" selected disabled></option>
+                    {% if nvls_educativos %}
+                    {% for nvleducativo in nvls_educativos %}                            
+                    <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"{% if datos_estudiantes.1.nivel_educativo.id == nvleducativo.id %}selected{% elif estudiantes.0.nvl_educativo.id == nvleducativo.id %}selected{% endif %}>{{ nvleducativo.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Nivel educativo</label>
+                {% if datos_estudiantes.1.nvl_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.nvl_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-1-nivel" class="select-registro" id="selectNiveles1">
+                    <option value="{% if datos_estudiantes.1.nivel %}{{datos_estudiantes.1.nivel}}{% elif estudiantes.0.sala_grado_anio %}{{ estudiantes.0.sala_grado_anio }}{% endif %}" selected>{% if datos_estudiantes.1.nivel %}{{datos_estudiantes.1.nivel}}{% elif estudiantes.0.sala_grado_anio %}{{ estudiantes.0.sala_grado_anio }}{% endif %}</option>                           
+                </select>
+                <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                {% if datos_estudiantes.1.nvl_num_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.nvl_num_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-1-division" class="select-registro" id="selectDivision1" >
+                    {% if datos_estudiantes.1.division.id %} 
+                    <option value="{{datos_estudiantes.1.division.id}}" selected></option> 
+                    {% elif estudiantes.0.division.id %}
+                    <option value="{{ estudiantes.0.division.id }}" selected></option> 
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">División</label>
+                {% if datos_estudiantes.1.division_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.division_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-1-turno" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if turnos %}
+                    {% for turno in turnos %}                            
+                    <option value="{{ turno.id }}"{% if datos_estudiantes.1.turno == turno  %}selected{% elif estudiantes.0.turno == turno %}selected{% endif %}>{{ turno.turno }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Turno</label>
+                {% if datos_estudiantes.1.turno_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.turno_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-1-servicio" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if viajes %}
+                    {% for viaje in viajes %}                            
+                    <option value="{{ viaje.id }}"{% if datos_estudiantes.1.servicio_viaje == viaje  %}selected{% elif estudiantes.0.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Servicio contratado</label>
+                {% if datos_estudiantes.1.servicio_viaje_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.1.servicio_viaje_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Estudiante 2</h3>
+            <input type="hidden" name="id-estudiante-2" value="{{ estudiantes.1.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-estudiante-2" placeholder=""value="{% if datos_estudiantes.2.nombre %}{{datos_estudiantes.2.nombre}}{% elif estudiantes.1.nombre %}{{ estudiantes.1.nombre }}{% endif %}">
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_estudiantes.2.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-estudiante-2" placeholder=""value="{% if datos_estudiantes.2.apellido %}{{datos_estudiantes.2.apellido}}{% elif estudiantes.1.apellido %}{{ estudiantes.1.apellido }}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_estudiantes.2.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-2-nvl-educativo" class="select-registro" id="selectNivelEducativo2" onchange="cargarDivisiones('selectNivelEducativo2', 'selectDivision2')">
+                    <option value="" selected disabled></option>
+                    {% if nvls_educativos %}
+                    {% for nvleducativo in nvls_educativos %}                            
+                    <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"{% if datos_estudiantes.2.nivel_educativo.id == nvleducativo.id %}selected{% elif estudiantes.1.nvl_educativo.id == nvleducativo.id %}selected{% endif %}>{{ nvleducativo.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Nivel educativo</label>
+                {% if datos_estudiantes.2.nvl_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.nvl_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-2-nivel" class="select-registro" id="selectNiveles2">
+                    <option value="{% if datos_estudiantes.2.nivel %}{{datos_estudiantes.2.nivel}}{% elif estudiantes.1.sala_grado_anio %}{{ estudiantes.1.sala_grado_anio }}{% endif %}" selected>{% if datos_estudiantes.2.nivel %}{{datos_estudiantes.2.nivel}}{% elif estudiantes.1.sala_grado_anio %}{{ estudiantes.1.sala_grado_anio }}{% endif %}</option>                             
+                </select>
+                <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                {% if datos_estudiantes.2.nvl_num_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.nvl_num_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-2-division" class="select-registro" id="selectDivision2">
+                    {% if datos_estudiantes.2.division.id %} 
+                    <option value="{{datos_estudiantes.2.division.id}}" selected></option> 
+                    {% elif estudiantes.1.division.id %}
+                    <option value="{{ estudiantes.1.division.id }}" selected></option> 
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">División</label>
+                {% if datos_estudiantes.2.division_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.division_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-2-turno" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if turnos %}
+                    {% for turno in turnos %}                            
+                    <option value="{{ turno.id }}"{% if datos_estudiantes.2.turno == turno  %}selected{% elif estudiantes.1.turno == turno %}selected{% endif %}>{{ turno.turno }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Turno</label>
+                {% if datos_estudiantes.2.turno_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.turno_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-2-servicio" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if viajes %}
+                    {% for viaje in viajes %}                            
+                    <option value="{{ viaje.id }}"{% if datos_estudiantes.2.servicio_viaje == viaje  %}selected{% elif estudiantes.1.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Servicio contratado</label>
+                {% if datos_estudiantes.2.servicio_viaje_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.2.servicio_viaje_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Estudiante 3</h3>
+            <input type="hidden" name="id-estudiante-3" value="{{ estudiantes.2.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-estudiante-3" placeholder=""value="{% if datos_estudiantes.3.nombre %}{{datos_estudiantes.3.nombre}}{% elif estudiantes.2.nombre %}{{ estudiantes.2.nombre }}{% endif %}">
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_estudiantes.3.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-estudiante-3" placeholder=""value="{% if datos_estudiantes.3.apellido %}{{datos_estudiantes.3.apellido}}{% elif estudiantes.2.apellido %}{{ estudiantes.2.apellido }}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_estudiantes.3.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-3-nvl-educativo" class="select-registro" id="selectNivelEducativo3" onchange="cargarDivisiones('selectNivelEducativo3', 'selectDivision3')">
+                    <option value="" selected disabled></option>
+                    {% if nvls_educativos %}
+                    {% for nvleducativo in nvls_educativos %}                            
+                    <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"{% if datos_estudiantes.3.nivel_educativo.id == nvleducativo.id %}selected{% elif estudiantes.2.nvl_educativo.id == nvleducativo.id %}selected{% endif %}>{{ nvleducativo.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Nivel educativo</label>
+                {% if datos_estudiantes.3.nvl_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.nvl_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-3-nivel" class="select-registro" id="selectNiveles3">
+                    <option value="{% if datos_estudiantes.3.nivel %}{{datos_estudiantes.3.nivel}}{% elif estudiantes.2.sala_grado_anio %}{{ estudiantes.2.sala_grado_anio }}{% endif %}" selected>{% if datos_estudiantes.3.nivel %}{{datos_estudiantes.3.nivel}}{% elif estudiantes.2.sala_grado_anio %}{{ estudiantes.2.sala_grado_anio }}{% endif %}</option>                            
+                </select>
+                <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                {% if datos_estudiantes.3.nvl_num_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.nvl_num_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-3-division" class="select-registro" id="selectDivision3">
+                    {% if datos_estudiantes.3.division.id %} 
+                    <option value="{{datos_estudiantes.3.division.id}}" selected></option> 
+                    {% elif estudiantes.2.division.id %}
+                    <option value="{{ estudiantes.2.division.id }}" selected></option> 
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">División</label>
+                {% if datos_estudiantes.3.division_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.division_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-3-turno" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if turnos %}
+                    {% for turno in turnos %}                            
+                    <option value="{{ turno.id }}"{% if datos_estudiantes.3.turno == turno  %}selected{% elif estudiantes.2.turno == turno %}selected{% endif %}>{{ turno.turno }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Turno</label>
+                {% if datos_estudiantes.3.turno_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.turno_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-3-servicio" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if viajes %}
+                    {% for viaje in viajes %}                            
+                    <option value="{{ viaje.id }}"{% if datos_estudiantes.3.servicio_viaje == viaje  %}selected{% elif estudiantes.2.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Servicio contratado</label>
+                {% if datos_estudiantes.3.servicio_viaje_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.3.servicio_viaje_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Estudiante 4</h3>
+            <input type="hidden" name="id-estudiante-4" value="{{ estudiantes.3.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="nombre-estudiante-4" placeholder="" value="{% if datos_estudiantes.4.nombre %}{{datos_estudiantes.4.nombre}}{% elif estudiantes.3.nombre %}{{ estudiantes.3.nombre }}{% endif %}">
+                <label class="lablel-registro">Nombre</label>
+                {% if datos_estudiantes.4.nombre_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.nombre_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="apellido-estudiante-4" placeholder="" value="{% if datos_estudiantes.4.apellido %}{{datos_estudiantes.4.apellido}}{% elif estudiantes.3.apellido %}{{ estudiantes.3.apellido }}{% endif %}">
+                <label class="lablel-registro">Apellido</label>
+                {% if datos_estudiantes.4.apellido_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.apellido_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-4-nvl-educativo" class="select-registro" id="selectNivelEducativo4" onchange="cargarDivisiones('selectNivelEducativo4', 'selectDivision4')">
+                    <option value="" selected disabled></option>
+                    {% if nvls_educativos %}
+                    {% for nvleducativo in nvls_educativos %}                            
+                    <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"{% if datos_estudiantes.4.nivel_educativo.id == nvleducativo.id %}selected{% elif estudiantes.3.nvl_educativo.id == nvleducativo.id %}selected{% endif %}>{{ nvleducativo.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Nivel educativo</label>
+                {% if datos_estudiantes.4.nvl_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.nvl_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-4-nivel" class="select-registro" id="selectNiveles4">
+                    <option value="{% if datos_estudiantes.4.nivel %}{{datos_estudiantes.4.nivel}}{% elif estudiantes.3.sala_grado_anio %}{{ estudiantes.3.sala_grado_anio }}{% endif %}" selected>{% if datos_estudiantes.4.nivel %}{{datos_estudiantes.4.nivel}}{% elif estudiantes.3.sala_grado_anio %}{{ estudiantes.3.sala_grado_anio }}{% endif %}</option>                           
+                </select>
+                <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                {% if datos_estudiantes.4.nvl_num_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.nvl_num_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-4-division" class="select-registro" id="selectDivision4">
+                    {% if datos_estudiantes.4.division.id %} 
+                    <option value="{{datos_estudiantes.4.division.id}}" selected></option> 
+                    {% elif estudiantes.3.division.id %}
+                    <option value="{{ estudiantes.3.division.id }}" selected></option> 
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">División</label>
+                {% if datos_estudiantes.4.division_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.division_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-4-turno" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if turnos %}
+                    {% for turno in turnos %}                            
+                    <option value="{{ turno.id }}"{% if datos_estudiantes.4.turno == turno  %}selected{% elif estudiantes.3.turno == turno %}selected{% endif %}>{{ turno.turno }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Turno</label>
+                {% if datos_estudiantes.4.turno_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.turno_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <select name="opcion-estudiante-4-servicio" class="select-registro">
+                    <option value="" selected disabled></option>
+                    {% if viajes %}
+                    {% for viaje in viajes %}                            
+                    <option value="{{ viaje.id }}"{% if datos_estudiantes.4.servicio_viaje == viaje  %}selected{% elif estudiantes.3.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                <label class="lablel-registro-opcion">Servicio contratado</label>
+                {% if datos_estudiantes.4.servicio_viaje_error %}
+                    <p class="error_forms_registro">{{ datos_estudiantes.4.servicio_viaje_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+</div>
+<div id="registro-seccion-3" class="fila">
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Domicilio*</h3>
+            <input type="hidden" name="id-direccion-1" value="{{ direcciones.0.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="calle-direccion-1" placeholder="" value="{% if datos_direcciones.1.calle %}{{ datos_direcciones.1.calle }}{% elif direcciones.0.calle %}{{ direcciones.0.calle }}{% endif %}">
+                <label class="lablel-registro">Calle</label>  
+                {% if datos_direcciones.1.calle_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.1.calle_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="altura-direccion-1" placeholder="" value="{% if datos_direcciones.1.altura %}{{ datos_direcciones.1.altura }}{% elif direcciones.0.altura %}{{ direcciones.0.altura }}{% endif %}">
+                <label class="lablel-registro">Altura</label>  
+                {% if datos_direcciones.1.altura_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.1.altura_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro piso" name="piso-direccion-1" placeholder="" value="{% if datos_direcciones.1.piso %}{{ datos_direcciones.1.piso }}{% elif direcciones.0.piso %}{{ direcciones.0.piso }}{% endif %}">
+                <label class="lablel-registro">Piso</label>
+                {% if datos_direcciones.1.piso_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.1.piso_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro dto" name="dpto-direccion-1" placeholder="" value="{% if datos_direcciones.1.departamento %}{{ datos_direcciones.1.departamento }}{% elif direcciones.0.dpto %}{{ direcciones.0.dpto }}{% endif %}">
+                <label class="lablel-registro">Departamento</label>
+                {% if datos_direcciones.1.dpto_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.1.dpto_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Domicilio</h3>
+            <input type="hidden" name="id-direccion-2" value="{{ direcciones.1.id }}">
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="calle-direccion-2" placeholder="" value="{% if datos_direcciones.2.calle %}{{ datos_direcciones.2.calle }}{% elif direcciones.1.calle %}{{ direcciones.1.calle }}{% endif %}">
+                <label class="lablel-registro">Calle</label>  
+                {% if datos_direcciones.2.calle_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.2.calle_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro" name="altura-direccion-2" placeholder="" value="{% if datos_direcciones.2.altura %}{{ datos_direcciones.2.altura }}{% elif direcciones.1.altura %}{{ direcciones.1.altura }}{% endif %}">
+                <label class="lablel-registro">Altura</label>  
+                {% if datos_direcciones.2.altura_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.2.altura_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro piso" name="piso-direccion-2" placeholder="" value="{% if datos_direcciones.2.piso %}{{ datos_direcciones.2.piso }}{% elif direcciones.1.piso %}{{ direcciones.1.piso }}{% endif %}">
+                <label class="lablel-registro">Piso</label>
+                {% if datos_direcciones.2.piso_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.2.piso_error }}</p>
+                {% endif %}
+            </section>
+            <section class="campo-registro campo-registro-error">
+                <input class="input-registro dto" name="dpto-direccion-2" placeholder="" value="{% if datos_direcciones.2.departamento %}{{ datos_direcciones.2.departamento }}{% elif direcciones.1.dpto %}{{ direcciones.1.dpto }}{% endif %}">
+                <label class="lablel-registro">Departamento</label>
+                {% if datos_direcciones.2.dpto_error %}
+                    <p class="error_forms_registro">{{ datos_direcciones.2.dpto_error }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+</div>
+<div id="registro-seccion-3" class="fila">
+    <section class="columna">
+        <div class="titulo-seccion fila">
+            <i class="fa-solid fa-percent"></i>
+            <h3>Descuento</h3>
+        </div>
+        <div class="campos columna">
+            <section class="campo-registro">
+                <input class="input-registro" name="descuento" placeholder="" value="{% if familia.descuento %}{{familia.descuento}}{% else %}0{% endif %}">  
+                <label class="lablel-registro">Descuento</label>
+                {% if error_descuento %}
+                    <p class="error_forms_registro">{{ error_descuento }}</p>
+                {% endif %}
+            </section>
+        </div>
+        
+    </section>
+</div>
+{% endblock campos_content %}

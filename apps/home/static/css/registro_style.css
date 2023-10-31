@@ -1,0 +1,172 @@
+/* pagina */
+.tarjeta-registro{
+    width: 100%;
+}
+.titulo-tarjeta{
+    padding: 5px 20px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--color_borde_id_tarjeta);
+    border-radius: 5px 5px 0px 0px;
+    gap: 5px;
+}
+.titulo-tarjeta h3{
+    color: var(--color_borde_id_tarjeta);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.titulo-tarjeta i{
+    color: var(--color_borde_id_tarjeta);
+    font-size: 12px;
+}
+#registro-db{
+    margin: 20px 60px;
+    justify-content: start;
+    align-items: center;
+    gap: 60px;
+}
+#registro-db h3{
+    color: var(--color_principal);
+    font-size: 16px;
+}
+#registro-db i{
+    color: var(--color_principal);
+    font-size: 12px;
+}
+#registro-seccion-1, #registro-seccion-2, #registro-seccion-3, #registro-seccion-4{
+    width: 100%;
+}
+.titulo-seccion{
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+}
+.campos{
+    margin: 0px 24px;
+    border-left: 1px dashed var(--color_borde_id_tarjeta);
+}
+/* inputs y labels */
+.campo-registro{
+    position: relative;
+    margin: 30px 20px 0px;
+}
+.campo-registro-error{
+    position: relative;
+    margin-bottom:15px; 
+}
+.lablel-registro{
+    color: var(--color_borde_id_tarjeta);
+    font-weight: 300;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: top 0.2s, font-size 0.2s;
+    pointer-events: none;
+}
+.input-registro{
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color_borde_id_tarjeta);
+    background-color: #ffffff00;
+    border-radius: 5px;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.input-registro:hover{
+    border: 1px solid var(--color_blanco);
+    transition: 0.3s ease;
+}
+.input-registro:focus{
+    color: var(--color_blanco);
+    border: 1px solid var(--color_principal);
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5) inset;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5) inset;
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5) inset;
+    transition: 0.3s ease;
+}
+.input-registro:hover + .lablel-registro{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.input-registro:focus + .lablel-registro{
+    color: var(--color_principal);
+    transition: 0.3s ease;
+}
+.input-registro:not(:placeholder-shown) + .lablel-registro,
+.input-registro:focus + .lablel-registro{
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    opacity: 1;
+}
+/* select */
+.lablel-registro-opcion{
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    top: -18px;
+    left: 5px;
+    color: var(--color_borde_id_tarjeta);
+    font-weight: 400;
+}
+.select-registro{
+    width: 100%;
+    padding: 3px 5px;
+    font-weight: 400;
+    background-color: #ffffff00;
+    color: var(--color_borde_id_tarjeta);
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--color_borde_id_tarjeta);
+    cursor: pointer;
+}
+.select-registro:hover{
+    color: var(--color_blanco);
+    border: 1px solid var(--color_blanco);
+    transition: 0.3s ease;
+}
+.select-registro:hover + .lablel-registro-opcion{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.select-registro:focus{
+    color: var(--color_principal);
+    border: 1px solid var(--color_principal);
+    transition: 0.2s ease;
+}
+select option:checked{
+    background-color: var(--color_principal_a);
+    color: var(--color_blanco);
+}
+select option{
+    font-weight: 400;
+    background-color: #111111;
+    color: var(--color_blanco);
+}
+select option:hover{
+    background-color: var(--color_principal);
+    color: var(--color_letras);
+}
+.campo-registro:focus-within .lablel-registro-opcion{
+    color: var(--color_principal);
+    transition: 0.3s ease;
+}
+.estado-m{
+    width: 230px;
+}
+/* botones */
+.botones-registro{
+    width: 100%;
+    margin: 0px 5px 0px 0px;
+    justify-content: center;
+    align-items: end;
+}
+.botones-registro a, .botones-registro button{
+    margin: 0px 0px 20px 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #ffffff00;
+}

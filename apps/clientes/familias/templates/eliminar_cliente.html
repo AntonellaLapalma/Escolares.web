@@ -1,0 +1,341 @@
+{% extends 'clientes.html' %}
+{% load static %}
+{% block clientes_content %}
+<div class="tarjeta tarjeta-registro sombra-luz">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-trash-can"></i>
+        <h3>Eliminar cliente</h3>
+        <input type="hidden" name="id-familia" value="{{ familia.id_familiar }}">
+    </section>
+    <script src="{% static 'js/opciones-registro.js' %}"></script>
+    <form id="registro-db" class="columna" action="{% url 'eliminar_cliente' familia.id_familiar %}" method="post">
+        {% csrf_token %}
+        <div id="registro-seccion-1" class="fila">
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Responsable 1</h3>
+                    <input type="hidden" name="id-adulto-1" value="{{ adultos.0.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-adulto-1" placeholder="" value="{{ adultos.0.nombre }}" disabled>  
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-adulto-1" value="{{ adultos.0.apellido }}" placeholder=""disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-adulto-1-parentesco" class="select-registro" disabled>                        
+                            <option value="{{ adultos.0.parentesco.id }}"selected>{{ adultos.0.parentesco }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Parentesco</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro cel" name="celular-adulto-1" value="{{ adultos.0.celular }}" placeholder="" disabled>
+                        <label class="lablel-registro ">Celular</label>
+                    </section>
+                </div>
+            </section>
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Responsable 2</h3>
+                    <input type="hidden" name="id-adulto-2" value="{{ adultos.1.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-adulto-2" value="{{ adultos.1.nombre }}" placeholder="" disabled>  
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-adulto-2" value="{{ adultos.1.apellido }}" placeholder="" disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-adulto-2-parentesco" class="select-registro" disabled>
+                            <option value="{{ adultos.1.parentesco.id }}"selected>{{ adultos.1.parentesco }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Parentesco</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro cel" name="celular-adulto-2" value="{{ adultos.1.celular }}" placeholder="" disabled>
+                        <label class="lablel-registro ">Celular</label>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div id="registro-seccion-2" class="fila">
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>Estudiante 1</h3>
+                    <input type="hidden" name="id-estudiante-1" value="{{ estudiantes.0.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-estudiante-1" value="{{ estudiantes.0.nombre }}" placeholder="" disabled>
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-estudiante-1" value="{{ estudiantes.0.apellido }}" placeholder="" disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-1-nvl-educativo" class="select-registro" id="selectNivelEducativo1" onchange="cargarDivisiones('selectNivelEducativo1', 'selectDivision1')" disabled>
+                            <option value="" selected disabled></option>                        
+                            <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"selected>{{ estudiantes.0.nvl_educativo.id }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Nivel educativo</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-1-nivel" class="select-registro" disabled>
+                            <option value="{{ estudiantes.0.sala_grado_anio }}" selected>{{ estudiantes.0.sala_grado_anio }}</option>                   
+                        </select>
+                        <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-1-division" class="select-registro" id="selectDivision1" disabled>
+                            <option value="{{ estudiantes.0.division.id }}" selected>{{ estudiantes.0.division.division }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">División</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-1-turno" class="select-registro" disabled>                       
+                            <option value="{{ estudiantes.0.turno.id }}"selected>{{ estudiantes.0.turno.turno }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Turno</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-1-servicio" class="select-registro"disabled>
+                            <option value="" selected ></option>
+                            {% if viajes %}
+                            {% for viaje in viajes %}                            
+                            <option value="{{ viaje.id }}"{% if estudiantes.0.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                        <label class="lablel-registro-opcion">Servicio contratado</label>
+                    </section>
+                </div>
+            </section>
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>Estudiante 2</h3>
+                    <input type="hidden" name="id-estudiante-2" value="{{ estudiantes.1.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-estudiante-2" value="{{ estudiantes.1.nombre }}" placeholder="" disabled>
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-estudiante-2" value="{{ estudiantes.1.apellido }}" placeholder="" disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-2-nvl-educativo" class="select-registro"disabled>
+                            <option value="" selected disabled></option>                        
+                            <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"selected>{{ estudiantes.1.nvl_educativo.id }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Nivel educativo</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-2-nivel" class="select-registro" disabled>
+                            <option value="{{ estudiantes.1.sala_grado_anio }}" selected>{{ estudiantes.1.sala_grado_anio }}</option>                   
+                        </select>
+                        <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-2-division" class="select-registro" disabled>
+                            <option value="{{ estudiantes.1.division.id }}" selected>{{ estudiantes.1.division.division }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">División</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-2-turno" class="select-registro" disabled>                       
+                            <option value="{{ estudiantes.1.turno.id }}"selected>{{ estudiantes.1.turno.turno }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Turno</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-2-servicio" class="select-registro"disabled>
+                            <option value="" selected ></option>
+                            {% if viajes %}
+                            {% for viaje in viajes %}                            
+                            <option value="{{ viaje.id }}"{% if estudiantes.1.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                        <label class="lablel-registro-opcion">Servicio contratado</label>
+                    </section>
+                </div>
+            </section>
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>Estudiante 3</h3>
+                    <input type="hidden" name="id-estudiante-3" value="{{ estudiantes.2.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-estudiante-3" value="{{ estudiantes.2.nombre }}" placeholder="" disabled>
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-estudiante-3" value="{{ estudiantes.2.apellido }}" placeholder="" disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-3-nvl-educativo" class="select-registro" id="selectNivelEducativo3" onchange="cargarDivisiones('selectNivelEducativo3', 'selectDivision3')" disabled>
+                            <option value="" selected disabled></option>                        
+                            <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"selected>{{ estudiantes.2.nvl_educativo.id }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Nivel educativo</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-3-nivel" class="select-registro" disabled>
+                            <option value="{{ estudiantes.2.sala_grado_anio }}" selected>{{ estudiantes.2.sala_grado_anio }}</option>                   
+                        </select>
+                        <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-3-division" class="select-registro" id="selectDivision3" disabled>
+                            <option value="{{ estudiantes.2.division.id }}" selected>{{ estudiantes.2.division.division }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">División</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-3-turno" class="select-registro" disabled>                       
+                            <option value="{{ estudiantes.2.turno.id }}"selected>{{ estudiantes.2.turno.turno }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Turno</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-3-servicio" class="select-registro"disabled>
+                            <option value="" selected ></option>
+                            {% if viajes %}
+                            {% for viaje in viajes %}                            
+                            <option value="{{ viaje.id }}"{% if estudiantes.2.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                        <label class="lablel-registro-opcion">Servicio contratado</label>
+                    </section>
+                </div>
+            </section>
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>Estudiante 4</h3>
+                    <input type="hidden" name="id-estudiante-4" value="{{ estudiantes.3.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" name="nombre-estudiante-4" value="{{ estudiantes.3.nombre }}" placeholder="" disabled>
+                        <label class="lablel-registro">Nombre</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" name="apellido-estudiante-4" value="{{ estudiantes.3.apellido }}" placeholder="" disabled>
+                        <label class="lablel-registro">Apellido</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-4-nvl-educativo" class="select-registro"  disabled>
+                            <option value="" selected disabled></option>                        
+                            <option value="{{ nvleducativo.id }}" data-inicio="{{ nvleducativo.inicio }}" data-fin="{{ nvleducativo.fin }}"selected>{{ estudiantes.3.nvl_educativo.id }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Nivel educativo</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-4-nivel" class="select-registro" disabled>
+                            <option value="{{ estudiantes.3.sala_grado_anio }}" selected>{{ estudiantes.3.sala_grado_anio }}</option>                   
+                        </select>
+                        <label class="lablel-registro-opcion">Sala/Grado/Año</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-4-division" class="select-registro" id="selectDivision4" disabled>
+                            <option value="{{ estudiantes.3.division.id }}" selected>{{ estudiantes.3.division.division }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">División</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-4-turno" class="select-registro" disabled>                       
+                            <option value="{{ estudiantes.3.turno.id }}"selected>{{ estudiantes.3.turno.turno }}</option>
+                        </select>
+                        <label class="lablel-registro-opcion">Turno</label>
+                    </section>
+                    <section class="campo-registro">
+                        <select name="opcion-estudiante-4-servicio" class="select-registro"disabled>
+                            <option value="" selected ></option>
+                            {% if viajes %}
+                            {% for viaje in viajes %}                            
+                            <option value="{{ viaje.id }}"{% if estudiantes.3.viaje == viaje %}selected{% endif %}>{{ viaje.tipo }}</option>
+                            {% endfor %}
+                            {% endif %}
+                        </select>
+                        <label class="lablel-registro-opcion">Servicio contratado</label>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div id="registro-seccion-3" class="fila">
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Domicilio</h3>
+                    <input type="hidden" name="id-direccion-1" value="{{ direcciones.0.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" value="{{ direcciones.0.calle }}" name="calle-direccion-1" placeholder="" disabled>
+                        <label class="lablel-registro">Calle</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" value="{{ direcciones.0.altura }}" name="altura-direccion-1" placeholder="" disabled>
+                        <label class="lablel-registro">Altura</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro piso" value="{{ direcciones.0.piso }}"name="piso-direccion-1" placeholder="" disabled>
+                        <label class="lablel-registro">Piso</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro dto" value="{{ direcciones.0.dpto }}" name="dpto-direccion-1" placeholder="" disabled>
+                        <label class="lablel-registro">Departamento</label>
+                    </section>
+                </div>
+            </section>
+            <section class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Domicilio</h3>
+                    <input type="hidden" name="id-direccion-2" value="{{ direcciones.1.id }}">
+                </div>
+                <div class="campos columna">
+                    <section class="campo-registro">
+                        <input class="input-registro" value="{{ direcciones.1.calle }}" name="calle-direccion-2" placeholder="" disabled>
+                        <label class="lablel-registro">Calle</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro" value="{{ direcciones.1.altura }}" name="altura-direccion-2" placeholder="" disabled>
+                        <label class="lablel-registro">Altura</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro piso" value="{{ direcciones.1.piso }}" name="piso-direccion-2" placeholder="" disabled>
+                        <label class="lablel-registro">Piso</label>
+                    </section>
+                    <section class="campo-registro">
+                        <input class="input-registro dto" value="{{ direcciones.1.dpto }}" name="dpto-direccion-2" placeholder="" disabled>
+                        <label class="lablel-registro">Departamento</label>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div class="botones-registro fila">
+            <a href="{% url 'clientes' %}" class="btn-secundario">Cancelar</a>
+            <button type="submit" class="btn-principal">Eliminar</button>
+        </div>
+    </form>
+</div>
+{% endblock clientes_content %}

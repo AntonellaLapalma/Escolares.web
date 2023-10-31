@@ -1,0 +1,162 @@
+.grid-tarjeta-recorridos{
+    padding: 30px;
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+.dia{
+    padding: 5px 10px;
+    font-size: 15px;
+    color: var(--color_borde_id_tarjeta);
+}
+.i-recorrido{
+    color: var(--color_blanco);
+    font-size: 12px;
+}
+.recorrido-1{
+    grid-column: 1/span 1;
+    grid-row: 1/span 1;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.recorrido-2{
+    grid-column: 2/span 1;
+    grid-row: 1/span 1;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.recorrido-3{
+    grid-column: 3/span 1;
+    grid-row: 1/span 1;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.recorrido-4{
+    grid-column: 4/span 1;
+    grid-row: 1/span 1;
+    border: 1px solid var(--color_borde_id_tarjeta);
+}
+.id-dia{
+    width: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+}
+.seccion-turno-recorrido{
+    padding: 5px 20px;
+    border-bottom: 1px solid var(--color_borde_id_tarjeta);
+    align-items: center;
+    justify-content: space-between;
+}
+.seccion-turno-recorrido .fila{
+    align-items: center;
+    gap: 10px;
+}
+.grid-tarjeta-recorridos h3{
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color_blanco);
+}
+.btn-enviar-wsp{
+    padding-top: 3px;
+    gap: 10px;
+    align-items: center;
+    color: var(--color_principal);
+    background-color: #00000000;
+    cursor: pointer;
+    border: none;
+}
+.wsp-e{
+    font-size: 9px;
+}
+.btn-enviar-wsp:hover .wsp-e{
+    opacity: 1;
+    transform: translateX(5px);
+    transition: 0.3s ease;
+}
+.lista-pasajeros{
+    padding: 10px;
+    height: 500px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5)inset;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5)inset;
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5)inset;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+}
+.lista-pasajeros::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #0000000c;
+}
+.lista-pasajeros::-webkit-scrollbar-thumb{
+    background-color: var(--color_detalles);
+    border-radius: 5px;
+}
+.lista-pasajeros li{
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    justify-content: space-between; 
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+.lista-pasajeros li:hover{
+    background-color: var(--efecto_translucido);
+    transition: 0.3s ease;
+}
+.lista-pasajeros li form{
+    width: 100%;
+    justify-content: space-between;
+}
+.lista-pasajeros li section button{
+    background-color: #00000000;
+    border: none;
+}
+.lista-pasajeros li section button i{
+    color: var(--color_borde_id_tarjeta);
+    font-size: 13px;
+    cursor: pointer;
+}
+.quitar-pasajero:hover{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.pasajeros-1{
+    font-size: 16px;
+    color: var(--color_principal);
+    font-weight: 600;
+}
+.pasajeros-2{
+    font-size: 12px;
+    color: var(--color_info);
+    font-weight: 400;
+}
+.pasajeros-3{
+    font-size: 16px;
+    color: var(--color_blanco);
+    font-weight: 400;
+}
+.form-recorridos{
+    padding: 10px 10px;
+    height: 30px;
+    border-top: 1px solid var(--color_borde_id_tarjeta);
+    align-items: start;
+    gap: 10px;
+}
+.btn-recorrido{
+    height: 99%;
+}
+.btn-recorrido:hover{
+    color: var(--color_principal);
+    border: 1px solid var(--color_principal);
+}
+.btn-recorrido:active{
+    color: #111111;
+    background-color: var(--color_principal);
+}
+.select-recorrido{
+    border-radius: 0px;
+    height: 99%;
+}

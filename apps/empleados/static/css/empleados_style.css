@@ -1,0 +1,39 @@
+/* Aca iran los estilos que afecten unicamente a la seccion empleados */
+.grid-tarjeta-empleados{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0px 80px;
+}
+.campos-tarea{
+    margin: 0px 24px;
+    width: 230px;
+    border-left: 1px dashed var(--color_borde_id_tarjeta);
+}
+.aclaracion-empleado{
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color_blanco);
+    width: 100%;
+    white-space: normal;
+}
+.r2r{
+    justify-content: space-around;
+    gap: 8px;
+}
+.renglon-2-r{
+    width: 100%;
+    background-color: var(--color_borde_id_tarjeta);
+    text-align: center;
+    color: var(--color_fondo);
+    font-size: 14px;
+}
+.renglon-3-r{
+    /* margin-top: 3px; */
+    width: 100%;
+    border: 1px solid var(--color_borde_id_tarjeta);
+    text-align: center;
+    font-size: 14px;
+    color: var(--color_principal);
+}

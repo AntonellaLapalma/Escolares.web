@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block content %}
+<main class="login columna">
+    <div class="tarjeta-login">
+        <section class="titulo-tarjeta fila">
+            <h3>INGRESAR</h3>
+        </section>
+        <form id="form-login" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <section class="campo-registro campo-login">
+                {{ form.username }}
+                <label for="" class="lablel-registro">Usuario</label>
+            </section>
+            {% for error in form.username.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+            <section class="campo-registro campo-login">
+                {{ form.password }}
+                <label for="" class="lablel-registro">Contraseña</label>
+            </section>
+            {% for error in form.password.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+            <button type="submit" class="btn-principal boton-login">INGRESAR</button>
+            <a href="http://" class="link-login">¿Olvidaste tu contraseña?</a>
+        </form>
+    </div>
+</main>
+{% endblock content %}

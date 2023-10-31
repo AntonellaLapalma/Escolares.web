@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% block content %}
+<main class="">
+    {% include "navbar.html" %}
+    <div id="pagina-clientes" class="pagina columna">
+        <div class="listado-db">
+        {% include "header_gastos.html" %}
+        {% block gastos_content %}
+        {% endblock gastos_content %}
+            <!-- <div class="sombra-luz tarjeta-extra">
+                <section class="id-tarjeta dia fila">
+                    <h3 class="id-dia"> PRECIOS</h3>
+                </section>
+                <section>
+                    <ul class="fila">
+                        <li>Viaje</li>
+                        <li>Precio</li>
+                    </ul>
+                    <ul>
+                        <li class="fila viaje-precio"></li>
+                        <ul class="fila renglon-listado-1">
+                            <li>Ida o vuelta</li>
+                            <li>$ 30000</li>
+                        </ul>
+                    </ul>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fila viaje-precio"></li>
+                        <ul class="fila renglon-listado-2">
+                            <li>Ida y vuelta</li>
+                            <li>$ 55000</li>
+                        </ul>
+                    </ul>
+                </section>
+            </div> -->
+        </div>
+    </div>
+</main>
+{% endblock content %}

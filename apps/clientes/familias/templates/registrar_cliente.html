@@ -1,0 +1,25 @@
+{% extends 'clientes.html' %}
+{% load static %}
+{% block clientes_content %}
+<div class="tarjeta tarjeta-registro sombra-luz">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-user-plus"></i>
+        <h3>Registrar grupo familiar</h3>
+    </section>
+    <p class="advertencia">Para registrar un grupo familiar deberá ingresar por lo menos un adulto, un estudiante y una dirección.*</p>
+    <script src="{% static 'js/opciones-registro.js' %}"></script>
+    <form id="registro-db" class="columna" action="{% url 'registrar_cliente' %}" method="post">
+        {% csrf_token %}
+        {% include "campos_registro_modificar.html" %}
+        <div class="fila error-in">
+            {% if error_x %}
+            <p class="error_forms_registro">{{ error_x }}</p>
+            {% endif %}
+        </div>
+        <div class="botones-registro fila">
+            <a href="{% url 'clientes' %}" class="btn-secundario">Cancelar registro</a>
+            <button type="submit" class="btn-principal">Registrar cliente</button>
+        </div>
+    </form>
+</div>
+{% endblock clientes_content %}

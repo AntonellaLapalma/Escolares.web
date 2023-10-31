@@ -1,0 +1,18 @@
+{% extends 'recorridos.html' %}
+{% block content %}
+<header class="cabecera-pag item-pag-2 fila">
+    <section class="opciones-header fila">
+        <section class="filtros semana fila sombra-luz">
+            <p class="fila borde-der {% if request.path == '/vehiculos/' or '/recorridos/' in request.path %} seccion-filtro {% endif %}"><i class="fa-solid fa-rectangle-list i-header"></i><span>Mostrar</span></p>
+            <a href="{% url 'recorridos' vehiculo.id 'lunes' %}" class="fila {% if '/lunes/' in request.path %} filtro-active {% endif %}">Lunes</a>
+            <a href="{% url 'recorridos' vehiculo.id 'martes' %}" class="fila {% if '/martes/' in request.path %} filtro-active {% endif %}">Martes</a>
+            <a href="{% url 'recorridos' vehiculo.id 'miercoles' %}" class="fila {% if '/miercoles/' in request.path %} filtro-active {% endif %}">Miércoles</a>
+            <a href="{% url 'recorridos' vehiculo.id 'jueves' %}" class="fila {% if '/jueves/' in request.path %} filtro-active {% endif %}">Jueves</a>
+            <a href="{% url 'recorridos' vehiculo.id 'viernes' %}" class="fila {% if '/viernes/' in request.path %} filtro-active {% endif %}">Viernes</a>
+        </section>
+        <section class="registrar">
+            <a href="{% url 'ver_info_vehiculo' vehiculo.id %}" class="btn-header fila sombra-luz"><i class="fa-regular fa-circle-question i-header"></i><span>Información del vehículo</span></a>
+         </section> 
+    </section>
+</header>
+{% endblock content %}

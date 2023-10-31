@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+<main class="grid-pagina">
+    {% include "navbar.html" %}
+    <div id="pagina-clientes" class="pagina columna item-pag-3">
+        <div class="listado-db">
+            {% include "header_recorridos.html" %}
+            {% block recorridos_content %}
+            {% endblock recorridos_content %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

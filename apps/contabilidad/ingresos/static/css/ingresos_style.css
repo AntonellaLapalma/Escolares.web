@@ -1,0 +1,60 @@
+.contabilidad{
+    gap: 22px;
+}
+.tarjeta-contabilidad{
+    padding: 20px;
+}
+.seccion-contabilidad{
+    width: 55.5%;
+}
+.btn-ingresos{
+    padding: 8px 10px;
+    background-color: #ffffff00;
+    border: 1px solid var(--color_borde_id_tarjeta);
+    border-radius: 20%;
+    color: var(--color_borde_id_tarjeta);
+    cursor: pointer;
+}
+.btn-ingresos i{
+    border-radius: 10px;
+}
+.btn-ingresos:hover{
+    color: var(--color_blanco);
+    border: 1px solid var(--color_blanco);
+    transition: 0.3s ease;
+}
+.btn-ingresos:active{
+    background-color: var(--color_blanco);
+    color: var(--color_negro);
+    border: 1px solid var(--color_blanco);
+    transition: 0.3s ease;
+}
+
+.tabla-mes{
+    border: solid 1px var(--color_borde_id_tarjeta);
+}
+.cabecera-tabla-mes{
+    border-bottom: solid 1px var(--color_borde_id_tarjeta);
+    background-color: rgba(255, 255, 255, 0.111);
+}
+.contenido-tabla-mes li{
+    padding: 10px 0px;
+    color: var(--color_blanco);
+    font-weight: 300;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.cabecera-tabla-mes li{
+    padding: 5px 0px;
+}
+.renglon-mes:hover{
+    background-color: var(--efecto_translucido);
+}
+.edicion{
+    padding: 0px 10px;
+    width: 25% !important;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}

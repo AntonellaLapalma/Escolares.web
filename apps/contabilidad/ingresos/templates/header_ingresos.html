@@ -1,0 +1,26 @@
+{% extends 'ingresos.html' %}
+{% block content %}
+<header class="cabecera-pag item-pag-2 fila">
+    <section class="opciones-header fila">
+        <section class="filtros fila">
+            <p class="fila borde-der"><i class="fa-solid fa-calendar-days i-header"></i><span>Mostrar</span></p>
+            <select name="opcion-anio-ingresos" class="select-registro">
+                <option value="Todos" selected disabled>Todos los años</option>
+                {% if turnos %}
+                {% for turno in turnos %}                            
+                <option value="{{ turno.id }}">{{ turno.turno }}</option>
+                {% endfor %}
+                {% endif %}
+            </select>
+            <button class="btn-ingresos fila"><i class="fa-solid fa-arrow-right"></i></button>
+        </section>
+        <section class="registrar">
+            <a href="{% url 'registrar_cliente' %}" class="btn-header fila sombra-luz"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></a>
+        </section>
+        <form class="buscador fila" action="{% url 'buscar_clientes' busqueda='busqueda' %}" method="get">
+            <input type="text" placeholder="Buscar cliente" class="buscador-input" name="busqueda" >
+            <button class="buscar" type="submit"><i class="fa-solid fa-magnifying-glass lupita"></i></button>
+        </form>
+    </section>
+</header>
+{% endblock content %}

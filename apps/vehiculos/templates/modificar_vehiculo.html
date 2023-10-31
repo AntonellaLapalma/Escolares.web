@@ -1,0 +1,94 @@
+{% extends 'vehiculos.html' %}
+{% block vehiculos_content %}
+<div class="tarjeta tarjeta-registro sombra-luz">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-pencil"></i>
+        <h3>Modificar vehículo</h3>
+    </section>
+    <form id="registro-db" class="columna"  action="{% url 'modificar_vehiculo' vehiculo.id %}" method="post">
+        {% csrf_token %}
+        <dv class="fila seccion-info">
+            <div id="registro-seccion-1" class="columna">
+                <section class="columna">
+                    <div class="titulo-seccion fila">
+                        <i class="fa-solid fa-bus"></i>
+                        <h3>Datos Vehículo</h3>
+                    </div>
+                    <div class="campos columna">
+                        <section class="campo-registro {% if patente_error %} campo-registro-error{% endif %}">
+                            <input class="input-registro" name="patente_vehiculo" placeholder="" value="{{ vehiculo.patente|upper }}">
+                            <label class="lablel-registro">Patente</label>
+                            {% if patente_error %}
+                                <p class="error_forms_registro">{{ patente_error }}</p>
+                            {% endif %}
+                        </section>
+                        <section class="campo-registro {% if asientos_error %} campo-registro-error{% endif %}">
+                            <input class="input-registro parentezco cel" name="asientos_vehiculo" placeholder="" value="{{ vehiculo.cant_asientos }}">
+                            <label class="lablel-registro">Cant. de asientos</label>
+                            {% if asientos_error %}
+                                <p class="error_forms_registro">{{ asientos_error }}</p>
+                            {% endif %}
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div id="registro-seccion-2" class="columna">
+                <section class="columna">
+                    <div class="titulo-seccion fila">
+                        <i class="fa-solid fa-address-card"></i>
+                        <h3>Chofer asignado</h3>
+                    </div>
+                    <div class="campos columna estado-m">
+                        <section class="campo-registro columna">
+                            <select name="opcion_chofer" class="select-registro">
+                                <option value="Ninguno" {% if vehiculo.chofer.id == Null %}selected{% endif %}>Ninguno</option>
+                                {% for empleado in empleados %}
+                                {% if empleado.puesto.puesto == 'Chofer' %}
+                                <option value="{{ empleado.id }}" {% if vehiculo.chofer.id == empleado.id %}selected{% endif %}>{{empleado.id}} - {{empleado.nombre}} {{empleado.apellido}}</option>
+                                {% endif %}
+                                {% endfor %}
+                                {% if vehiculo.chofer.id != None %}
+                                <option value="{{vehiculo.chofer.id}}" selected>{{vehiculo.chofer.id}} - {{vehiculo.chofer.nombre}} {{vehiculo.chofer.apellido}}</option>
+                                {% endif %}
+                            </select>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div id="registro-seccion-3" class="columna">
+                <section class="columna">
+                    <div class="titulo-seccion fila">
+                        <i class="fa-solid fa-address-card"></i>
+                        <h3>Celador asignado</h3>
+                    </div>
+                    <div class="campos columna estado-m">
+                        <section class="campo-registro columna">
+                            <select name="opcion_celador" class="select-registro">
+                                <option value="Ninguno" {% if vehiculo.celador.id == Null %}selected{% endif %}>Ninguno</option>
+                                {% for empleado in empleados %}
+                                {% if empleado.puesto.puesto == 'Celador' %}
+                                <option value="{{empleado.id}}">{{empleado.id}} - {{empleado.nombre}} {{empleado.apellido}}</option>
+                                {% endif %}
+                                {% endfor %}
+                                {% if vehiculo.celador.id != None %}
+                                <option value="{{vehiculo.celador.id}}"selected>{{vehiculo.celador.id}} - {{vehiculo.celador.nombre}} {{vehiculo.celador.apellido}}</option>
+                                {% endif %}
+                            </select>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div id="registro-seccion-4" class="fila"></div>
+        </dv>
+        <div class="fila error-in">
+            {% if error_x %}
+            <p class="error_forms_registro">{{ error_x }}</p>
+            {% endif %}
+        </div>
+        <div class="botones-registro fila">
+            <a href="{% url 'vehiculos' %}" class="btn-secundario">Cancelar</a>
+            <button type="submit" class="btn-principal">Guardar</button>
+        </div>
+    </form>
+</div>  
+{% endblock vehiculos_content %}
