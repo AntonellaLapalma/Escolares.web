@@ -14,13 +14,6 @@ class VehiculosView(IndexView):
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-        
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
         # Obtengo el valor del parametro 'estado' en la URL
         chofer = self.kwargs.get('estado')
 
@@ -53,13 +46,7 @@ class VehiculosView(IndexView):
             vehiculo.j = viajes_distintos_j.count()
             viajes_distintos_v = Viernes.objects.filter(vehiculo=vehiculo.id).values('viaje__turno', 'viaje__tipo').distinct()
             vehiculo.v = viajes_distintos_v.count()
-        
-        
-
-        # Paso los empleados y vehiculos al contexto
-        context['vehiculos'] = vehiculos
-
-        return context
+        return render(request, self.template_name, {'vehiculos':vehiculos})
     
 class RegistrarVehiculoView(IndexView):
     template_name='registrar_vehiculo.html'
@@ -69,20 +56,13 @@ class RegistrarVehiculoView(IndexView):
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-        
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         td=Traer_Datos()
         # Traigo los empleados para luego listarlos en el html
         empleados_sin_asignar = td.empleados_libres()
 
         if empleados_sin_asignar:
-            context['empleados'] = empleados_sin_asignar
-
-        return context
+            empleados = empleados_sin_asignar
+        return render(request, self.template_name, {'empleados':empleados})
 
     def post(self,request):
         error_x=None
@@ -144,18 +124,18 @@ class ModificarVehiculoView(IndexView):
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
+        vehiculo = None
+        empleados_sin_asignar = None
+
+        vehiculo_id = kwargs.get('vehiculo_id')
+        if vehiculo_id:
+            vehiculo = Vehiculo.objects.get(id=vehiculo_id)
+            td = Traer_Datos()
+            empleados_sin_asignar = td.empleados_libres()
+
+        return render(request, self.template_name, {'vehiculo': vehiculo, 
+                                                    'empleados': empleados_sin_asignar})
         
-    def get(self, request, vehiculo_id):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_id)
-        td=Traer_Datos()
-        # Traigo los empleados para luego listarlos en el html
-        empleados_sin_asignar = td.empleados_libres()
-
-        return render(request, self.template_name, {'vehiculo': vehiculo,'empleados':empleados_sin_asignar})
-
     def post(self, request, vehiculo_id):
         error_x=None
         vehiculo = Vehiculo.objects.get(id=vehiculo_id)
@@ -174,7 +154,6 @@ class ModificarVehiculoView(IndexView):
         else:
             error_x = 'Error, vuelva a intentarlo.*'
             
-
         if celador_id != 'Ninguno':
             celador = get_object_or_404(Empleado, id=celador_id)
         elif celador_id == 'Ninguno':
@@ -207,9 +186,6 @@ class ModificarVehiculoView(IndexView):
             vehiculo.save()
             return redirect('vehiculos')
         
-
-
-            
         td=Traer_Datos()
         # Traigo los empleados para luego listarlos en el html
         empleados_sin_asignar = td.empleados_libres()
@@ -225,21 +201,24 @@ class EliminarVehiculoView(IndexView):
     template_name='eliminar_vehiculo.html'
 
     def get(self, request, *args, **kwargs):
-        # En caso de que no se haya iniciado sesion redirige a login
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
+        vehiculo = None
+        vehiculo_id = kwargs.get('vehiculo_id')
         
-    def get(self, request, vehiculo_id):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_id)
+        if vehiculo_id:
+            vehiculo = Vehiculo.objects.get(id=vehiculo_id)
 
         return render(request, self.template_name, {'vehiculo': vehiculo})
 
-    def post(self, request, vehiculo_id):
-        vehiculo = Vehiculo.objects.filter(id=vehiculo_id)
+    
+    def post(self, *args, **kwargs):
+        vehiculo = None
+        vehiculo_id = kwargs.get('vehiculo_id')
+        
+        if vehiculo_id:
+            vehiculo = Vehiculo.objects.get(id=vehiculo_id)
         vehiculo.delete()
 
         return redirect('vehiculos')

@@ -3,7 +3,7 @@
     padding: 0px 0px 20px 0px;
     width: 100%;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
 }
 .i-header{
     font-size: 12px;
@@ -44,7 +44,7 @@
     gap: 10px;
     background-color: #ffffff00;
     backdrop-filter: blur(10px);
-    animation: fadeIn 0.8s ease-in-out forwards;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 .filtros p{
     height: 100%;
@@ -99,7 +99,7 @@
 .registrar{
     width: 25%;
     height: 100%;
-    animation: fadeIn 0.8s ease-in-out forwards;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 /*  Buscador */
 .buscador{
@@ -111,7 +111,7 @@
     border: 1px solid var(--color_borde_id_tarjeta);
     background-color: #ffffff00;
     backdrop-filter: blur(10px);
-    animation: fadeIn 0.8s ease-in-out forwards;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 .buscador:hover{
     border-color: var(--color_blanco);

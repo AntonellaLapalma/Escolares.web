@@ -5,7 +5,7 @@
         <i class="fa-solid fa-trash-can"></i>
         <h3>Eliminar vehículo</h3>
     </section>
-    <form id="registro-db" class="columna"  action="{% url 'eliminar_vehiculo' vehiculo.patente %}" method="post">
+    <form id="registro-db" class="columna"  action="{% url 'eliminar_vehiculo' vehiculo.id %}" method="post">
         {% csrf_token %}
         <dv class="fila seccion-info">
             <div id="registro-seccion-1" class="columna">

@@ -58,5 +58,7 @@ urlpatterns = [
     path('vehiculos/quitar-pasajero/<int:vehiculo_id>/<str:dia>/<str:viaje>/<str:estudiante>/', QuitarPasajero.as_view(), name='quitar-pasajero'),
     
     path('ingresos/', IngresosView.as_view(), name='ingresos'),
+    path('ingresos/<int:anio_elegido>/<int:mes_elegido>/', IngresosView.as_view(), name='ingresos_anio_mes'),
+
     path('gastos/', GastosView.as_view(), name='gastos'),
 ]

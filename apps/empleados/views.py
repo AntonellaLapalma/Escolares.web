@@ -13,14 +13,6 @@ class EmpleadosView(IndexView):
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-        
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
         # Obtengo el valor del 'estado' en la URL
         puesto = self.kwargs.get('estado')
 
@@ -85,8 +77,7 @@ class EmpleadosView(IndexView):
                     empleado.v = viajes_distintos_v.count()
                     break
                 
-        context['empleados'] = empleados
-        return context
+        return render(request, self.template_name,{'empleados':empleados})
 
 class RegistrarEmpleadoView(IndexView):
     template_name='registrar_empleado.html'
@@ -96,15 +87,8 @@ class RegistrarEmpleadoView(IndexView):
         if not request.user.is_authenticated:
             return redirect('login')
 
-        # Llamo al metodo get_context_data y paso los resultados
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-            
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         puestos = Puesto.objects.all()
-        context['puestos'] = puestos
-        return context
+        return render(request, self.template_name, {'puestos':puestos})
     
     def post(self, request):
         error_x=None
@@ -165,8 +149,8 @@ class ModificarEmpleadoView(IndexView):
         
         empleado = Empleado.objects.get(id=empleado_id)
         puestos = Puesto.objects.all()
-
-        return render(request, self.template_name, {'empleado': empleado,'puestos':puestos})
+        return render(request, self.template_name, {'empleado': empleado,
+                                                    'puestos':puestos})
  
     def post(self, request, empleado_id):
         nombre = ""

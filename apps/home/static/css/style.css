@@ -24,6 +24,7 @@
     --color_info:rgb(168, 168, 168);
     --color_info_a:rgb(144, 144, 144);
     --color_fondo:#111111;
+    --color_negro:rgba(10, 10, 10);
 }
 ::selection {
     background-color: var(--color_gris_seleccion);
@@ -108,7 +109,7 @@ body::-webkit-scrollbar-thumb{
     width: 100%;
     height: min-content;
     border-radius: 5px;
-    animation: fadeIn 1s ease-in-out forwards;
+    /* animation: fadeIn 1s ease-in-out forwards; */
     background-color: var(--efecto_translucido);
     border-left: 1px solid rgba(255, 255, 255, 0.3);
     border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -327,7 +328,7 @@ body::-webkit-scrollbar-thumb{
     margin: 5px 0px 15px 0px;
     width: 100%;
     border-radius: 5px;
-    animation: fadeIn 1s ease-in-out forwards;
+    /* animation: fadeIn 1s ease-in-out forwards; */
 }
 .sin-resultados{
     padding: 100px;

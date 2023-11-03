@@ -9,8 +9,8 @@
     background-color: rgba(10, 10, 10);
     border: none;
     box-shadow: 1px 1px 10px #000000;
-    animation: fadeIn 0.6s ease-in-out forwards;
-    z-index: 99;
+    /* animation: fadeIn 0.6s ease-in-out forwards; */
+    z-index: 999;
 }
 #navbar a{
     width: 100%;

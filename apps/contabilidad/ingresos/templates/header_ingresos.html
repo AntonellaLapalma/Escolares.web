@@ -2,24 +2,34 @@
 {% block content %}
 <header class="cabecera-pag item-pag-2 fila">
     <section class="opciones-header fila">
-        <section class="filtros fila">
-            <p class="fila borde-der"><i class="fa-solid fa-calendar-days i-header"></i><span>Mostrar</span></p>
-            <select name="opcion-anio-ingresos" class="select-registro">
-                <option value="Todos" selected disabled>Todos los años</option>
-                {% if turnos %}
-                {% for turno in turnos %}                            
-                <option value="{{ turno.id }}">{{ turno.turno }}</option>
-                {% endfor %}
-                {% endif %}
-            </select>
-            <button class="btn-ingresos fila"><i class="fa-solid fa-arrow-right"></i></button>
+        <section class="desplegable-anios columna">
+            <div class="titulo-desplegable fila">
+                <h4>Categorías</h4><i class="fa-solid fa-angle-down i-header"></i>
+            </div>
+            <ul class="categorias-desplegable-anios">
+            {% for anio in anios %}
+                <li class="fila"><a class="categoria fila"><span>{{ anio }}</span><i class="fa-solid fa-angle-right i-header"></i></a>
+                    <ul class="desplegable-meses">
+                        <li><a href="{% url 'ingresos_anio_mes' anio '01' %}" class="subcategoria fila">Enero</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '02' %}" class="subcategoria fila">Febrero</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '03' %}" class="subcategoria fila">Marzo</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '04' %}" class="subcategoria fila">Abril</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '05' %}" class="subcategoria fila">Mayo</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '06' %}" class="subcategoria fila">Junio</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '07' %}" class="subcategoria fila">Julio</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '08' %}" class="subcategoria fila">Agosto</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '09' %}" class="subcategoria fila">Septiembre</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '10' %}" class="subcategoria fila">Octubre</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '11' %}" class="subcategoria fila">Noviembre</a></li>
+                        <li><a href="{% url 'ingresos_anio_mes' anio '12' %}" class="subcategoria fila">Diciembre</a></li>
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
         </section>
-        <section class="registrar">
-            <a href="{% url 'registrar_cliente' %}" class="btn-header fila sombra-luz"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></a>
-        </section>
-        <form class="buscador fila" action="{% url 'buscar_clientes' busqueda='busqueda' %}" method="get">
-            <input type="text" placeholder="Buscar cliente" class="buscador-input" name="busqueda" >
-            <button class="buscar" type="submit"><i class="fa-solid fa-magnifying-glass lupita"></i></button>
+        <form class="actualizar" action="{% url 'ingresos' %}" method="post">
+            {% csrf_token %}
+            <button class="btn-header fila btn-contabilidad"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></button>
         </form>
     </section>
 </header>

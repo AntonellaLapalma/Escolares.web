@@ -1,41 +1,159 @@
+/* BTN ACTUALIZAR */
+.actualizar{
+    width: 35%;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
+}
+.btn-contabilidad{
+    width: 100%; 
+    padding: 10px 20px;
+}
+/* CATEGORIAS */
+.titulo-desplegable{
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.titulo-desplegable h4{
+    color: var(--color_borde_id_tarjeta);
+    font-weight: 400;
+    font-weight: 16px ;
+    padding: 10px 20px;
+}
+.titulo-desplegable i{
+    color: var(--color_borde_id_tarjeta);
+    padding: 0px 20px;
+}
+.desplegable-anios{
+    position: relative;
+    width: 62.8% !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    border: 1px solid var(--color_borde_id_tarjeta);
+    transition: 0.3s ease;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
+}
+.desplegable-anios:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px #000000;
+    border: 1px solid var(--color_blanco);
+}
+.desplegable-anios:hover h4, .desplegable-anios:hover i{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.categorias-desplegable-anios{
+    display: none;
+    position: absolute;
+    border: 1px solid var(--color_blanco);
+    background-color: rgba(10, 10, 10, 0.675);
+    width: 100%;
+    height: 528px;
+    box-shadow: 1px 1px 10px #000000;
+    top: 100%;
+    left: -1;
+    z-index: 98;
+    /* animation: fadeIn 0.8s ease-in-out forwards; */
+    backdrop-filter: blur(4px);
+}
+.desplegable-anios:hover .categorias-desplegable-anios{
+    display: block;
+}
+.categorias-desplegable-anios li{
+    width: 50%;
+}
+.categorias-desplegable-anios li .categoria{
+    padding: 10px 20px;
+    color: var(--color_blanco);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.categorias-desplegable-anios li .categoria i{
+    color: var(--color_blanco);
+}
+.categorias-desplegable-anios li:hover .categoria{
+    background-color: var(--color_blanco);
+    color: #111;
+    transition: 0.3s ease;
+}
+.categorias-desplegable-anios li:hover .categoria i{
+    color: #111;
+    transition: 0.3s ease;
+}
+.categorias-desplegable-anios li:hover{
+    cursor: pointer;
+}
+.categoria i{
+    right: 0;
+}
+/* SUB CATEGORIAS */
+.desplegable-meses{
+    display: none;
+    position: absolute;
+    border-left: 1px solid var(--color_borde_id_tarjeta);
+    height: 528px;
+    width: 50%;
+    right: 0;
+    top: 0;
+}
+.desplegable-meses li{
+    width: 100%;
+    padding: 0px;
+    height: max-content;
+}
+.categorias-desplegable-anios li:hover .desplegable-meses{
+    display: block;
+}
+.desplegable-meses .subcategoria{
+    width: 100%;
+    height: 100%;
+    color: var(--color_blanco);
+    justify-content: left;
+}
+.subcategoria{
+    padding: 10px 20px;
+}
+.desplegable-meses li:hover .subcategoria{
+    color: #111;
+}
+.desplegable-meses li:hover{
+    background-color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+/* CONTENIDO */
 .contabilidad{
-    gap: 22px;
+    gap: 25px;
+}
+.seccion-meses{
+    width: 100%;
 }
 .tarjeta-contabilidad{
     padding: 20px;
 }
-.seccion-contabilidad{
-    width: 55.5%;
+.tarjeta-mes{
+    height: 550px;
 }
-.btn-ingresos{
-    padding: 8px 10px;
-    background-color: #ffffff00;
-    border: 1px solid var(--color_borde_id_tarjeta);
-    border-radius: 20%;
-    color: var(--color_borde_id_tarjeta);
-    cursor: pointer;
-}
-.btn-ingresos i{
-    border-radius: 10px;
-}
-.btn-ingresos:hover{
-    color: var(--color_blanco);
-    border: 1px solid var(--color_blanco);
-    transition: 0.3s ease;
-}
-.btn-ingresos:active{
-    background-color: var(--color_blanco);
-    color: var(--color_negro);
-    border: 1px solid var(--color_blanco);
-    transition: 0.3s ease;
-}
-
 .tabla-mes{
     border: solid 1px var(--color_borde_id_tarjeta);
+    height: 91.5%;
+}
+.tabla-mes::-webkit-scrollbar{
+    width: 2px;
+    height: 2px;
+    background-color: #ffffff10;
+}
+.tabla-mes::-webkit-scrollbar-thumb{
+    background-color: #ffffff13;
+    border-radius: 5px;
 }
 .cabecera-tabla-mes{
     border-bottom: solid 1px var(--color_borde_id_tarjeta);
     background-color: rgba(255, 255, 255, 0.111);
+}
+.cabecera-tabla-mes li{
+    padding: 5px 0px;
 }
 .contenido-tabla-mes li{
     padding: 10px 0px;
@@ -44,9 +162,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-}
-.cabecera-tabla-mes li{
-    padding: 5px 0px;
 }
 .renglon-mes:hover{
     background-color: var(--efecto_translucido);
@@ -57,4 +172,69 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+.tabla-total{
+    border-top: none;
+    align-items: center;
+}
+.tabla-total ul{
+    justify-content: end;
+}
+.tabla-total ul li{
+    color: var(--color_principal);
+    border: 1px solid var(--color_borde_id_tarjeta);
+    border-top: none;
+    padding: 10px 4%;
+    font-weight: 600;
+}
+.box-resultado{
+    overflow-y: auto;
+    height: 460px;
+}
+.box-resultado::-webkit-scrollbar{
+    width: 2px;
+    height: 2px;
+    background-color: #ffffff10;
+}
+.box-resultado::-webkit-scrollbar-thumb{
+    background-color: var(--color_principal);
+    border-radius: 5px;
+}
+/* TARJETA PRECIO */
+.seccion-contabilidad{
+    width: 56%;
+}
+/*  FACTURACION TOTAL */
+.facturacion-total{
+    height: 390px;
+}
+.tabla-anual{
+    height: 50%;
+}
+.box-tabla{
+    overflow-y: auto;
+    height: 224px;
+}
+.box-tabla::-webkit-scrollbar{
+    width: 2px;
+    height: 2px;
+    background-color: #ffffff10;
+}
+.box-tabla::-webkit-scrollbar-thumb{
+    background-color: var(--color_principal);
+    border-radius: 5px;
+}
+/* SIN RESULTADOS */
+.seccion-sin-resultados{
+    width: 30px;
+}
+#sin-resultados-i{
+    padding: 29% 0%;
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--color_borde_id_tarjeta);
+    text-align: center;
+}
+.tarjeta-mes-sin{
+    height: 590px;
 }

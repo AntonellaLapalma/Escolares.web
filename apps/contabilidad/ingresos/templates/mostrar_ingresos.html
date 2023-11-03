@@ -1,45 +1,54 @@
 {% extends 'ingresos.html' %}
-{% block ingresos_content %}    
-<div class=" contabilidad fila">
-    <div class="tarjeta">
-        <section class="id-tarjeta dia fila">
-            <p class="id-dia">MES{{ dia | upper }}</p>
-        </section>
-        <div class="tarjeta-contabilidad">
-        <div class="tabla-mes">
-                <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
-                    <li>ID</li>
-                    <li>ID Familiar</li>
-                    <li>Fecha</li>
-                    <li>Descuento</li>
-                    <li>Total</li>
-                    <!-- <li class="edicion"></li> -->
-                </ul>
-                <ul class="contenido-tabla-mes renglon-mes fila">
-                    <li>20</li>
-                    <li>35</li>
-                    <li>10/23</li>
-                    <li>% 20</li>
-                    <li>$ 35000</li>
-                    <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
-                </ul>
-                <ul class="contenido-tabla-mes renglon-mes fila">
-                    <li>20</li>
-                    <li>35</li>
-                    <li>10/23</li>
-                    <li>% 20</li>
-                    <li>$ 35000</li>
-                </ul>
-                <ul class="contenido-tabla-mes renglon-mes fila">
-                    <li>20</li>
-                    <li>35</li>
-                    <li>10/23</li>
-                    <li>% 20</li>
-                    <li>$ 35000</li>
-                </ul>
-            </div> 
+{% block ingresos_content %}   
+
+<div class="contabilidad fila">
+    <div class="seccion-meses columna">
+        {% if resultado %}
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">{{mes | upper}} {{anio}}</p>
+            </section>
+            <div class="tarjeta-contabilidad tarjeta-mes">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li>ID</li>
+                        <li>ID Familiar</li>
+                        <li>Fecha</li>
+                        <li>Descuento</li>
+                        <li>Total</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <div class="box-resultado">
+                        {% for ingreso in resultado %}
+                            <ul class="contenido-tabla-mes renglon-mes fila">
+                                <li>{{ ingreso.id }}</li>
+                                <li>{{ ingreso.id_familiar }}</li>
+                                <li>{{ ingreso.fecha|date:"F Y" }}</li>
+                                <li>% {{ ingreso.descuento }}</li>
+                                <li>$ {{ ingreso.total }}</li>
+                                <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div> 
+                <div class="tabla-total">
+                    <ul class="fila">
+                        <li>$ {{total}}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>  
+        {% else %}
+        <section class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">SIN RESULTADOS</p>
+            </section>
+            <div class="tarjeta-mes-sin">
+                <p id="sin-resultados-i">Oops.. Sin resultados.</p>
+            </div>
+        </section>
+        {% endif %}
+    </div>
     <div class="seccion-contabilidad columna">    
         <div class="tarjeta">
             <section class="id-tarjeta dia fila">
@@ -53,59 +62,48 @@
                         <li>Precio</li>
                         <!-- <li class="edicion"></li> -->
                     </ul>
+                    {% for precio in precios %}
+                    {% if precio.tipo != 'Ninguno' %}
                     <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Ida o vuelta</li>
-                        <li>$ 30000</li>
+                        <li>{{precio.tipo}}</li>
+                        <li>$ {{precio.total}}</li>
                         <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
                     </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Ida y vuelta</li>
-                        <li>$ 55000</li>
-                    </ul>
+                    {% endif %}
+                    {% endfor %}
                 </div> 
             </div>
         </div>
-        <div class="tarjeta">
+        {% if anio %}
+        <div class="tarjeta facturacion-total">
             <section class="id-tarjeta dia fila">
-                <p class="id-dia">FACTURACIÓN ANUAL{{ dia | upper }}</p>
+                <p class="id-dia">FACTURACIÓN TOTAL {{anio}}</p>
             </section>        
             <div class="tarjeta-contabilidad">
-                <div class="tabla-mes">
+                <div class="tabla-mes tabla-anual">
                     <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
                         <li>Mes</li>
                         <li>Total</li>
                         <!-- <li class="edicion"></li> -->
                     </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Enero</li>
-                        <li>$ 30000</li>
-                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
-                    </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Febrero</li>
-                        <li>$ 55000</li>
-                    </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Enero</li>
-                        <li>$ 30000</li>
-                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
-                    </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Febrero</li>
-                        <li>$ 55000</li>
-                    </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Enero</li>
-                        <li>$ 30000</li>
-                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
-                    </ul>
-                    <ul class="contenido-tabla-mes renglon-mes fila">
-                        <li>Febrero</li>
-                        <li>$ 55000</li>
+                    <div class="box-tabla">
+                    {% for total in total_facturado %}
+                       <ul class="contenido-tabla-mes renglon-mes fila">
+                            <li>{{ total.mes }}</li>
+                            <li>$ {{ total.total }}</li>
+                        </ul> 
+                    {% endfor %}  
+                    </div>
+                </div>
+                <div class="tabla-total">
+                    <ul class="fila">
+                        <li>$ {{total_anual}}</li>
                     </ul>
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
+
 {% endblock ingresos_content %}
