@@ -16,9 +16,9 @@ class IngresosView(IndexView):
         funciones = Funciones_Ingresos()      
         anios = funciones.anios()
         resultado = None
-        total_recaudado = None
-        total_por_mes = None
-        total_recaudado_anualmente = None
+        total_recaudado = 0
+        total_por_mes = 0
+        total_recaudado_anualmente = 0
 
         # llamo el valor de la url
         anio = self.kwargs.get('anio_elegido')
@@ -35,7 +35,6 @@ class IngresosView(IndexView):
             total_recaudado = total_recaudado['total_cuota']
 
             # ahora procedo a calcular el total de todos los meses de ese anio
-            
             total_por_mes = funciones.calcular_facturacion_anual(anio)
 
             total_anual = Ingreso.objects.filter(fecha__year=anio)

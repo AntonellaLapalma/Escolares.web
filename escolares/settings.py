@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.4']
 
+# USE_THOUSAND_SEPARATOR = True
 
 # Application definition
 

@@ -88,15 +88,27 @@
 .categoria i{
     right: 0;
 }
+/* LINEA */
+.linea{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    border-left: 1px solid var(--color_borde_id_tarjeta);
+    z-index: -1;
+}
 /* SUB CATEGORIAS */
 .desplegable-meses{
     display: none;
     position: absolute;
-    border-left: 1px solid var(--color_borde_id_tarjeta);
+    top: 0;
+    right: 0;
     height: 528px;
     width: 50%;
     right: 0;
     top: 0;
+    z-index: 97;
 }
 .desplegable-meses li{
     width: 100%;
@@ -133,7 +145,7 @@
     padding: 20px;
 }
 .tarjeta-mes{
-    height: 550px;
+    height: 540px;
 }
 .tabla-mes{
     border: solid 1px var(--color_borde_id_tarjeta);
@@ -151,9 +163,6 @@
 .cabecera-tabla-mes{
     border-bottom: solid 1px var(--color_borde_id_tarjeta);
     background-color: rgba(255, 255, 255, 0.111);
-}
-.cabecera-tabla-mes li{
-    padding: 5px 0px;
 }
 .contenido-tabla-mes li{
     padding: 10px 0px;
@@ -186,6 +195,9 @@
     border-top: none;
     padding: 10px 4%;
     font-weight: 600;
+}
+.cabecera-tabla-mes li{
+    padding: 5px 0px;
 }
 .box-resultado{
     overflow-y: auto;
@@ -237,4 +249,7 @@
 }
 .tarjeta-mes-sin{
     height: 590px;
+}
+.id-col{
+    width: 50% !important;
 }

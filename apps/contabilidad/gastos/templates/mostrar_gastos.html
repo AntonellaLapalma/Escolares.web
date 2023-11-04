@@ -1,44 +1,143 @@
 {% extends 'gastos.html' %}
 {% block gastos_content %}
-<div class="tarjeta sombra-luz">
-    <section class="id-tarjeta fila">
-        <section class="actividad fila">
-            <p class="inactivo">#{{vehiculo.id}}</p>
-        </section>
-        <section class="fila">
-            <a href="" class="fila borde"><i class="fa-solid fa-pencil i-tarjeta-id"></i><span>Modificar</span></a>
-            <a href="" class="fila borde"><i class="fa-solid fa-trash-can i-tarjeta-id"></i><span>Eliminar</span></a>
-        </section>
-    </section>
-    <div class="grid-tarjeta-ingresos">
-        <section class="seccion-1-mostrar tam-seccion fila">
-            <i class="fa-solid fa-bus i-tarjetas"></i>
-            <section>
-                <p class="renglon-1 desborde">Vehículo</p>
-                <p class="renglon-2 desborde">HGF302</p>
+<div class="contabilidad fila">
+    <div class="seccion-meses columna">
+        {% if resultado_empleados or resultado_vehiculos %}
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">GASTOS EMPLEADOS {{mes | upper}} {{anio}}</p>
             </section>
-        </section>
-        <section class="seccion-1-mostrar tam-seccion fila">
-            <i class="fa-solid fa-calendar-days i-tarjetas"></i>
-            <section>
-                <p class="renglon-1 desborde">Fecha</p>
-                <p class="renglon-2 desborde">Octubre 2023</p>
+            <div class="tarjeta-contabilidad tarjeta-mes">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li class="id-col">ID</li>
+                        <li class="id-col">ID Empleado</li>
+                        <li>Nombre y Apellido</li>
+                        <li>Fecha</li>
+                        <li>Total</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <div class="box-resultado">
+                        {% for gasto in resultado_empleados %}
+                            <ul class="contenido-tabla-mes renglon-mes fila">
+                                <li class="id-col">{{ gasto.id }}</li>
+                                <li class="id-col">{{ gasto.id_empleado.id }}</li>
+                                <li>{{ gasto.id_empleado.nombre }} {{ gasto.id_empleado.apellido }}</li>
+                                <li>{{ gasto.fecha|date:"F Y" }}</li>
+                                <li>$ {{ gasto.total }}</li>
+                                <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div> 
+                <div class="tabla-total">
+                    <ul class="fila">
+                        <li>$ {{total_empleados}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">GASTOS VEHÍCULOS {{mes | upper}} {{anio}}</p>
             </section>
-        </section>
-        <section class="seccion-1-mostrar tam-seccion fila">
-            <i class="fa-regular fa-file-lines i-tarjetas"></i>
-            <section>
-                <p class="renglon-1 desborde">Descripción</p>
-                <p class="renglon-2 desborde">Taller</p>
+            <div class="tarjeta-contabilidad tarjeta-mes">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li class="id-col">ID</li>
+                        <li class="id-col">ID Vehículo</li>
+                        <li class="id-col">Patente</li>
+                        <li>Fecha</li>
+                        <li>Motivo</li>
+                        <li>Total</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <div class="box-resultado">
+                        {% for resultado in resultado_vehiculos %}
+                            <ul class="contenido-tabla-mes renglon-mes fila">
+                                <li class="id-col">{{ resultado.id }}</li>
+                                <li class="id-col">{{ resultado.id_vehiculo.id }}</li>
+                                <li class="id-col">{{ resultado.id_vehiculo.patente }}</li>
+                                <li>{{ resultado.fecha|date:"F Y" }}</li>
+                                <li>{{ resultado.motivo }}</li>
+                                <li>$ {{ resultado.total }}</li>
+                                <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div> 
+                <div class="tabla-total">
+                    <ul class="fila">
+                        <li>$ {{total_vehiculos}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <section class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">SIN RESULTADOS</p>
             </section>
+            <div class="tarjeta-mes-sin">
+                <p id="sin-resultados-i">Oops.. Sin resultados.</p>
+            </div>
         </section>
-        <section class="seccion-1-mostrar tam-seccion fila">
-            <i class="fa-solid fa-coins i-tarjetas"></i>
-            <section>
-                <p class="renglon-1 desborde">Total</p>
-                <p class="renglon-2 desborde">$ 30000</p>
+        {% endif %}
+    </div>
+    <div class="seccion-contabilidad columna">    
+        <div class="tarjeta">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">SUELDOS</p>
+                <i class="fa-solid fa-pencil i-tarjeta-id"></i>
             </section>
-        </section>
+            <div class="tarjeta-contabilidad">
+                <div class="tabla-mes">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li>Puesto</li>
+                        <li>Sueldo</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    {% for puesto in puestos %}
+                    {% if puesto.puesto != 'Ninguno' %}
+                    <ul class="contenido-tabla-mes renglon-mes fila">
+                        <li>{{puesto.puesto}}</li>
+                        <li>$ {{puesto.sueldo}}</li>
+                        <!-- <li class="edicion fila"><i class="fa-solid fa-pencil i-tarjeta-id"></i><i class="fa-solid fa-trash-can i-tarjeta-id"></i></li> -->
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
+                </div> 
+            </div>
+        </div>
+        {% if anio %}
+        <div class="tarjeta facturacion-total">
+            <section class="id-tarjeta dia fila">
+                <p class="id-dia">GASTOS TOTALES {{anio}}</p>
+            </section>        
+            <div class="tarjeta-contabilidad">
+                <div class="tabla-mes tabla-anual">
+                    <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
+                        <li>Mes</li>
+                        <li>Total</li>
+                        <!-- <li class="edicion"></li> -->
+                    </ul>
+                    <div class="box-tabla">
+                    {% for total in total_gastado %}
+                       <ul class="contenido-tabla-mes renglon-mes fila">
+                            <li>{{ total.mes }}</li>
+                            <li>$ {{ total.total }}</li>
+                        </ul> 
+                    {% endfor %}  
+                    </div>
+                </div>
+                <div class="tabla-total">
+                    <ul class="fila">
+                        <li>$ {{total_gastado_anualmente}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock gastos_content %}

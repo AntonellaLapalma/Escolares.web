@@ -1,12 +1,11 @@
 {% extends 'ingresos.html' %}
 {% block ingresos_content %}   
-
 <div class="contabilidad fila">
     <div class="seccion-meses columna">
         {% if resultado %}
         <div class="tarjeta">
             <section class="id-tarjeta dia fila">
-                <p class="id-dia">{{mes | upper}} {{anio}}</p>
+                <p class="id-dia">INGRESOS {{mes | upper}} {{anio}}</p>
             </section>
             <div class="tarjeta-contabilidad tarjeta-mes">
                 <div class="tabla-mes">
@@ -52,7 +51,7 @@
     <div class="seccion-contabilidad columna">    
         <div class="tarjeta">
             <section class="id-tarjeta dia fila">
-                <p class="id-dia">PRECIOS{{ dia | upper }}</p>
+                <p class="id-dia">PRECIOS</p>
                 <i class="fa-solid fa-pencil i-tarjeta-id"></i>
             </section>
             <div class="tarjeta-contabilidad">
@@ -105,5 +104,4 @@
         {% endif %}
     </div>
 </div>
-
 {% endblock ingresos_content %}

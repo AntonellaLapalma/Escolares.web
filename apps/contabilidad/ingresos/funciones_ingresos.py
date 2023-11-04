@@ -30,9 +30,9 @@ class Funciones_Ingresos:
                 # si el id se encuentra en el registro se actualizan los datos 
                 # por si algun dato como descuento o la cuota fueron cambiados
                 if familia.id_familiar == registro.id_familiar:
-                    registro.total=familia.cuota
-                    registro.descuento=familia.descuento
-                    registro.fecha=fecha_actual
+                    registro.total = familia.cuota
+                    registro.descuento = familia.descuento
+                    registro.fecha = fecha_actual
                     registro.save()
 
         # En caso de que uno haya sacado un cliente ya que dio de baja el servicio
