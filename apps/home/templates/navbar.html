@@ -1,16 +1,16 @@
 {% load static %}
 {% block navbar_content %}
-<nav id="navbar" class="item-pag-1 fila">
-    <a href="{% url 'inicio' %}" class="fila borde-redondo-nav-1 {% if '/clientes/' not in request.path and '/empleados/' not in request.path and '/vehiculos/' not in request.path  and '/ingresos/' not in request.path and '/gastos/' not in request.path %} active{% endif %}"><i class="fa-solid fa-house i-navbar"></i><span>Inicio</span></a>  
+<nav id="navbar">
+    <a href="{% url 'inicio' %}" class="borde-redondo-nav-1 {% if '/clientes/' not in request.path and '/empleados/' not in request.path and '/vehiculos/' not in request.path  and '/ingresos/' not in request.path and '/gastos/' not in request.path %} active{% endif %}"><i class="fa-solid fa-house i-navbar"></i><span>Inicio</span></a>  
 
-    <a href="{% url 'clientes' %}" class="fila borde {% if '/clientes/' in request.path %} active{% endif %}"><i class="fa-solid fa-user-group i-navbar"></i><span>Clientes</span></a>
+    <a href="{% url 'clientes' %}" class="borde {% if '/clientes/' in request.path %} active{% endif %}"><i class="fa-solid fa-user-group i-navbar"></i><span>Clientes</span></a>
 
-    <a href="{% url 'empleados' %}" class="fila borde {% if '/empleados/' in request.path %} active{% endif %}"><i class="fa-solid fa-address-card i-navbar"></i><span>Empleados</span></a>
+    <a href="{% url 'empleados' %}" class="borde {% if '/empleados/' in request.path %} active{% endif %}"><i class="fa-solid fa-address-card i-navbar"></i><span>Empleados</span></a>
     
-    <a href="{% url 'vehiculos' %}" class="fila borde {% if '/vehiculos/' in request.path or '/recorridos/' in request.path %} active{% endif %}"><i class="fa-solid fa-bus i-navbar"></i><span>Vehículos</span></a>
+    <a href="{% url 'vehiculos' %}" class="borde {% if '/vehiculos/' in request.path or '/recorridos/' in request.path %} active{% endif %}"><i class="fa-solid fa-bus i-navbar"></i><span>Vehículos</span></a>
     
-    <a href="{% url 'ingresos' %}" class="fila borde borde-redondo-nav-2 {% if '/ingresos/' in request.path %} active{% endif %}"><i class="fa-solid fa-coins i-navbar"></i><span>Ingresos</span></a>
+    <a href="{% url 'ingresos' %}" class="borde borde-redondo-nav-2 {% if '/ingresos/' in request.path %} active{% endif %}"><i class="fa-solid fa-coins i-navbar"></i><span>Ingresos</span></a>
 
-    <a href="{% url 'gastos' %}" class="fila borde borde-redondo-nav-2 {% if '/gastos/' in request.path %} active{% endif %}"><i class="fa-solid fa-coins i-navbar"></i><span>Gastos</span></a>
+    <a href="{% url 'gastos' %}" class="borde borde-redondo-nav-2 {% if '/gastos/' in request.path %} active{% endif %}"><i class="fa-solid fa-coins i-navbar"></i><span>Gastos</span></a>
 </nav>
 {% endblock navbar_content %}

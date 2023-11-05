@@ -160,3 +160,25 @@
     border-radius: 0px;
     height: 99%;
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 1405px) {
+    .grid-tarjeta-recorridos{
+        display: flex;
+        flex-direction: column;
+    }
+    .filtros{
+        padding: 0;
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .filtros p{
+        padding: 10px 0px;
+        width: 100%;
+        border: none;
+        border-radius: 0px;
+        border-bottom: 1px solid var(--color_borde_id_tarjeta);
+    }
+}

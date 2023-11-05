@@ -1,13 +1,13 @@
 {% extends 'vehiculos.html' %}
 {% block vehiculos_content %}
-<div class="tarjeta tarjeta-registro sombra-luz">
+<div class="tarjeta tarjeta-registro">
     <section class="titulo-tarjeta fila">
-        <i class="fa-solid fa-user-plus"></i>
+        <i class="fa-solid fa-plus"></i>
         <h3>Registrar vehículo</h3>
     </section>
     <form id="registro-db" class="columna"  action="{% url 'registrar_vehiculo' %}" method="post">
         {% csrf_token %}
-        <dv class="fila seccion-info">
+        <dv class="seccion-info">
             <div id="registro-seccion-1" class="columna">
                 <section class="columna">
                     <div class="titulo-seccion fila">

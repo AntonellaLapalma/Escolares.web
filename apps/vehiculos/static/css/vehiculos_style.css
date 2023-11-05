@@ -37,3 +37,13 @@
         transform: translateX(0);
     }
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 1405px) {
+    .grid-tarjeta-vehiculos{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+}

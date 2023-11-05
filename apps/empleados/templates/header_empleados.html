@@ -1,17 +1,17 @@
 {% extends 'empleados.html' %}
 {% block content %}
-<header class="cabecera-pag item-pag-2 fila">
-    <section class="opciones-header fila">
-        <section class="filtros fila sombra-luz">
+<header>
+    <section class="opciones-header">
+        <section class="filtros fila">
             <p class="fila borde-der"><i class="fa-solid fa-rectangle-list i-header "></i><span>Mostrar</span></p>
             <a href="{% url 'empleados' %}" class="fila {% if request.path == '/empleados/' %} filtro-active {% endif %}">Todos</a>
             <a href="{% url 'empleados_estado' estado='activo' %}" class="fila {% if request.path == '/empleados/filtro/activo' %} filtro-active {% endif %}">Activos</a>
             <a href="{% url 'empleados_estado' estado='inactivo' %}" class="fila {% if request.path == '/empleados/filtro/inactivo' %} filtro-active {% endif %}">Inactivos</a>
         </section>
         <section class="registrar">
-           <a href="{% url 'registrar_empleado' %}" class="btn-header fila sombra-luz"><i class="fa-solid fa-user-plus i-header"></i><span>Registrar empleado</span></a>
+           <a href="{% url 'registrar_empleado' %}" class="btn-header fila"><i class="fa-solid fa-user-plus i-header"></i><span>Registrar empleado</span></a>
         </section>   
-        <form class="buscador fila sombra-luz" action="{% url 'buscar_empleados' busqueda='busqueda' %}" method="get">
+        <form class="buscador fila" action="{% url 'buscar_empleados' busqueda='busqueda' %}" method="get">
             <input type="text" name="busqueda" placeholder="Buscar empleado" class="buscador-input">
             <button class="buscar" type="submit"><i class="fa-solid fa-magnifying-glass lupita"></i></button>
         </form>

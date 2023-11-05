@@ -62,5 +62,6 @@ urlpatterns = [
 
     path('gastos/', GastosView.as_view(), name='gastos'),
     path('gastos/<int:anio_elegido>/<int:mes_elegido>/', GastosView.as_view(), name='gastos_anio_mes'),
+    path('gastos/agregar_gasto', RegistrarGastoView.as_view(), name='agregar_gastos'),
 
 ]

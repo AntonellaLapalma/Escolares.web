@@ -1,6 +1,72 @@
 {% extends 'index.html' %}
+{% load static%}
 {% block content %}
-<main class="grid-pagina">
+<main>
     {% include "navbar.html" %}
+    <div id="pagina-clientes" class="pagina columna">
+        <div class="listado-db">
+            <div class="tarjeta">
+                <section class="id-tarjeta dia fila">
+                    <p class="id-dia">BIENVENIDO</p>
+                </section>
+                <div class="grid-tarjeta-inicio">
+                    <section class="fila seccion-1-mostrar tam-seccion">
+                        <i class="fa-solid fa-user-group i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Clientes</p>
+                            <p class="renglon-3 desborde">{{familia}} Familias registradas</p>
+                            <p class="renglon-3 desborde">{{adulto}} Adultos registrados</p>
+                            <p class="renglon-3 desborde">{{estudiante}} Estudiantes registrados</p>
+                        </section>
+                    </section>
+                    <section class="fila seccion-1-mostrar tam-seccion">
+                        <i class="fa-solid fa-address-card i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Empleados</p>
+                            <p class="renglon-3 desborde">{{empleado}} Empleados registrados</p>
+                            <p class="renglon-3 desborde">{{chofer}} Choferes registrados</p>
+                            <p class="renglon-3 desborde">{{celador}} Celadores registrados</p>
+                        </section>
+                    </section>
+                    <section class="fila seccion-1-mostrar tam-seccion">
+                        <i class="fa-solid fa-bus i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Vehículos</p>
+                            <p class="renglon-3 desborde">{{vehiculo}} Vehículos registrados</p>
+                        </section>
+                    </section>
+                    <section class="fila seccion-1-mostrar tam-seccion">
+                        <i class="fa-solid fa-map-location-dot i-tarjetas"></i>
+                        <section>
+                            <p class="renglon-1 desborde">Recorridos</p>
+                            <p class="renglon-3 desborde">{{recorrido}} Recorridos registrados</p>
+                        </section>
+                    </section>
+                </div>
+            </div>
+            <div class="graficos-box">
+                    <div class="tarjeta">
+                        <section class="id-tarjeta dia fila">
+                            <p class="id-dia">INGRESOS {{anio}}</p>
+                        </section>
+                        <section class="tarjeta-graficos">
+                            <input type="hidden" id="datos_ingreso" value="{{ datos_ingreso|safe }}">
+                            <canvas id="graficoDeBarrasIngreso"></canvas>
+                        </section>
+                    </div>
+                    <div class="tarjeta">
+                        <section class="id-tarjeta dia fila">
+                            <p class="id-dia">GASTOS {{anio}}</p>
+                        </section>
+                        <section class="tarjeta-graficos">
+                            <input type="hidden" id="datos_gastos" value="{{ datos_gastos|safe }}">
+                            <canvas id="graficoDeBarrasGastos"></canvas>
+                        </section>
+                    </div>
+                </div>
+        </div>
+    </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/graficos.js' %}"></script>
 {% endblock content %}

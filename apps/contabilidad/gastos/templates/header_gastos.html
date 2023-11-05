@@ -1,7 +1,7 @@
 {% extends 'gastos.html' %}
 {% block content %}
-<header class="cabecera-pag item-pag-2 fila">
-    <section class="opciones-header fila">
+<header>
+    <section class="opciones-header">
         <section class="desplegable-anios columna">
             <div class="titulo-desplegable fila">
                 <h4>Categorías</h4><i class="fa-solid fa-angle-down i-header"></i>
@@ -28,11 +28,8 @@
             {% endfor %}
             </ul>
         </section>
-        <form class="actualizar" action="{% url 'gastos' %}" method="post">
-            {% csrf_token %}
-            <button class="btn-header fila btn-contabilidad"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></button>
-        </form>
-        <form class="actualizar" action="{% url 'gastos' %}" method="post">
+        <a href="{% url 'agregar_gastos' %}" class="btn-header fila btn-contabilidad btn-agregar-gasto"><i class="fa-solid fa-plus i-header"></i><span>Agregar gasto</span></a>
+        <form class="actualizar-gastos" action="{% url 'gastos' %}" method="post">
             {% csrf_token %}
             <button class="btn-header fila btn-contabilidad"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></button>
         </form>

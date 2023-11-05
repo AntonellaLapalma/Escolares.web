@@ -36,6 +36,8 @@
 }
 #registro-seccion-1, #registro-seccion-2, #registro-seccion-3, #registro-seccion-4{
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 .titulo-seccion{
     justify-content: start;
@@ -169,4 +171,24 @@ select option:hover{
     padding: 10px 20px;
     font-size: 14px;
     background-color: #ffffff00;
+}
+/*  RESPONSIVE */
+@media (max-width: 1200px) {
+    .seccion-info{
+        flex-direction: column;
+    }
+    #registro-db{
+        margin: 10px;
+    }
+    #registro-seccion-1, #registro-seccion-2, #registro-seccion-3, #registro-seccion-4{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 1400px) {
+    .select-registro{
+        width: 103.5%;}
+    .input-registro{
+        width:100%}
 }

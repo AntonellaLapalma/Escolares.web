@@ -30,10 +30,19 @@
     font-size: 14px;
 }
 .renglon-3-r{
-    /* margin-top: 3px; */
     width: 100%;
     border: 1px solid var(--color_borde_id_tarjeta);
     text-align: center;
     font-size: 14px;
     color: var(--color_principal);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1405px) {
+    .grid-tarjeta-empleados{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
 }

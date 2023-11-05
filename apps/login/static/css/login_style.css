@@ -86,3 +86,9 @@
     font-size: 14px;
     color: var(--color_borde_id_tarjeta);
 }
+
+@media (max-width: 500px) {
+    .tarjeta-login{
+        width: 300px;           
+    }
+}

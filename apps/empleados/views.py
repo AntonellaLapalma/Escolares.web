@@ -79,7 +79,7 @@ class EmpleadosView(IndexView):
                 
         return render(request, self.template_name,{'empleados':empleados})
 
-class RegistrarEmpleadoView(IndexView):
+class RegistrarEmpleadoView(EmpleadosView):
     template_name='registrar_empleado.html'
 
     def get(self, request, *args, **kwargs):
@@ -140,7 +140,7 @@ class RegistrarEmpleadoView(IndexView):
                                                     'puestos':puestos
                                                     })
 
-class ModificarEmpleadoView(IndexView):
+class ModificarEmpleadoView(EmpleadosView):
     template_name='modificar_empleado.html'
 
     def get(self, request, empleado_id):
@@ -214,7 +214,7 @@ class ModificarEmpleadoView(IndexView):
                                                     'empleado': empleado
                                                     })
     
-class EliminarEmpleadoView(IndexView):
+class EliminarEmpleadoView(EmpleadosView):
     template_name = 'eliminar_empleado.html'
 
     def get(self, request, empleado_id):

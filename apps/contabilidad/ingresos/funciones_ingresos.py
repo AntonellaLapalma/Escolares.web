@@ -19,7 +19,7 @@ class Funciones_Ingresos:
             # registros de este mes se procede a realizar el registro
             try:
                 # Intenta obtener un registro de Ingreso con el mismo id_familiar
-                ingreso_existente = Ingreso.objects.get(id_familiar=familia.id_familiar)
+                ingreso_existente = Ingreso.objects.get(id_familiar=familia.id_familiar,fecha__month=mes_actual, fecha__year=anio_actual)
             except Ingreso.DoesNotExist:
                 # Si no existe, crea un nuevo registro
                 f = Familia.objects.get(id_familiar=familia.id_familiar)

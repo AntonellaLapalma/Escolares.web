@@ -1,13 +1,13 @@
-// Define una función para cargar las direcciones en función del alumno y el campo de selección dado
-function cargarDirecciones(selectAlumnoId, selectDireccionId) {
+function cargarDirecciones(selectAlumnoId, selectDireccionId, botonId) {
     const selectAlumno = document.getElementById(selectAlumnoId);
     const selectDireccion = document.getElementById(selectDireccionId);
+    const boton = document.getElementById(botonId);
 
     // Obtén el valor seleccionado en el primer select (ID del alumno)
     const idAlumno = selectAlumno.value;
 
     // Envía una solicitud AJAX a Django para obtener las direcciones del alumno
-    // Puedes usar la biblioteca fetch o jQuery.ajax para esto
+    // ...
 
     // Ejemplo con fetch
     fetch('/cargar-direcciones/?alumno=' + idAlumno)
@@ -26,13 +26,14 @@ function cargarDirecciones(selectAlumnoId, selectDireccionId) {
 
             // Habilita el segundo select
             selectDireccion.removeAttribute('disabled');
+
         })
         .catch(error => {
             console.error('Error al cargar las direcciones:', error);
         });
 }
 document.getElementById('alumno1').addEventListener('change', function() {
-    cargarDirecciones('alumno1', 'direccion1'); // Usar 'direccion-m' en lugar de 'direccion'
+    cargarDirecciones('alumno1', 'direccion1','btn1'); // Usar 'direccion-m' en lugar de 'direccion'
 });
 
 document.getElementById('alumno2').addEventListener('change', function() {

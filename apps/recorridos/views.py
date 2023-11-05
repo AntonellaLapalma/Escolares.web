@@ -27,72 +27,68 @@ class RecorridosView(IndexView):
 
         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        l=FuncionesLunes()
-        m=FuncionesMartes()
-        x=FuncionesMiercoles()
-        j=FuncionesJueves()
-        v=FuncionesViernes()
+        f=Funciones_Recorridos()
         
         if dia == 'lunes':
             resultado = Lunes.objects.filter(vehiculo=vehiculo.id)
-            mi_estudiantes_sin_recorrido=l.filtrar_lunes(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_estudiantes_sin_recorrido=l.filtrar_lunes(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_estudiantes_sin_recorrido=l.filtrar_lunes(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_estudiantes_sin_recorrido=l.filtrar_lunes(vehiculo_seleccionado,'Tarde','Salida')
+            mi_estudiantes_sin_recorrido=f.filtrar(Lunes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_estudiantes_sin_recorrido=f.filtrar(Lunes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_estudiantes_sin_recorrido=f.filtrar(Lunes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_estudiantes_sin_recorrido=f.filtrar(Lunes,vehiculo_seleccionado,'Tarde','Salida')
 
             # Establecer tope de pasajeros
-            mi_lugar_disponible=l.lugares_disponibles_l(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_lugar_disponible=l.lugares_disponibles_l(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_lugar_disponible=l.lugares_disponibles_l(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_lugar_disponible=l.lugares_disponibles_l(vehiculo_seleccionado,'Tarde','Salida')
+            mi_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Tarde','Salida')
             
         if dia == 'martes':
             resultado = Martes.objects.filter(vehiculo=vehiculo.id)
-            mi_estudiantes_sin_recorrido=m.filtrar_martes(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_estudiantes_sin_recorrido=m.filtrar_martes(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_estudiantes_sin_recorrido=m.filtrar_martes(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_estudiantes_sin_recorrido=m.filtrar_martes(vehiculo_seleccionado,'Tarde','Salida')
+            mi_estudiantes_sin_recorrido=f.filtrar(Martes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_estudiantes_sin_recorrido=f.filtrar(Martes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_estudiantes_sin_recorrido=f.filtrar(Martes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_estudiantes_sin_recorrido=f.filtrar(Martes,vehiculo_seleccionado,'Tarde','Salida')
             
-            mi_lugar_disponible=m.lugares_disponibles_m(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_lugar_disponible=m.lugares_disponibles_m(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_lugar_disponible=m.lugares_disponibles_m(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_lugar_disponible=m.lugares_disponibles_m(vehiculo_seleccionado,'Tarde','Salida')
+            mi_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Tarde','Salida')
             
         if dia == 'miercoles':
             resultado = Miercoles.objects.filter(vehiculo=vehiculo.id)
-            mi_estudiantes_sin_recorrido=x.filtrar_miercoles(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_estudiantes_sin_recorrido=x.filtrar_miercoles(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_estudiantes_sin_recorrido=x.filtrar_miercoles(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_estudiantes_sin_recorrido=x.filtrar_miercoles(vehiculo_seleccionado,'Tarde','Salida')
+            mi_estudiantes_sin_recorrido=f.filtrar(Miercoles,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_estudiantes_sin_recorrido=f.filtrar(Miercoles,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_estudiantes_sin_recorrido=f.filtrar(Miercoles,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_estudiantes_sin_recorrido=f.filtrar(Miercoles,vehiculo_seleccionado,'Tarde','Salida')
             
-            mi_lugar_disponible=x.lugares_disponibles_x(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_lugar_disponible=x.lugares_disponibles_x(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_lugar_disponible=x.lugares_disponibles_x(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_lugar_disponible=x.lugares_disponibles_x(vehiculo_seleccionado,'Tarde','Salida')
+            mi_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Tarde','Salida')
             
         if dia == 'jueves':
             resultado = Jueves.objects.filter(vehiculo=vehiculo.id)
-            mi_estudiantes_sin_recorrido=j.filtrar_jueves(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_estudiantes_sin_recorrido=j.filtrar_jueves(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_estudiantes_sin_recorrido=j.filtrar_jueves(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_estudiantes_sin_recorrido=j.filtrar_jueves(vehiculo_seleccionado,'Tarde','Salida')
+            mi_estudiantes_sin_recorrido=f.filtrar(Jueves,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_estudiantes_sin_recorrido=f.filtrar(Jueves,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_estudiantes_sin_recorrido=f.filtrar(Jueves,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_estudiantes_sin_recorrido=f.filtrar(Jueves,vehiculo_seleccionado,'Tarde','Salida')
         
-            mi_lugar_disponible=j.lugares_disponibles_j(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_lugar_disponible=j.lugares_disponibles_j(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_lugar_disponible=j.lugares_disponibles_j(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_lugar_disponible=j.lugares_disponibles_j(vehiculo_seleccionado,'Tarde','Salida')
+            mi_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Tarde','Salida')
             
         if dia == 'viernes':
             resultado = Viernes.objects.filter(vehiculo=vehiculo.id)
-            mi_estudiantes_sin_recorrido=v.filtrar_viernes(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_estudiantes_sin_recorrido=v.filtrar_viernes(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_estudiantes_sin_recorrido=v.filtrar_viernes(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_estudiantes_sin_recorrido=v.filtrar_viernes(vehiculo_seleccionado,'Tarde','Salida')
+            mi_estudiantes_sin_recorrido=f.filtrar(Viernes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_estudiantes_sin_recorrido=f.filtrar(Viernes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_estudiantes_sin_recorrido=f.filtrar(Viernes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_estudiantes_sin_recorrido=f.filtrar(Viernes,vehiculo_seleccionado,'Tarde','Salida')
             
-            mi_lugar_disponible=v.lugares_disponibles_v(vehiculo_seleccionado,'Mañana','Ingreso')
-            mds_lugar_disponible=v.lugares_disponibles_v(vehiculo_seleccionado,'Medio dia','Salida')
-            mdi_lugar_disponible=v.lugares_disponibles_v(vehiculo_seleccionado,'Medio dia','Ingreso')
-            ts_lugar_disponible=v.lugares_disponibles_v(vehiculo_seleccionado,'Tarde','Salida')
+            mi_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Mañana','Ingreso')
+            mds_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Medio dia','Salida')
+            mdi_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Medio dia','Ingreso')
+            ts_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Tarde','Salida')
             
         if vehiculo.chofer == None:
             context['celular'] = 0
@@ -139,46 +135,45 @@ class RecorridosView(IndexView):
                 estudiante = request.POST.get('agregar-alumno-t')
                 direccion = request.POST.get('agregar-direccion-t')  
                 turno = 'Tarde'
-                tipo = 'Salida'          
-            
-            vehiculo = Vehiculo.objects.get(id=vehiculo_id)
-            estudiante = Estudiante.objects.get(id=estudiante)
-            direccion = Direccion.objects.get(id=direccion)
-            viaje = Viaje.objects.get(turno=turno, tipo=tipo)
-            
-            l=FuncionesLunes()
-            m=FuncionesMartes()
-            x=FuncionesMiercoles()
-            j=FuncionesJueves()
-            v=FuncionesViernes()
+                tipo = 'Salida'    
 
-            if dia == 'lunes':
-                mi_estudiantes_sin_recorrido=l.lugares_disponibles_l(vehiculo_id,turno,tipo)
-                if mi_estudiantes_sin_recorrido == True:
-                    actualizar = Lunes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
-                pass
+            vehiculo = Vehiculo.objects.get(id=vehiculo_id)  
+                    
+            if estudiante != None or direccion != None:
+                
+                estudiante = Estudiante.objects.get(id=estudiante)
+                direccion = Direccion.objects.get(id=direccion)
+                viaje = Viaje.objects.get(turno=turno, tipo=tipo)
+                
+                f=Funciones_Recorridos()
 
-            if dia == 'martes':
-                mi_estudiantes_sin_recorrido=m.lugares_disponibles_m(vehiculo_id,turno,tipo)
-                if mi_estudiantes_sin_recorrido == True:
-                    actualizar = Martes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+                if dia == 'lunes':
+                    mi_estudiantes_sin_recorrido=f.lugares_disponibles(Lunes,vehiculo_id,turno,tipo)
+                    if mi_estudiantes_sin_recorrido == True:
+                        actualizar = Lunes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+                    pass
 
-            if dia == 'miercoles':
-                mi_estudiantes_sin_recorrido=x.lugares_disponibles_x(vehiculo_id,turno,tipo)
-                if mi_estudiantes_sin_recorrido == True:
-                    actualizar = Miercoles(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+                if dia == 'martes':
+                    mi_estudiantes_sin_recorrido=f.lugares_disponibles(Martes,vehiculo_id,turno,tipo)
+                    if mi_estudiantes_sin_recorrido == True:
+                        actualizar = Martes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
 
-            if dia == 'jueves':
-                mi_estudiantes_sin_recorrido=j.lugares_disponibles_j(vehiculo_id,turno,tipo)
-                if mi_estudiantes_sin_recorrido == True:
-                    actualizar = Jueves(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+                if dia == 'miercoles':
+                    mi_estudiantes_sin_recorrido=f.lugares_disponibles(Miercoles,vehiculo_id,turno,tipo)
+                    if mi_estudiantes_sin_recorrido == True:
+                        actualizar = Miercoles(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
 
-            if dia == 'viernes':
-                mi_estudiantes_sin_recorrido=v.lugares_disponibles_v(vehiculo_id,turno,tipo)
-                if mi_estudiantes_sin_recorrido == True:
-                    actualizar = Viernes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+                if dia == 'jueves':
+                    mi_estudiantes_sin_recorrido=f.lugares_disponibles(Jueves,vehiculo_id,turno,tipo)
+                    if mi_estudiantes_sin_recorrido == True:
+                        actualizar = Jueves(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
 
-            actualizar.save()
+                if dia == 'viernes':
+                    mi_estudiantes_sin_recorrido=f.lugares_disponibles(Viernes,vehiculo_id,turno,tipo)
+                    if mi_estudiantes_sin_recorrido == True:
+                        actualizar = Viernes(vehiculo=vehiculo, estudiante=estudiante, direccion=direccion,  viaje=viaje)
+
+                actualizar.save()
 
             return redirect('recorridos', vehiculo_id=vehiculo.id, dia=dia)
         

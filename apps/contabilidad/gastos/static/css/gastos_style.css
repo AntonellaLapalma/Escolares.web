@@ -1,0 +1,17 @@
+.actualizar-gastos{
+    width: 16.5%;
+}
+.btn-agregar-gasto{
+    width: 16.5%;
+    padding: 0px;
+    height: 95%;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1360px) {
+    .btn-agregar-gasto, .actualizar-gastos{
+        width: 100%;
+        margin-top: 5px;
+    }
+}

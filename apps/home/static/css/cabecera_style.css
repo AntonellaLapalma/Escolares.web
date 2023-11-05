@@ -1,5 +1,7 @@
 /* Seccion del header comun para toda las paginas */
 .opciones-header{
+    display: flex;
+    flex-direction: row;
     padding: 0px 0px 20px 0px;
     width: 100%;
     justify-content: space-between;
@@ -19,6 +21,7 @@
     gap: 20px;
 }
 .btn-header span{
+    padding: 10px 20px;
     font-size: 16px;
 }
 .btn-header:hover{
@@ -43,8 +46,6 @@
     border: 1px solid var(--color_borde_id_tarjeta);
     gap: 10px;
     background-color: #ffffff00;
-    backdrop-filter: blur(10px);
-    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 .filtros p{
     height: 100%;
@@ -99,7 +100,6 @@
 .registrar{
     width: 25%;
     height: 100%;
-    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 /*  Buscador */
 .buscador{
@@ -110,7 +110,6 @@
     color: var(--color_blanco);
     border: 1px solid var(--color_borde_id_tarjeta);
     background-color: #ffffff00;
-    backdrop-filter: blur(10px);
     /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 .buscador:hover{
@@ -159,4 +158,24 @@ input[type="text"]:not(:focus) {
 }
 .buscar:hover .lupita{
     color: var(--color_blanco);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1360px) {
+    .opciones-header{
+        flex-direction: column;
+    }
+    .filtros{
+        width: 98.5%;
+        margin-bottom: 5px;
+    }
+    .registrar{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .buscador{
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }

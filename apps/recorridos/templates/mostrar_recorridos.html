@@ -3,7 +3,7 @@
 {% block recorridos_content %}
 <script src="{% static 'js/recorridos_js.js' %}"></script>
 <div>
-    <div class="tarjeta sombra-luz">
+    <div class="tarjeta">
         <section class="id-tarjeta dia fila">
             <p class="id-dia">{{ dia | upper }}</p>
         </section>
@@ -50,7 +50,7 @@
                         <option value="" selected disabled>Seleccione un estudiante</option>
                         {% if estudiantes1 %}
                         {% for estudiante in estudiantes1 %}
-                        {% if estudiante.turno.turno == 'Mañana' or estudiante.turno.turno == 'Completo' %}
+                        {% if estudiante.turno.turno == 'Mañana' or estudiante.turno.turno == 'Completo'%}
                         <option value="{{estudiante.id}}">{{estudiante.id}} - {{estudiante.nombre}} {{estudiante.apellido}}</option>
                         {% endif %}
                         {% endfor %}

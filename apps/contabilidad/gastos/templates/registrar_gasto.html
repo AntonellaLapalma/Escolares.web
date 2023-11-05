@@ -1,0 +1,56 @@
+{% extends 'gastos.html' %}
+{% block gastos_content %}
+<div class="tarjeta">
+    <section class="titulo-tarjeta fila">
+        <i class="fa-solid fa-plus"></i>
+        <h3>Agregar gasto</h3>
+    </section>
+    <form id="registro-db" action="{% url 'agregar_gastos' %}" method="post">
+        {% csrf_token %}
+        <div class="fila seccion-info">
+            <div id="registro-seccion-1" class="columna">
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-regular fa-file-lines"></i>
+                    <h3>Datos</h3>
+                </div>
+                <div class="campos columna estado-m separacion-gastos">
+                    <section class="campo-registro{% if error_total %} campo-registro-error{% endif %}">
+                        <select name="opcion_vehiculo" class="select-registro">
+                            <option selected disabled>Seleccione un vehículo</option>
+                            {% for vehiculo in vehiculos %}
+                            <option value="{{vehiculo.id}}">{{vehiculo.id}} - {{vehiculo.patente|upper}}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="lablel-registro-opcion">Vehículo</label>
+                    </section>
+                    <section class="campo-registro{% if error_total %} campo-registro-error{% endif %}">
+                        <select name="motivo_vehiculo" class="select-registro">
+                            <option selected disabled>Seleccione un motivo</option>
+                            {% for motivo in motivos %}
+                            <option value="{{motivo.id}}">{{motivo.motivo}}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="lablel-registro-opcion">Motivo</label>
+                    </section>
+                    <section class="campo-registro {% if error_total %} campo-registro-error{% endif %}">
+                        <input class="input-registro" name="total_vehiculo" placeholder="">
+                        <label class="lablel-registro">Total</label>
+                        {% if error_total %}
+                            <p class="error_forms_registro error-gastos">{{ error_total }}</p>
+                        {% endif %}
+                    </section>
+                </div>
+                <div class="fila error-in">
+                    {% if error_x %}
+                    <p class="error_forms_registro">{{ error_x }}</p>
+                    {% endif %}
+                </div>
+                <div class="botones-registro fila">
+                    <a href="{% url 'agregar_gastos' %}" class="btn-secundario">Cancelar</a>
+                    <button type="submit" class="btn-principal">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock gastos_content %}

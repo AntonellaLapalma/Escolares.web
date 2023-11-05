@@ -1,11 +1,10 @@
 /* BTN ACTUALIZAR */
 .actualizar{
     width: 35%;
-    /* animation: fadeIn 0.8s ease-in-out forwards; */
 }
 .btn-contabilidad{
     width: 100%; 
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 /* CATEGORIAS */
 .titulo-desplegable{
@@ -26,7 +25,7 @@
 }
 .desplegable-anios{
     position: relative;
-    width: 62.8% !important;
+    width: 62.8%;
     justify-content: center;
     align-items: center;
     z-index: 99;
@@ -119,7 +118,7 @@
     display: block;
 }
 .desplegable-meses .subcategoria{
-    width: 100%;
+    width: 90%;
     height: 100%;
     color: var(--color_blanco);
     justify-content: left;
@@ -136,6 +135,8 @@
 }
 /* CONTENIDO */
 .contabilidad{
+    display: flex;
+    flex-direction: row;
     gap: 25px;
 }
 .seccion-meses{
@@ -155,12 +156,14 @@
     width: 2px;
     height: 2px;
     background-color: #ffffff10;
+    overflow-x: auto;
 }
 .tabla-mes::-webkit-scrollbar-thumb{
     background-color: #ffffff13;
     border-radius: 5px;
+    overflow-x: auto;
 }
-.cabecera-tabla-mes{
+.cabecera-tabla-mes li{
     border-bottom: solid 1px var(--color_borde_id_tarjeta);
     background-color: rgba(255, 255, 255, 0.111);
 }
@@ -174,13 +177,6 @@
 }
 .renglon-mes:hover{
     background-color: var(--efecto_translucido);
-}
-.edicion{
-    padding: 0px 10px;
-    width: 25% !important;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
 }
 .tabla-total{
     border-top: none;
@@ -215,6 +211,8 @@
 /* TARJETA PRECIO */
 .seccion-contabilidad{
     width: 56%;
+    display: flex;
+    flex-direction: column;
 }
 /*  FACTURACION TOTAL */
 .facturacion-total{
@@ -252,4 +250,30 @@
 }
 .id-col{
     width: 50% !important;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1360px) {
+    .desplegable-anios{
+        width: 100%;
+    }
+    .actualizar{
+        margin-top: 5px;
+        width: 100%;
+    }
+    .titulo-desplegable{
+        width: 100%;
+    }
+}
+@media (max-width: 1200px) {
+    .contabilidad{
+        flex-direction: column;
+    }
+    .seccion-contabilidad{
+        width: 100%;
+    }
+    .contenido-tabla-mes li{
+        min-width: 200px;
+    }
 }

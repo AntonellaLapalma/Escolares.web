@@ -1,8 +1,8 @@
 {% extends 'recorridos.html' %}
 {% block content %}
-<header class="cabecera-pag item-pag-2 fila">
-    <section class="opciones-header fila">
-        <section class="filtros semana fila sombra-luz">
+<header>
+    <section class="opciones-header">
+        <section class="filtros semana">
             <p class="fila borde-der {% if request.path == '/vehiculos/' or '/recorridos/' in request.path %} seccion-filtro {% endif %}"><i class="fa-solid fa-rectangle-list i-header"></i><span>Mostrar</span></p>
             <a href="{% url 'recorridos' vehiculo.id 'lunes' %}" class="fila {% if '/lunes/' in request.path %} filtro-active {% endif %}">Lunes</a>
             <a href="{% url 'recorridos' vehiculo.id 'martes' %}" class="fila {% if '/martes/' in request.path %} filtro-active {% endif %}">Martes</a>

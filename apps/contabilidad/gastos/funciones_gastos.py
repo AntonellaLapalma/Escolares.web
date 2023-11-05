@@ -17,7 +17,7 @@ class Funciones_Gastos:
 
         for empleado in empleados:
             try:
-                ingreso_existente = Gastos_empleado.objects.get(id_empleado=empleado.id)  
+                ingreso_existente = Gastos_empleado.objects.get(id_empleado=empleado.id,fecha__month=mes_actual, fecha__year=anio_actual)  
             except Gastos_empleado.DoesNotExist:
                 e = Empleado.objects.get(id=empleado.id)
                 registrar = Gastos_empleado(id_empleado=e, fecha=fecha_actual, total=e.puesto.sueldo) 
@@ -76,3 +76,14 @@ class Funciones_Gastos:
 
         return total_por_mes
 
+    def registrar(self,vehiculo,motivo,total):
+        fecha_actual = datetime.now()
+        agregar = Gastos_vehiculo(id_vehiculo=vehiculo,fecha=fecha_actual,motivo=motivo,total=total)
+        agregar.save()
+
+    def validar_total(self,total):
+        try:
+            total=int(total)
+            return True
+        except ValueError:
+            return False

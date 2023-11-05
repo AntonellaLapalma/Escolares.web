@@ -3,21 +3,21 @@ from apps.recorridos.models import *
 from apps.vehiculos.models import Vehiculo
 from apps.clientes.estudiantes.models import *
 
-class FuncionesLunes:
-    def filtrar_lunes(self,vehiculo_seleccionado,turno,tipo):
+class Funciones_Recorridos:
+    def filtrar(self,dia,vehiculo_seleccionado,turno,tipo):
         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        resultado_lunes = Lunes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+        resultados = dia.objects.filter(viaje__turno=turno, viaje__tipo=tipo) # traigo los resultados que sean igual al turno
 
         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
 
         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
-        estudiantes_con_recorrido= [r.estudiante.id for r in resultado_lunes]
+        estudiantes_con_recorrido= [r.estudiante.id for r in resultados]
         estudiantes_sin_recorrido = Estudiante.objects.exclude(
             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
         )
         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
-        estudiantes_sin_filtrar_viaje = Lunes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+        estudiantes_sin_filtrar_viaje = dia.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
 
         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
@@ -25,9 +25,9 @@ class FuncionesLunes:
 
         return estudiantes_sin_recorrido2
     
-    def lugares_disponibles_l(self,vehiculo_seleccionado,turno,tipo):
+    def lugares_disponibles(self,dia,vehiculo_seleccionado,turno,tipo):
         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
-        resultado_lunes = Lunes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+        resultado_lunes = dia.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
         numero_de_resultados = resultado_lunes.count()
 
         if numero_de_resultados >= int(vehiculo.cant_asientos):
@@ -35,130 +35,166 @@ class FuncionesLunes:
         else:
             return True
 
-class FuncionesMartes:
-    def filtrar_martes(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        resultado_martes = Martes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
 
-        turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
 
-        # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
-        estudiantes_con_recorrido= [r.estudiante.id for r in resultado_martes]
-        estudiantes_sin_recorrido = Estudiante.objects.exclude(
-            Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
-        )
-        # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
-        estudiantes_sin_filtrar_viaje = Martes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
-        estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
 
-        # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
-        estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+# class FuncionesLunes:
+#     def filtrar_lunes(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        return estudiantes_sin_recorrido2
+#         resultado_lunes = Lunes.objects.filter(viaje__turno=turno, viaje__tipo=tipo)
+
+#         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
+
+#         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
+#         estudiantes_con_recorrido= [r.estudiante.id for r in resultado_lunes]
+#         estudiantes_sin_recorrido = Estudiante.objects.exclude(
+#             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
+#         )
+#         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
+#         estudiantes_sin_filtrar_viaje = Lunes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+#         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
+
+#         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
+#         estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+
+#         return estudiantes_sin_recorrido2
     
-    def lugares_disponibles_m(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
-        resultado_martes = Martes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
-        numero_de_resultados = resultado_martes.count()
+#     def lugares_disponibles_l(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         resultado_lunes = Lunes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         numero_de_resultados = resultado_lunes.count()
 
-        if numero_de_resultados >= int(vehiculo.cant_asientos):
-            return False
-        else:
-            return True
+#         if numero_de_resultados >= int(vehiculo.cant_asientos):
+#             return False
+#         else:
+#             return True
 
-class FuncionesMiercoles:
-    def filtrar_miercoles(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+# class FuncionesMartes:
+#     def filtrar_martes(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        resultado_miercoles = Miercoles.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         resultado_martes = Martes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
 
-        turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
+#         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
 
-        # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
-        estudiantes_con_recorrido= [r.estudiante.id for r in resultado_miercoles]
-        estudiantes_sin_recorrido = Estudiante.objects.exclude(
-            Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
-        )
-        # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
-        estudiantes_sin_filtrar_viaje = Miercoles.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
-        estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
+#         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
+#         estudiantes_con_recorrido= [r.estudiante.id for r in resultado_martes]
+#         estudiantes_sin_recorrido = Estudiante.objects.exclude(
+#             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
+#         )
+#         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
+#         estudiantes_sin_filtrar_viaje = Martes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+#         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
 
-        # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
-        estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+#         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
+#         estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
 
-        return estudiantes_sin_recorrido2
+#         return estudiantes_sin_recorrido2
     
-    def lugares_disponibles_x(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
-        resultado_miercoles = Miercoles.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
-        numero_de_resultados = resultado_miercoles.count()
+#     def lugares_disponibles_m(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         resultado_martes = Martes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         numero_de_resultados = resultado_martes.count()
 
-        if numero_de_resultados >= int(vehiculo.cant_asientos):
-            return False
-        else:
-            return True
+#         if numero_de_resultados >= int(vehiculo.cant_asientos):
+#             return False
+#         else:
+#             return True
+
+# class FuncionesMiercoles:
+#     def filtrar_miercoles(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+
+#         resultado_miercoles = Miercoles.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+
+#         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
+
+#         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
+#         estudiantes_con_recorrido= [r.estudiante.id for r in resultado_miercoles]
+#         estudiantes_sin_recorrido = Estudiante.objects.exclude(
+#             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
+#         )
+#         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
+#         estudiantes_sin_filtrar_viaje = Miercoles.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+#         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
+
+#         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
+#         estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+
+#         return estudiantes_sin_recorrido2
     
-class FuncionesJueves:
-    def filtrar_jueves(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#     def lugares_disponibles_x(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         resultado_miercoles = Miercoles.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         numero_de_resultados = resultado_miercoles.count()
 
-        resultado_jueves = Jueves.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
-
-        turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
-
-        # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
-        estudiantes_con_recorrido= [r.estudiante.id for r in resultado_jueves]
-        estudiantes_sin_recorrido = Estudiante.objects.exclude(
-            Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
-        )
-        # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
-        estudiantes_sin_filtrar_viaje = Jueves.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
-        estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
-
-        # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
-        estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
-
-        return estudiantes_sin_recorrido2
+#         if numero_de_resultados >= int(vehiculo.cant_asientos):
+#             return False
+#         else:
+#             return True
     
-    def lugares_disponibles_j(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
-        resultado_jueves = Jueves.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
-        numero_de_resultados = resultado_jueves.count()
+# class FuncionesJueves:
+#     def filtrar_jueves(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-        if numero_de_resultados >= int(vehiculo.cant_asientos):
-            return False
-        else:
-            return True
+#         resultado_jueves = Jueves.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
 
-class FuncionesViernes:
-    def filtrar_viernes(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
 
-        resultado_viernes = Viernes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
+#         estudiantes_con_recorrido= [r.estudiante.id for r in resultado_jueves]
+#         estudiantes_sin_recorrido = Estudiante.objects.exclude(
+#             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
+#         )
+#         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
+#         estudiantes_sin_filtrar_viaje = Jueves.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+#         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
 
-        turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
+#         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
+#         estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
 
-        # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
-        estudiantes_con_recorrido= [r.estudiante.id for r in resultado_viernes]
-        estudiantes_sin_recorrido = Estudiante.objects.exclude(
-            Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
-        )
-        # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
-        estudiantes_sin_filtrar_viaje = Viernes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
-        estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
+#         return estudiantes_sin_recorrido2
+    
+#     def lugares_disponibles_j(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         resultado_jueves = Jueves.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         numero_de_resultados = resultado_jueves.count()
 
-        # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
-        estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+#         if numero_de_resultados >= int(vehiculo.cant_asientos):
+#             return False
+#         else:
+#             return True
 
-        return estudiantes_sin_recorrido2
+# class FuncionesViernes:
+#     def filtrar_viernes(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
 
-    def lugares_disponibles_v(self,vehiculo_seleccionado,turno,tipo):
-        vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
-        resultado_viernes = Viernes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
-        numero_de_resultados = resultado_viernes.count()
+#         resultado_viernes = Viernes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
 
-        if numero_de_resultados >= int(vehiculo.cant_asientos):
-            return False
-        else:
-            return True 
+#         turno_filtro = Precio.objects.get(tipo='Ida o vuelta')
+
+#         # Primero filtro los datos para obtener solo los estudiantes sin recorrido y con servicio contratado
+#         estudiantes_con_recorrido= [r.estudiante.id for r in resultado_viernes]
+#         estudiantes_sin_recorrido = Estudiante.objects.exclude(
+#             Q(id__in=estudiantes_con_recorrido) | Q(viaje__tipo='Ninguno') # utilizo or 
+#         )
+#         # Busco que no viaje en otro turno en caso de haber contratado ida o vuelta y ya este haciendo uso de 1
+#         estudiantes_sin_filtrar_viaje = Viernes.objects.filter(vehiculo=vehiculo.id,estudiante__viaje__id=turno_filtro.id)
+#         estudiantes_sin_filtrar_viaje_lista= [r.estudiante.id for r in estudiantes_sin_filtrar_viaje]
+
+#         # Excluyo los estudiantes que tienen 'ida o vuelta' y se encuentran viajando en otro turno
+#         estudiantes_sin_recorrido2 = estudiantes_sin_recorrido.exclude(id__in=estudiantes_sin_filtrar_viaje_lista,viaje__id=turno_filtro.id)
+
+#         return estudiantes_sin_recorrido2
+
+#     def lugares_disponibles_v(self,vehiculo_seleccionado,turno,tipo):
+#         vehiculo = Vehiculo.objects.get(id=vehiculo_seleccionado)
+#         resultado_viernes = Viernes.objects.filter(vehiculo=vehiculo.id, viaje__turno=turno, viaje__tipo=tipo)
+#         numero_de_resultados = resultado_viernes.count()
+
+#         if numero_de_resultados >= int(vehiculo.cant_asientos):
+#             return False
+#         else:
+#             return True 

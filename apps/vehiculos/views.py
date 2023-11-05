@@ -48,7 +48,7 @@ class VehiculosView(IndexView):
             vehiculo.v = viajes_distintos_v.count()
         return render(request, self.template_name, {'vehiculos':vehiculos})
     
-class RegistrarVehiculoView(IndexView):
+class RegistrarVehiculoView(VehiculosView):
     template_name='registrar_vehiculo.html'
 
     def get(self, request, *args, **kwargs):
@@ -60,8 +60,7 @@ class RegistrarVehiculoView(IndexView):
         # Traigo los empleados para luego listarlos en el html
         empleados_sin_asignar = td.empleados_libres()
 
-        if empleados_sin_asignar:
-            empleados = empleados_sin_asignar
+        empleados = empleados_sin_asignar
         return render(request, self.template_name, {'empleados':empleados})
 
     def post(self,request):
@@ -116,7 +115,7 @@ class RegistrarVehiculoView(IndexView):
                                                     'empleados':empleados_sin_asignar
                                                     })
     
-class ModificarVehiculoView(IndexView):
+class ModificarVehiculoView(VehiculosView):
     template_name='modificar_vehiculo.html'
 
     def get(self, request, *args, **kwargs):
@@ -197,7 +196,7 @@ class ModificarVehiculoView(IndexView):
                                                     'vehiculo':vehiculo
                                                     })
     
-class EliminarVehiculoView(IndexView):
+class EliminarVehiculoView(VehiculosView):
     template_name='eliminar_vehiculo.html'
 
     def get(self, request, *args, **kwargs):
