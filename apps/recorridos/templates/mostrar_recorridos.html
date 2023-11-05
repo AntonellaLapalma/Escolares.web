@@ -7,7 +7,8 @@
         <section class="id-tarjeta dia fila">
             <p class="id-dia">{{ dia | upper }}</p>
         </section>
-        <input type="hidden" id="celular-input" value="{{ celular }}">
+        <input type="hidden" id="celular-input-chofer" value="{{ celular_chofer }}">
+        <input type="hidden" id="celular-input-celador" value="{{ celular_celador }}">
         <div class="grid-tarjeta-recorridos columna">
             <div class="columna recorrido-1">
                 <section class="fila seccion-turno-recorrido">
@@ -15,9 +16,16 @@
                         <i class="fa-solid fa-clock i-recorrido"></i>
                         <h3>Ingreso mañana</h3>  
                     </section>
-                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
-                        <i class="fa-solid fa-chevron-right wsp-e"></i>
-                    </button>
+                </section>
+                <section class="btns-recorridos">
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-chofer-mi" value="{{mensaje_mi}}">
+                        <button id="enviar-por-whatsapp-chofer-mi"class="{% if celular_chofer is None %}deshabilitado {% endif %}"{% if celular_chofer is None %}disabled {% endif %}><span>Enviar lista al chofer</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-celador-mi" value="{{mensaje_mi|linebreaksbr }}">
+                        <button id="enviar-por-whatsapp-celador-mi" class="{% if celular_celador is None %}deshabilitado {% endif %}"{% if celular_celador is None %}disabled {% endif %}><span>Enviar lista al celador</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
                 </section>
                 <section class="lista-pasajeros" id="lista-ingreso-m">
                     <ul id="">
@@ -67,9 +75,16 @@
                         <i class="fa-solid fa-clock i-recorrido"></i>
                         <h3>Salida medio dia</h3>
                     </section>
-                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
-                        <i class="fa-solid fa-chevron-right wsp-e"></i>
-                    </button>
+                </section>
+                <section class="btns-recorridos">
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-chofer-mds" value="{{mensaje_mds}}">
+                        <button id="enviar-por-whatsapp-chofer-mds"class="{% if celular_chofer is None %}deshabilitado {% endif %}"{% if celular_chofer is None %}disabled {% endif %}><span>Enviar lista al chofer</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-celador-mds" value="{{mensaje_mds }}">
+                        <button id="enviar-por-whatsapp-celador-mds" class="{% if celular_celador is None %}deshabilitado {% endif %}"{% if celular_celador is None %}disabled {% endif %}><span>Enviar lista al celador</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
                 </section>
                 <section class="lista-pasajeros" id="lista-salida-md">
                     <ul>
@@ -118,9 +133,16 @@
                         <i class="fa-solid fa-clock i-recorrido"></i>
                         <h3>Ingreso medio dia</h3>
                     </section>
-                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
-                        <i class="fa-solid fa-chevron-right wsp-e"></i>
-                    </button>
+                </section>
+                <section class="btns-recorridos">
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-chofer-mdi" value="{{mensaje_mdi}}">
+                        <button id="enviar-por-whatsapp-chofer-mdi"class="{% if celular_chofer is None %}deshabilitado {% endif %}"{% if celular_chofer is None %}disabled {% endif %}><span>Enviar lista al chofer</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-celador-mdi" value="{{mensaje_mdi}}">
+                        <button id="enviar-por-whatsapp-celador-mdi" class="{% if celular_celador is None %}deshabilitado {% endif %}"{% if celular_celador is None %}disabled {% endif %}><span>Enviar lista al celador</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
                 </section>
                 <section class="lista-pasajeros" id="lista-ingreso-md">
                     <ul>
@@ -169,9 +191,16 @@
                         <i class="fa-solid fa-clock i-recorrido"></i>
                         <h3>Salida tarde</h3>
                     </section>
-                    <button id="enviar-por-whatsapp"  class="fila btn-enviar-wsp">Enviar
-                        <i class="fa-solid fa-chevron-right wsp-e"></i>
-                    </button>
+                </section>
+                <section class="btns-recorridos">
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-chofer-ts" value="{{mensaje_ts}}">
+                        <button id="enviar-por-whatsapp-chofer-ts"class="{% if celular_chofer is None %}deshabilitado {% endif %}"{% if celular_chofer is None %}disabled {% endif %}><span>Enviar lista al chofer</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
+                    <form>
+                        <input type="hidden" id="lista-pasajeros-wsp-celador-ts" value="{{mensaje_ts}}">
+                        <button id="enviar-por-whatsapp-celador-ts" class="{% if celular_celador is None %}deshabilitado {% endif %}"{% if celular_celador is None %}disabled {% endif %}><span>Enviar lista al celador</span><i class="fa-solid fa-chevron-right wsp-e"></i></button>                    
+                    </form>
                 </section>
                 <section class="lista-pasajeros" id="lista-salida-t">
                     <ul>

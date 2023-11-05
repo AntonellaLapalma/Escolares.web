@@ -41,6 +41,11 @@ class RecorridosView(IndexView):
             mds_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Medio dia','Salida')
             mdi_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Medio dia','Ingreso')
             ts_lugar_disponible=f.lugares_disponibles(Lunes,vehiculo_seleccionado,'Tarde','Salida')
+
+            mensaje_mi = f.crear_mensaje(vehiculo_seleccionado,Lunes,'Mañana','Ingreso')
+            mensaje_mds = f.crear_mensaje(vehiculo_seleccionado,Lunes,'Medio dia','Salida')
+            mensaje_mdi = f.crear_mensaje(vehiculo_seleccionado,Lunes,'Medio dia','Ingreso')
+            mensaje_ts = f.crear_mensaje(vehiculo_seleccionado,Lunes,'Tarde','Salida')
             
         if dia == 'martes':
             resultado = Martes.objects.filter(vehiculo=vehiculo.id)
@@ -53,6 +58,11 @@ class RecorridosView(IndexView):
             mds_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Medio dia','Salida')
             mdi_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Medio dia','Ingreso')
             ts_lugar_disponible=f.lugares_disponibles(Martes,vehiculo_seleccionado,'Tarde','Salida')
+
+            mensaje_mi = f.crear_mensaje(vehiculo_seleccionado,Martes,'Mañana','Ingreso')
+            mensaje_mds = f.crear_mensaje(vehiculo_seleccionado,Martes,'Medio dia','Salida')
+            mensaje_mdi = f.crear_mensaje(vehiculo_seleccionado,Martes,'Medio dia','Ingreso')
+            mensaje_ts = f.crear_mensaje(vehiculo_seleccionado,Martes,'Tarde','Salida')
             
         if dia == 'miercoles':
             resultado = Miercoles.objects.filter(vehiculo=vehiculo.id)
@@ -65,6 +75,11 @@ class RecorridosView(IndexView):
             mds_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Medio dia','Salida')
             mdi_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Medio dia','Ingreso')
             ts_lugar_disponible=f.lugares_disponibles(Miercoles,vehiculo_seleccionado,'Tarde','Salida')
+
+            mensaje_mi = f.crear_mensaje(vehiculo_seleccionado,Miercoles,'Mañana','Ingreso')
+            mensaje_mds = f.crear_mensaje(vehiculo_seleccionado,Miercoles,'Medio dia','Salida')
+            mensaje_mdi = f.crear_mensaje(vehiculo_seleccionado,Miercoles,'Medio dia','Ingreso')
+            mensaje_ts = f.crear_mensaje(vehiculo_seleccionado,Miercoles,'Tarde','Salida')
             
         if dia == 'jueves':
             resultado = Jueves.objects.filter(vehiculo=vehiculo.id)
@@ -77,6 +92,11 @@ class RecorridosView(IndexView):
             mds_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Medio dia','Salida')
             mdi_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Medio dia','Ingreso')
             ts_lugar_disponible=f.lugares_disponibles(Jueves,vehiculo_seleccionado,'Tarde','Salida')
+
+            mensaje_mi = f.crear_mensaje(vehiculo_seleccionado,Jueves,'Mañana','Ingreso')
+            mensaje_mdi = f.crear_mensaje(vehiculo_seleccionado,Jueves,'Medio dia','Ingreso')
+            mensaje_mds = f.crear_mensaje(vehiculo_seleccionado,Jueves,'Medio dia','Salida')
+            mensaje_ts = f.crear_mensaje(vehiculo_seleccionado,Jueves,'Tarde','Salida')
             
         if dia == 'viernes':
             resultado = Viernes.objects.filter(vehiculo=vehiculo.id)
@@ -89,11 +109,18 @@ class RecorridosView(IndexView):
             mds_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Medio dia','Salida')
             mdi_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Medio dia','Ingreso')
             ts_lugar_disponible=f.lugares_disponibles(Viernes,vehiculo_seleccionado,'Tarde','Salida')
+
+            mensaje_mi = f.crear_mensaje(vehiculo_seleccionado,Viernes,'Mañana','Ingreso')
+            mensaje_mdi = f.crear_mensaje(vehiculo_seleccionado,Viernes,'Medio dia','Ingreso')
+            mensaje_mds = f.crear_mensaje(vehiculo_seleccionado,Viernes,'Medio dia','Salida')
+            mensaje_ts = f.crear_mensaje(vehiculo_seleccionado,Viernes,'Tarde','Salida')
             
-        if vehiculo.chofer == None:
-            context['celular'] = 0
+        if vehiculo.chofer == None or vehiculo.celador == None:
+            context['celular_chofer'] = None
+            context['celular_celador'] = None
         else:
-            context['celular'] = vehiculo.chofer.celular 
+            context['celular_chofer'] = vehiculo.chofer.celular
+            context['celular_celador'] = vehiculo.celador.celular
 
         context['dia'] = dia
         context['resultados'] = resultado 
@@ -106,6 +133,11 @@ class RecorridosView(IndexView):
         context['mds_lugar_disponible']=mds_lugar_disponible
         context['mdi_lugar_disponible']=mdi_lugar_disponible
         context['ts_lugar_disponible']=ts_lugar_disponible
+        context['mensaje_mi']=mensaje_mi
+        context['mensaje_mdi']=mensaje_mdi
+        context['mensaje_mds']=mensaje_mds
+        context['mensaje_ts']=mensaje_ts
+
         
         return context
     

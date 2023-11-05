@@ -36,9 +36,14 @@ class Validar_Ingresos:
         if not celular.isdigit():
             celular_error = 'Ingrese un celular válido.*'
         elif celular.isdigit():
-            empleado = Empleado.objects.get(celular=celular)
-            if int(empleado.id) != int(id):
-                celular_error = 'El número ya se encuentra registrado.*'
+            try:
+                empleado = Empleado.objects.get(celular=celular)
+                if int(empleado.id) != int(id):
+                    celular_error = 'El número ya se encuentra registrado.*'
+
+            except Empleado.DoesNotExist:    
+                pass
+                
         return celular_error
     
     def es_letras_y_espacios(self,cadena):

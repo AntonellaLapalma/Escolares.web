@@ -181,7 +181,7 @@ class ModificarEmpleadoView(EmpleadosView):
                 empleado.celular = request.POST.get('cel_empleado')
                 puesto_id = request.POST.get('opcion_tarea')
 
-                if empleado.puesto:
+                if empleado.puesto.puesto != puesto_id:
                     # Verifica si el empleado estaba asignado en algun vehiculo
                     vehiculo_chofer = Vehiculo.objects.filter(chofer=empleado)
                     vehiculo_celador = Vehiculo.objects.filter(celador=empleado)
@@ -195,12 +195,12 @@ class ModificarEmpleadoView(EmpleadosView):
                             vehiculo.celador = None
                             vehiculo.save()
 
-                # Luego asigno el nuevo puesto
-                if puesto_id == 'Ninguno' or puesto_id == 'Chofer' or puesto_id == 'Celador':
-                    if puesto_id != 'Ninguno':
-                        empleado.puesto = get_object_or_404(Puesto, puesto=puesto_id)
-                    else:
-                        empleado.puesto = None
+                    # Luego asigno el nuevo puesto
+                    if puesto_id == 'Ninguno' or puesto_id == 'Chofer' or puesto_id == 'Celador':
+                        if puesto_id != 'Ninguno':
+                            empleado.puesto = get_object_or_404(Puesto, puesto=puesto_id)
+                        else:
+                            empleado.puesto = None
                 empleado.save()
                 return redirect('empleados')
 

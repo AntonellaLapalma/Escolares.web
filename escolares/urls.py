@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', InicioView.as_view(), name='inicio'),
     path('login/', LoginView.as_view(), name='login'),
+    path('salir/', salir, name='salir'),
 
     path('clientes/',ClientesView.as_view(),name='clientes'),
     path('clientes/', ClientesView.as_view(), name='clientes'),

@@ -362,21 +362,49 @@ body::-webkit-scrollbar-thumb{
 }
 /* GRAFICOS */
 .graficos-box{
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
+.graficos{
+    width: 50%;
+}
 .tarjeta-graficos{
     padding: 20px;
+    height: 500px;
 }
 .separacion-gastos{
     margin-bottom: 50px;
 }
-.graficoDeBarrasIngreso{
+.salir-box{
+    margin: 20px 0px ;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.graficoDeBarrasGastos{
-    width: 100%;
+.salir{
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.salir i{
+    font-size: 24px;
+    padding: 0px 10px;
+    color: var(--color_borde_id_tarjeta);
+}
+.salir span{
+    font-size: 25px;
+    color: var(--color_borde_id_tarjeta);
+}
+.salir:hover span, .salir:hover i{
+    color: var(--color_blanco);
+    transition: 0.3s ease;
+}
+.salir:active span, .salir:active i{
+    color: var(--color_principal);
 }
 /* Animaciones */
 @keyframes fadeIn {
@@ -390,9 +418,26 @@ body::-webkit-scrollbar-thumb{
 
 /* RESPONSIVE */
 
+@media (max-width:1880px){
+    .graficos-box{
+        flex-direction: column;
+    }
+    .graficos{
+        width: 100%;
+    }
+    .tarjeta-graficos{
+        width: 95%;
+    }
+    .graficoDeBarrasIngreso{
+        width: 500px;
+    }
+    .graficoDeBarrasGastos{
+        width: 500px;
+    }
+}
 @media (max-width: 1405px) {
     .listado-db{
-    padding-top: 120px;
+        padding-top: 120px;
     }
     .grid-tarjeta{
         padding: 10px;
@@ -404,25 +449,9 @@ body::-webkit-scrollbar-thumb{
         display: flex;
         flex-direction: column;
     }
-    .graficos-box{
-        flex-direction: column;
+    .tarjeta-graficos{
+        width: 90%;
     }
-    .tarjeta-graficos::-webkit-scrollbar{
-        width: 2px;
-        height: 2px;
-        background-color: #ffffff10;
-        overflow-x: auto;
-    }
-    .tarjeta-graficos::-webkit-scrollbar-thumb{
-        background-color: #ffffff13;
-        border-radius: 5px;
-        overflow-x: auto;
-    }
-    .graficoDeBarrasIngreso{
-        width: 500px;
-    }
-    .graficoDeBarrasGastos{
-        width: 500px;
-    }
+    
 }
 

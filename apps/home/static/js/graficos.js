@@ -17,6 +17,8 @@ var datos_ingreso = JSON.parse(document.getElementById('datos_ingreso').value);
                     type: 'bar',
                     data: data,
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true
@@ -24,7 +26,6 @@ var datos_ingreso = JSON.parse(document.getElementById('datos_ingreso').value);
                         }
                     }
                 };
-            
                 var myChart = new Chart(ctx, config);
 
 var ctx2 = document.getElementById('graficoDeBarrasGastos').getContext('2d');
@@ -45,6 +46,8 @@ var datos_gastos = JSON.parse(document.getElementById('datos_gastos').value);
                     type: 'bar',
                     data: data2,
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true

@@ -14,38 +14,38 @@
                         <i class="fa-solid fa-user-group i-tarjetas"></i>
                         <section>
                             <p class="renglon-1 desborde">Clientes</p>
-                            <p class="renglon-3 desborde">{{familia}} Familias registradas</p>
-                            <p class="renglon-3 desborde">{{adulto}} Adultos registrados</p>
-                            <p class="renglon-3 desborde">{{estudiante}} Estudiantes registrados</p>
+                            <p class="renglon-3 desborde">Familias registradas: {{familia}} </p>
+                            <p class="renglon-3 desborde">Adultos registrados: {{adulto}} </p>
+                            <p class="renglon-3 desborde">Estudiantes registrados: {{estudiante}}</p>
                         </section>
                     </section>
                     <section class="fila seccion-1-mostrar tam-seccion">
                         <i class="fa-solid fa-address-card i-tarjetas"></i>
                         <section>
                             <p class="renglon-1 desborde">Empleados</p>
-                            <p class="renglon-3 desborde">{{empleado}} Empleados registrados</p>
-                            <p class="renglon-3 desborde">{{chofer}} Choferes registrados</p>
-                            <p class="renglon-3 desborde">{{celador}} Celadores registrados</p>
+                            <p class="renglon-3 desborde">Empleados registrados: {{empleado}} </p>
+                            <p class="renglon-3 desborde">Choferes registrados: {{chofer}} </p>
+                            <p class="renglon-3 desborde">Celadores registrados: {{celador}} </p>
                         </section>
                     </section>
                     <section class="fila seccion-1-mostrar tam-seccion">
                         <i class="fa-solid fa-bus i-tarjetas"></i>
                         <section>
                             <p class="renglon-1 desborde">Vehículos</p>
-                            <p class="renglon-3 desborde">{{vehiculo}} Vehículos registrados</p>
+                            <p class="renglon-3 desborde">Vehículos registrados: {{vehiculo}} </p>
                         </section>
                     </section>
                     <section class="fila seccion-1-mostrar tam-seccion">
                         <i class="fa-solid fa-map-location-dot i-tarjetas"></i>
                         <section>
                             <p class="renglon-1 desborde">Recorridos</p>
-                            <p class="renglon-3 desborde">{{recorrido}} Recorridos registrados</p>
+                            <p class="renglon-3 desborde">Recorridos registrados: {{recorrido}} </p>
                         </section>
                     </section>
                 </div>
             </div>
             <div class="graficos-box">
-                    <div class="tarjeta">
+                    <div class="tarjeta graficos">
                         <section class="id-tarjeta dia fila">
                             <p class="id-dia">INGRESOS {{anio}}</p>
                         </section>
@@ -54,7 +54,7 @@
                             <canvas id="graficoDeBarrasIngreso"></canvas>
                         </section>
                     </div>
-                    <div class="tarjeta">
+                    <div class="tarjeta graficos">
                         <section class="id-tarjeta dia fila">
                             <p class="id-dia">GASTOS {{anio}}</p>
                         </section>
@@ -67,6 +67,11 @@
         </div>
     </div>
 </main>
+<div class="salir-box">
+    <a href="{% url 'salir' %}" class="salir"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Salir</span></a>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/graficos.js' %}"></script>
 {% endblock content %}
