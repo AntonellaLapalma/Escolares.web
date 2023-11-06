@@ -1,11 +1,14 @@
 {% load static %}
 {% block campos_content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="vaciar_campos.js"></script>
 <div id="registro-seccion-1">
-    <section class="columna">
+    <input type="hidden" name="id-adulto-1" value="{{ adultos.0.id }}">
+    <section class="columna responsable1">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user"></i>
             <h3>Responsable 1*</h3>
-            <input type="hidden" name="id-adulto-1" value="{{ adultos.0.id }}">
+            <a class="borrar-responsable1"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -45,11 +48,12 @@
             </section>
         </div>
     </section>
-    <section class="columna">
+    <input type="hidden" name="id-adulto-2" value="{{ adultos.1.id }}">
+    <section class="columna responsable2">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user"></i>
             <h3>Responsable 2</h3>
-            <input type="hidden" name="id-adulto-2" value="{{ adultos.1.id }}">
+            <a class="borrar-responsable2"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -91,11 +95,12 @@
     </section>
 </div>
 <div id="registro-seccion-2">
-    <section class="columna">
+    <input type="hidden" name="id-estudiante-1" value="{{ estudiantes.0.id }}">
+    <section class="columna estudiante1">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user-graduate"></i>
             <h3>Estudiante 1*</h3>
-            <input type="hidden" name="id-estudiante-1" value="{{ estudiantes.0.id }}">
+            <a class="borrar-estudiante1"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -178,11 +183,13 @@
             </section>
         </div>
     </section>
-    <section class="columna">
+    <input type="hidden" name="id-estudiante-2" value="{{ estudiantes.1.id }}">
+    <section class="columna estudiante2">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user-graduate"></i>
             <h3>Estudiante 2</h3>
-            <input type="hidden" name="id-estudiante-2" value="{{ estudiantes.1.id }}">
+            <a class="borrar-estudiante2"><i class="fa-solid fa-trash-can"></i></a>
+            
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -265,11 +272,12 @@
             </section>
         </div>
     </section>
-    <section class="columna">
+    <input type="hidden" name="id-estudiante-3" value="{{ estudiantes.2.id }}">
+    <section class="columna estudiante3">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user-graduate"></i>
             <h3>Estudiante 3</h3>
-            <input type="hidden" name="id-estudiante-3" value="{{ estudiantes.2.id }}">
+            <a class="borrar-estudiante3"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -352,11 +360,12 @@
             </section>
         </div>
     </section>
-    <section class="columna">
+    <input type="hidden" name="id-estudiante-4" value="{{ estudiantes.3.id }}">
+    <section class="columna estudiante4">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-user-graduate"></i>
             <h3>Estudiante 4</h3>
-            <input type="hidden" name="id-estudiante-4" value="{{ estudiantes.3.id }}">
+            <a class="borrar-estudiante4"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -441,11 +450,12 @@
     </section>
 </div>
 <div id="registro-seccion-3">
-    <section class="columna">
+    <input type="hidden" name="id-direccion-1" value="{{ direcciones.0.id }}">
+    <section class="columna domicilio1">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-location-dot"></i>
             <h3>Domicilio*</h3>
-            <input type="hidden" name="id-direccion-1" value="{{ direcciones.0.id }}">
+            <a class="borrar-domicilio1"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -478,11 +488,12 @@
             </section>
         </div>
     </section>
-    <section class="columna">
+    <input type="hidden" name="id-direccion-2" value="{{ direcciones.1.id }}">
+    <section class="columna domicilio2">
         <div class="titulo-seccion fila">
             <i class="fa-solid fa-location-dot"></i>
             <h3>Domicilio</h3>
-            <input type="hidden" name="id-direccion-2" value="{{ direcciones.1.id }}">
+            <a class="borrar-domicilio2"><i class="fa-solid fa-trash-can"></i></a>
         </div>
         <div class="campos columna">
             <section class="campo-registro campo-registro-error">
@@ -531,7 +542,31 @@
                 {% endif %}
             </section>
         </div>
-        
     </section>
 </div>
+<script>
+    function borrarCampos(clasePadre) {
+        $(".borrar-" + clasePadre).click(function() {
+            // Encuentra el elemento <section> padre
+            var seccionPadre = $(this).closest("." + clasePadre);
+
+            // Encuentra todos los campos de entrada y restablécelos
+            seccionPadre.find("input").val("");
+
+            // Encuentra todos los campos de selección y restablécelos al primer elemento
+            seccionPadre.find("select").prop("selectedIndex", 0);
+        });
+    }
+
+    $(document).ready(function() {
+        borrarCampos("responsable1");
+        borrarCampos("responsable2");
+        borrarCampos("estudiante1");
+        borrarCampos("estudiante2");
+        borrarCampos("estudiante3");
+        borrarCampos("estudiante4");
+        borrarCampos("domicilio1");
+        borrarCampos("domicilio2");
+    });
+</script>
 {% endblock campos_content %}

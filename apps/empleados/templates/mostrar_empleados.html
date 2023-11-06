@@ -87,7 +87,7 @@
                             {% if empleado.puesto.puesto == Null %}
                             <p class="renglon-2 desborde">$0</p>
                             {% else %}
-                            <p class="renglon-2 desborde">${{empleado.puesto.sueldo}}</p>
+                            <p class="renglon-2 desborde">${{empleado.puesto.sueldo| floatformat:0}}</p>
                             {% endif %}
                         </section>
                     </section>

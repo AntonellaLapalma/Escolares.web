@@ -85,11 +85,33 @@ class GastosView(IndexView):
 
         return context
     
-    def post(self,request):
+    def post(self,request,anio_elegido='',mes_elegido=''):
         if request.method == 'POST':
             funciones=Funciones_Gastos()
             funciones.actualizar()
+
+            anio_elegido = self.kwargs.get('anio_elegido')
+            mes_elegido = self.kwargs.get('mes_elegido')
+            if  anio_elegido and mes_elegido:
+                return redirect('gastos_anio_mes',mes_elegido,anio_elegido)
+            
         return redirect('gastos')
+    
+class GEliminarView(GastosView):
+    def post(self,request,anio_elegido,mes_elegido,id_registro,tabla):
+        # llamo el valor de la url
+        anio_elegido = self.kwargs.get('anio_elegido')
+        mes_elegido = self.kwargs.get('mes_elegido')
+        id_registro = self.kwargs.get('id_registro')
+        tabla = self.kwargs.get('tabla')
+
+        if  anio_elegido and mes_elegido and id_registro:
+            if tabla == 'Vehiculo':
+                elemento = Gastos_vehiculo.objects.get(id=id_registro)
+            if tabla == 'Empleado':
+                elemento = Gastos_empleado.objects.get(id=id_registro)
+            elemento.delete()
+            return redirect('gastos_anio_mes',mes_elegido,anio_elegido)
     
 class RegistrarGastoView(GastosView):
     template_name='registrar_gasto.html'
@@ -122,23 +144,65 @@ class RegistrarGastoView(GastosView):
             total = request.POST.get('total_vehiculo')
 
             agregar = Funciones_Gastos()
-            valdiar = agregar.validar_total(total)
-            if  vehiculo and motivo:
-                vehiculo = Vehiculo.objects.get(id=vehiculo)
-                motivo = Motivos_vehiculo.objects.get(id=motivo)
+            validar = agregar.validar_total(total)
+            print(total.isdigit())
 
-            if valdiar:
-                if vehiculo and motivo:
-                    agregar = Funciones_Gastos()
-                    agregar.registrar(vehiculo,motivo,total)
-                    return redirect('gastos')
+            if  vehiculo and motivo:
+                if vehiculo.isdigit() and motivo.isdigit():
+                    vehiculo = Vehiculo.objects.get(id=vehiculo)
+                    motivo = Motivos_vehiculo.objects.get(id=motivo)
+                    if validar:
+                        agregar.registrar(vehiculo,motivo,total)
+                        return redirect('gastos')
+                    else:
+                        error='Ingrese solo números enteros.*'
                 else:
-                    error_x='Error, vuelva a intentar.*'
-            else:
-                error='Ingrese solo números.*'
+                    error_x='Error, vuelva a intentarlo.*'            
+            if not validar:
+                error='Ingrese solo números enteros.*'
 
             context['error_total']=error
             context['error_x']=error_x
 
 
+        return render(request, self.template_name, context)
+
+class ModificarSueldosView(GastosView):
+    template_name = 'modificar_sueldos.html'
+    def get(self,request,*args, **kwargs):
+        # En caso de que no se haya iniciado sesion redirige a login
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        context = self.get_context_data(request, *args, **kwargs)
+        puesto1 = self.kwargs.get('puesto_elegido')
+        puesto = Puesto.objects.get(puesto=puesto1)
+
+        context['puesto']=puesto
+
+        return render(request, self.template_name, context)
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+    
+    def post(self,request, *args, **kwargs):
+        context = self.get_context_data(request, *args, **kwargs)
+
+        puesto1 = self.kwargs.get('puesto_elegido')
+        puesto = Puesto.objects.get(puesto=puesto1)
+        total = request.POST.get('total_sueldo')
+        print(total)
+        f=Funciones_Gastos()
+        val=f.validar_total(total)
+        if val:
+            puesto.sueldo = total
+            puesto.save()
+            return redirect('gastos')
+        else:
+            error='Ingrese solo números enteros.*'
+
+        context['error']=error
+        context['puesto']=puesto
         return render(request, self.template_name, context)

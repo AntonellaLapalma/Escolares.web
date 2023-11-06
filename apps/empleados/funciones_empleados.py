@@ -21,18 +21,20 @@ class Validar_Ingresos:
     
     def validar_celular_empleado(self,celular):
         celular_error = None
-        
+        val= None
         if not celular.isdigit():
             celular_error = 'Ingrese un celular válido.*'
         elif celular.isdigit():
-            val=self.validar_inexistencia_empleado(celular)
+            if celular[0]=='1' and celular[1]=='5' and len(celular)==10:
+                val=self.validar_inexistencia_empleado(celular)
+            else:
+                celular_error = 'Ingrese un celular válido, Ej.: 1599999999.*'
             if val:
                 celular_error = 'El número ya se encuentra registrado.*'
         return celular_error
     
     def validar_celular_modificacion(self,celular,id):
         celular_error = None
-        
         if not celular.isdigit():
             celular_error = 'Ingrese un celular válido.*'
         elif celular.isdigit():
@@ -41,9 +43,11 @@ class Validar_Ingresos:
                 if int(empleado.id) != int(id):
                     celular_error = 'El número ya se encuentra registrado.*'
 
-            except Empleado.DoesNotExist:    
-                pass
-                
+            except Empleado.DoesNotExist: 
+                if celular[0]=='1' and celular[1]=='5' and len(celular)==10:
+                    pass
+                else:
+                    celular_error = 'Ingrese un celular válido, Ej.: 1599999999.*'
         return celular_error
     
     def es_letras_y_espacios(self,cadena):

@@ -100,7 +100,7 @@ class RegistrarVehiculoView(VehiculosView):
                 vehiculo = Vehiculo(patente=patente, cant_asientos=asientos, chofer=chofer, celador=celador)
                 vehiculo.save()
                 return redirect('vehiculos')
-            elif not patente_error and not asientos_error and chofer_val and celador_val:
+            elif not patente_error and not asientos_error and (chofer_val or  chofer_id == 'Ninguno') and (celador_val or celador_id == 'Ninguno'):
                 vehiculo = Vehiculo(patente=patente, cant_asientos=asientos, chofer=chofer, celador=celador)
                 vehiculo.save()
                 return redirect('vehiculos')

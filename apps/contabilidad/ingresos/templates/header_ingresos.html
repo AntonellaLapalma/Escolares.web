@@ -28,7 +28,7 @@
             {% endfor %}
             </ul>
         </section>
-        <form class="actualizar" action="{% url 'ingresos' %}" method="post">
+        <form class="actualizar" action="{% if resultado %}{% url 'ingresos_anio_mes' resultado.0.fecha|date:'m' resultado.0.fecha|date:'Y' %}{% else %}{% url 'ingresos' %}{% endif %}" method="post">
             {% csrf_token %}
             <button class="btn-header fila btn-contabilidad"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></button>
         </form>

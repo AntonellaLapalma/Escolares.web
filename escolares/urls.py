@@ -59,10 +59,15 @@ urlpatterns = [
     path('vehiculos/quitar-pasajero/<int:vehiculo_id>/<str:dia>/<str:viaje>/<str:estudiante>/', QuitarPasajero.as_view(), name='quitar-pasajero'),
     
     path('ingresos/', IngresosView.as_view(), name='ingresos'),
+    path('ingresos/<int:anio_elegido>/<int:mes_elegido>/<int:id_registro>/', EliminarView.as_view(), name='ingresos_eliminar'),
     path('ingresos/<int:anio_elegido>/<int:mes_elegido>/', IngresosView.as_view(), name='ingresos_anio_mes'),
+    path('ingresos/modificar_cuota/<str:viaje_elegido>/', ModificarCuotaView.as_view(), name='modificar_cuota'),
+
 
     path('gastos/', GastosView.as_view(), name='gastos'),
+    path('gastos/<int:anio_elegido>/<int:mes_elegido>/<int:id_registro>/<str:tabla>', GEliminarView.as_view(), name='gastos_eliminar'),
     path('gastos/<int:anio_elegido>/<int:mes_elegido>/', GastosView.as_view(), name='gastos_anio_mes'),
     path('gastos/agregar_gasto', RegistrarGastoView.as_view(), name='agregar_gastos'),
+    path('gastos/modificar_sueldo/<str:puesto_elegido>/', ModificarSueldosView.as_view(), name='modificar_sueldo'),
 
 ]

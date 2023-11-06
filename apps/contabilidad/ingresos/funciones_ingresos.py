@@ -1,4 +1,6 @@
 from apps.clientes.familias.models import *
+from apps.clientes.familias.funciones_cliente import *
+from apps.clientes.estudiantes.models import *
 from .models import *
 from datetime import datetime
 from django.db.models import Count
@@ -40,9 +42,10 @@ class Funciones_Ingresos:
         # en caso de que este ya haya sido agregado, es importante que el cambio 
         # se haga el mismo mes de la baja y no antes ni despues
         for registro in registros:
-            if registro.id_familiar not in familias:
-                eliminar=Ingreso.objects.get(id_familiar=familia.id_familiar)
-                eliminar.delete()
+            if registro.id_familiar != None:
+                if registro.id_familiar not in familias:
+                    eliminar=Ingreso.objects.get(id_familiar=familia.id_familiar)
+                    eliminar.delete()
 
     def anios(self):
         anios_unicos = Ingreso.objects.values('fecha__year').annotate(count=Count('fecha__year')).values_list('fecha__year', flat=True) # values trae los anios registrados y annotate cuenta cuantas veces se repite cada uno, values list obtiene valores unicos
@@ -94,4 +97,16 @@ class Funciones_Ingresos:
                     break
 
         return total_por_mes
-    
+
+    def actualizar_cuotas_clientes(self):
+        familias = Familia.objects.filter(estado=True)
+
+        for familia in familias:
+            estudiantes = Estudiante.objects.filter(id_familiar=familia.id_familiar)
+            servicio_contratado = []
+            for estudiante in estudiantes:
+                if estudiante.viaje !=None:
+                    servicio_contratado.append(estudiante.viaje.id)
+            funciones_c=Cuota()
+            funciones_c.actualizar_cuota(familia.id_familiar,servicio_contratado,familia.descuento)
+

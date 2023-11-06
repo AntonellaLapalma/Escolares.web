@@ -387,7 +387,7 @@ class ModificarGrupoFamiliar(IndexView):
             except:
                 pass
 
-            if nombre and apellido and celular:
+            if nombre and apellido and celular and parentesco:
                 if not nombre_error and not apellido_error and not parentesco_error and not celular_error and parentesco:
                     adulto_completo[i]={
                                 'id':id_adulto,
@@ -397,6 +397,9 @@ class ModificarGrupoFamiliar(IndexView):
                                 'celular': celular,}
                 else:
                     datos_por_completar+=1
+            
+            if nombre or apellido or celular or parentesco:
+                datos_por_completar+=1
             
             datos_adultos[i] = {
                 'id':id_adulto,
@@ -462,6 +465,9 @@ class ModificarGrupoFamiliar(IndexView):
                                     'servicio_viaje': viaje_estudiante.id,}
                 else:
                     datos_por_completar+=1
+            
+            if nombre_estudiante or apellido_estudiante or nvl_estudiante or nvl_num_estudiante or division or turno or viaje_estudiante:
+                datos_por_completar+=1
 
             datos_estudiantes[i] = {
                 'id':id_estudiante,
@@ -504,7 +510,9 @@ class ModificarGrupoFamiliar(IndexView):
                     }
                 else:
                     datos_por_completar+=1
-
+            
+            if calle or altura or piso or dpto:
+                datos_por_completar+=1
 
             datos_direcciones[i] = {
                 'id':id_direccion,
@@ -530,19 +538,28 @@ class ModificarGrupoFamiliar(IndexView):
                 # si es numerico y hay 1 registro para adultos, estudiantes y direcciones, ademas no hay registros incompletos se procede a realizar los registros del grupo familiar
                 if adulto_completo and estudiante_completo and direccion_completa and datos_por_completar==0:
                     descuento = request.POST.get(f'descuento')
-
+                    print(adulto_completo)
+                    print('-----------------')
+                    print(datos_adultos)
                     for datos in adulto_completo.values():
                         if datos['id'] == '' or datos['id'] == None:
                             # Si no tiene id pero recibo datos realizo un registro
                             r.registro_adulto(familia_id,datos['nombre'].title(),datos['apellido'].title(),datos['parentesco'],datos['celular'])
 
-                        elif datos['id'] != '' and datos['id'] != None:
+                        if datos['id'] != '' and datos['id'] != None:
                             if datos['nombre'] == '' and datos['apellido'] == '':
                                 # Si tenia id y vienen los campos vacios elimino al integrante
                                 e.eliminar_adulto(datos['id'])
                             else:
                                 # Si tiene id y viene con contenido actualizo la tabla
                                 m.modificar_adulto(datos['id'],datos['nombre'].title(),datos['apellido'].title(),datos['parentesco'],datos['celular'])
+
+                    if datos_adultos:
+                        for i in datos_adultos.values():
+                                if i['id'] != '' and i['nombre']=='':
+                                    e.eliminar_adulto(i['id'])
+                                if i['id'] != None and i['nombre']==None:
+                                    e.eliminar_adulto(i['id'])
 
                     for datos in estudiante_completo.values():
                         if datos['id'] == '' or datos['id'] == None:
@@ -556,6 +573,13 @@ class ModificarGrupoFamiliar(IndexView):
                             else:
                                 # Si tiene id y viene con contenido actualizo la tabla
                                 m.modificar_estudiante(datos['id'],datos['nombre'].title(),datos['apellido'].title(),datos['nivel_educativo'],datos['nivel'],datos['division'],datos['turno'],datos['servicio_viaje'])
+
+                    if datos_estudiantes:
+                        for i in datos_estudiantes.values():
+                                if i['id'] != '' and i['nombre']=='':
+                                    e.eliminar_estudiante(i['id'])
+                                if i['id'] != None and i['nombre']==None:
+                                    e.eliminar_estudiante(i['id'])
                                 
                     for datos in datos_direcciones.values():
                         if datos['id'] == '' or datos['id'] == None:
@@ -570,6 +594,13 @@ class ModificarGrupoFamiliar(IndexView):
                                 # Si tiene id y viene con contenido actualizo la tabla
                                 m.modificar_direccion(datos['id'],datos['calle'].title(),datos['altura'],datos['piso'],datos['departamento'])
 
+                    if datos_direcciones:
+                        for i in datos_direcciones.values():
+                                if i['id'] != '' and i['calle']=='':
+                                    e.eliminar_direccion(i['id'])
+                                if i['id'] != None and i['calle']==None:
+                                    e.eliminar_direccion(i['id'])
+
                     c=Cuota()
                     c.actualizar_cuota(familia_id,servicio_contratado,descuento)
 
@@ -582,6 +613,9 @@ class ModificarGrupoFamiliar(IndexView):
                 error_descuento='Ingrese solo números.*'
         else:
             error_descuento='Ingrese un número del 0 al 100.*'
+
+        
+
     
         nvl_educativo = Nvl_educativo.objects.all()
         turnos = Turno.objects.all()

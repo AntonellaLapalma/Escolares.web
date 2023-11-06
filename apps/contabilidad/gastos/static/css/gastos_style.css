@@ -6,12 +6,56 @@
     padding: 0px;
     height: 95%;
 }
-
+.total-gastos{
+    width: 93%;
+}
+.btones-gastos{
+    margin-top: 30px;
+    width: 100%;
+}
+.lapicito i{
+    color: var(--color_borde_id_tarjeta);
+    transition: 0.3s ease;
+}
+.lapicito:hover i{
+    color: var(--color_blanco);
+}
+.lapicito:active i{
+    color: var(--color_info_a);
+}
+.modificar-sueldos{
+    flex-wrap: wrap;
+}
+.edit-g{
+    width: 80px !important;
+}
+.separar-gasto-r{
+    margin-bottom: 20px;
+}
+.error-gasto-r{
+   padding-left: 20px;
+}
+.btn-eliminar-cont{
+    background-color: var(--color_tarjeta_fondo);
+    border: none;
+    color: var(--color_borde_id_tarjeta);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.btn-eliminar-cont:hover{
+    color: var(--color_blanco);
+}
+.btn-eliminar-cont:active{
+    color: var(--color_principal);
+}
 /* RESPONSIVE */
 
-@media (max-width: 1360px) {
+@media (max-width: 1500px) {
     .btn-agregar-gasto, .actualizar-gastos{
         width: 100%;
         margin-top: 5px;
+    }
+    .modificar-sueldos{
+        flex-direction: column;
     }
 }

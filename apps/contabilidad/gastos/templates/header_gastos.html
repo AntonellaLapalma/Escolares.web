@@ -29,7 +29,7 @@
             </ul>
         </section>
         <a href="{% url 'agregar_gastos' %}" class="btn-header fila btn-contabilidad btn-agregar-gasto"><i class="fa-solid fa-plus i-header"></i><span>Agregar gasto</span></a>
-        <form class="actualizar-gastos" action="{% url 'gastos' %}" method="post">
+        <form class="actualizar-gastos" action="{% if resultado_empleados %}{% url 'gastos_anio_mes' resultado_empleados.0.fecha|date:'m' resultado_empleados.0.fecha|date:'Y' %}{% elif resultado_vehiculos %}{% url 'gastos_anio_mes' resultado_vehiculos.0.fecha|date:'m' resultado_vehiculos.0.fecha|date:'Y' %}{% else %}{% url 'gastos' %}{% endif %}" method="post">
             {% csrf_token %}
             <button class="btn-header fila btn-contabilidad"><i class="fa-solid fa-arrows-rotate i-header"></i><span>Actualizar</span></button>
         </form>

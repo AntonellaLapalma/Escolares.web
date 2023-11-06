@@ -254,7 +254,7 @@
 
 /* RESPONSIVE */
 
-@media (max-width: 1360px) {
+@media (max-width: 1500px) {
     .desplegable-anios{
         width: 100%;
     }
@@ -265,8 +265,6 @@
     .titulo-desplegable{
         width: 100%;
     }
-}
-@media (max-width: 1200px) {
     .contabilidad{
         flex-direction: column;
     }
@@ -275,5 +273,8 @@
     }
     .contenido-tabla-mes li{
         min-width: 200px;
+    }
+    .id-col{
+        width: 100px;
     }
 }

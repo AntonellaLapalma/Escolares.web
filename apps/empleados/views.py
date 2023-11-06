@@ -126,7 +126,7 @@ class RegistrarEmpleadoView(EmpleadosView):
             if not nombre_error and not apellido_error and not celular_error:
                 if puesto_id == 'Ninguno' or puesto_id == 'Chofer' or puesto_id == 'Celador':
                     # Creo el objeto de Empleado
-                    empleado = Empleado(nombre=nombre, apellido=apellido, celular=celular, puesto=puesto)
+                    empleado = Empleado(nombre=nombre.title(), apellido=apellido.title(), celular=celular, puesto=puesto)
                     empleado.save()
                     return redirect('empleados')
             
@@ -176,31 +176,33 @@ class ModificarEmpleadoView(EmpleadosView):
                 empleado = Empleado.objects.get(id=empleado_id)
                 # Creo el objeto de Empleado
                 # Actualizo los datos del empleado con los del formulario
-                empleado.nombre = request.POST.get('nombre_empleado')
-                empleado.apellido = request.POST.get('apellido_empleado')
-                empleado.celular = request.POST.get('cel_empleado')
-                puesto_id = request.POST.get('opcion_tarea')
+                empleado.nombre = nombre.title()
+                empleado.apellido = apellido.title()
+                empleado.celular = celular
+                puesto_id = puesto_id
 
-                if empleado.puesto.puesto != puesto_id:
-                    # Verifica si el empleado estaba asignado en algun vehiculo
-                    vehiculo_chofer = Vehiculo.objects.filter(chofer=empleado)
-                    vehiculo_celador = Vehiculo.objects.filter(celador=empleado)
+                if empleado.puesto:
+                    if empleado.puesto.puesto != puesto_id:
+                        # Verifica si el empleado estaba asignado en algun vehiculo
+                        vehiculo_chofer = Vehiculo.objects.filter(chofer=empleado)
+                        vehiculo_celador = Vehiculo.objects.filter(celador=empleado)
 
-                    # Si el empleado estaba asignado se lo desvincula
-                    if vehiculo_chofer.exists() or vehiculo_celador.exists():
-                        for vehiculo in vehiculo_chofer:
-                            vehiculo.chofer = None
-                            vehiculo.save()
-                        for vehiculo in vehiculo_celador:
-                            vehiculo.celador = None
-                            vehiculo.save()
+                        # Si el empleado estaba asignado se lo desvincula
+                        if vehiculo_chofer.exists() or vehiculo_celador.exists():
+                            for vehiculo in vehiculo_chofer:
+                                vehiculo.chofer = None
+                                vehiculo.save()
+                            for vehiculo in vehiculo_celador:
+                                vehiculo.celador = None
+                                vehiculo.save()
 
-                    # Luego asigno el nuevo puesto
-                    if puesto_id == 'Ninguno' or puesto_id == 'Chofer' or puesto_id == 'Celador':
-                        if puesto_id != 'Ninguno':
-                            empleado.puesto = get_object_or_404(Puesto, puesto=puesto_id)
-                        else:
-                            empleado.puesto = None
+                # Luego asigno el nuevo puesto
+                if puesto_id == 'Ninguno' or puesto_id == 'Chofer' or puesto_id == 'Celador':
+                    if puesto_id != 'Ninguno':
+                        empleado.puesto = get_object_or_404(Puesto, puesto=puesto_id)
+                    else:
+                        empleado.puesto = None
+
                 empleado.save()
                 return redirect('empleados')
 

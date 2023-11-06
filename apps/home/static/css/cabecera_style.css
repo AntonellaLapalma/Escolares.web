@@ -162,7 +162,7 @@ input[type="text"]:not(:focus) {
 
 /* RESPONSIVE */
 
-@media (max-width: 1360px) {
+@media (max-width: 1500px) {
     .opciones-header{
         flex-direction: column;
     }

@@ -1,0 +1,32 @@
+{% extends 'ingresos.html' %}
+{% block ingresos_content %}
+<div class="contabilidad fila">
+    <div class="tarjeta">
+        <section class="id-tarjeta dia fila">
+            <p class="id-dia">MODIFICAR CUOTA {{mes | upper}} {{anio}}</p>
+        </section>
+        <div class="modificar-sueldos">
+            <form id="registro-db" action="{% url 'modificar_cuota' viaje.id %}" method="post">
+                {% csrf_token %}
+                <div class="titulo-seccion fila">
+                    <i class="fa-solid fa-regular fa-address-card"></i>
+                    <h3>{{viaje.tipo | upper}}</h3>
+                </div>
+                <div class="campos columna estado-m separacion-gastos">
+                    <section class="campo-registro {% if error_total %} campo-registro-error{% endif %}">
+                        <input class="input-registro" name="total_viaje" placeholder="" value="{{viaje.total| floatformat:0}}">
+                        <label class="lablel-registro">Total</label>
+                        {% if error %}
+                            <p class="error_forms_registro error-gastos">{{ error }}</p>
+                        {% endif %}
+                    </section>
+                </div>
+                <div class="botones-registro fila btones-gastos">
+                    <a href="{% url 'ingresos' %}" class="btn-secundario">Cancelar</a>
+                    <button type="submit" class="btn-principal">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock ingresos_content %}

@@ -16,14 +16,21 @@
                             <li>Nombre y Apellido</li>
                             <li>Fecha</li>
                             <li>Total</li>
+                            <li class="edicion"></li>
                         </ul>
                         {% for gasto in resultado_empleados %}
                             <ul class="contenido-tabla-mes renglon-mes fila">
                                 <li class="id-col">{{ gasto.id }}</li>
-                                <li class="id-col">{{ gasto.id_empleado.id }}</li>
-                                <li>{{ gasto.id_empleado.nombre }} {{ gasto.id_empleado.apellido }}</li>
+                                <li class="id-col">{% if gasto.id_empleado.id %}{{  gasto.id_empleado.id }}{% else %}Eliminado{%endif%}</li>
+                                <li>{% if gasto.id_empleado.id %}{{ gasto.id_empleado.nombre }} {{ gasto.id_empleado.apellido }}{% else %}Eliminado{%endif%}</li>
                                 <li>{{ gasto.fecha|date:"F Y"|capfirst }}</li>
                                 <li>$ {{ gasto.total }}</li>
+                                <li class="edicion">
+                                    <form action="{% url 'gastos_eliminar' gasto.fecha|date:'m' gasto.fecha|date:'Y' gasto.id  'Empleado' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-eliminar-cont"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </li>
                             </ul>
                         {% endfor %}
                     </div>
@@ -49,15 +56,22 @@
                             <li>Fecha</li>
                             <li>Motivo</li>
                             <li>Total</li>
+                            <li class="edicion"></li>
                         </ul>
                         {% for resultado in resultado_vehiculos %}
                             <ul class="contenido-tabla-mes renglon-mes fila">
                                 <li class="id-col">{{ resultado.id }}</li>
-                                <li class="id-col">{{ resultado.id_vehiculo.id }}</li>
-                                <li class="id-col">{{ resultado.id_vehiculo.patente|upper }}</li>
+                                <li class="id-col">{% if resultado.id_vehiculo.id %}{{  resultado.id_vehiculo.id }}{% else %}Eliminado{%endif%}</li>
+                                <li class="id-col">{% if resultado.id_vehiculo.id %}{{  resultado.id_vehiculo.patente|upper }}{% else %}Eliminado{%endif%}</li>
                                 <li>{{ resultado.fecha|date:"F Y"|capfirst }}</li>
                                 <li>{{ resultado.motivo.motivo }}</li>
                                 <li>$ {{ resultado.total }}</li>
+                                <li class="edicion">
+                                    <form action="{% url 'gastos_eliminar' resultado.fecha|date:'m' resultado.fecha|date:'Y' resultado.id 'Vehiculo' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-eliminar-cont"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                </li>
                             </ul>
                         {% endfor %}
                     </div>
@@ -84,7 +98,6 @@
         <div class="tarjeta">
             <section class="id-tarjeta dia fila">
                 <p class="id-dia">SUELDOS</p>
-                <i class="fa-solid fa-pencil i-tarjeta-id"></i>
             </section>
             <div class="tarjeta-contabilidad">
                 <div class="tabla-mes">
@@ -92,12 +105,14 @@
                         <ul class="contenido-tabla-mes cabecera-tabla-mes fila">
                             <li>Puesto</li>
                             <li>Sueldo</li>
+                            <li class="edit-g"></li>
                         </ul>
                         {% for puesto in puestos %}
                         {% if puesto.puesto != 'Ninguno' %}
                         <ul class="contenido-tabla-mes renglon-mes fila">
                             <li>{{puesto.puesto}}</li>
-                            <li>$ {{puesto.sueldo}}</li>
+                            <li>$ {{puesto.sueldo| floatformat:0}}</li>
+                            <li class="edit-g"><a href="{% url 'modificar_sueldo' puesto.puesto %}" class="lapicito"><i class="fa-solid fa-pencil i-tarjeta-id"></i></a></li>
                         </ul>
                         {% endif %}
                         {% endfor %}
